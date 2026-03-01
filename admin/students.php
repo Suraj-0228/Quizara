@@ -55,7 +55,7 @@
                                                 <?php echo $student['quizzes_taken']; ?> Quizzes
                                             </span>
                                         <?php else: ?>
-                                            <span class="badge bg-secondary bg-opacity-20 text-secondary rounded-pill px-3">
+                                            <span class="badge bg-warning bg-opacity-20 text-dark rounded-pill px-3">
                                                 Inactive
                                             </span>
                                         <?php endif; ?>

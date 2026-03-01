@@ -1,7 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    include_once __DIR__ . '/functions.php';
-}
+include_once __DIR__ . '/functions.php';
 
 // Check for maintenance mode
 checkMaintenanceMode();
@@ -52,3 +50,4 @@ if (isLoggedIn() && isAdmin()) {
 
 <div class="<?php echo (isLoggedIn() && isAdmin()) ? 'container-fluid' : 'container'; ?> mt-4 mb-5">
     <?php flash('message'); ?>
+    <?php include_once __DIR__ . '/modals.php'; ?>

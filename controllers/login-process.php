@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($error)) {
         // Check for blocked status
-        $stmt = $pdo->prepare("SELECT id, username, password, role, is_blocked FROM users WHERE email = ? OR username = ?");
+        $stmt = $pdo->prepare("SELECT id, username, email, password, role, is_blocked FROM users WHERE email = ? OR username = ?");
         $stmt->execute([$email, $email]);
         $user = $stmt->fetch();
 
@@ -42,6 +42,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
+                $_SESSION['login_welcome'] = true;
+
+                // Send Login Alert Email
+                require_once __DIR__ . '/../includes/mail_helper.php';
+                $userEmail = $user['email'];
+                $username = $user['username'];
+                $subject = 'New Login Detected - QuizMaster';
+                $time = date('Y-m-d H:i:s');
+                $body = "
+                <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden;'>
+                    <div style='background: #4A90E2; color: white; padding: 20px; text-align: center;'>
+                        <h2>Security Alert</h2>
+                    </div>
+                    <div style='padding: 30px;'>
+                        <p>Hello! <strong>$username</strong>,</p>
+                        <p>We have detected a new Login to your QuizMaster Account on <strong>$time</strong>.</p>
+                        <p>If this was you, you can safely ignore this email. If you did not log in, please secure your account immediately by changing your password.</p>
+                        <div style='text-align: center; margin-top: 30px;'>
+                            <a href='http://localhost/QuizMaster/login.php' style='background: #4A90E2; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px;'>Secure My Account</a>
+                        </div>
+                    </div>
+                    <div style='background: #f9f9f9; color: #777; padding: 15px; text-align: center; font-size: 12px;'>
+                        &copy; " . date('Y') . " QuizMaster. All rights reserved.
+                    </div>
+                </div>";
+                sendEmail($userEmail, $username, $subject, $body);
 
                 if ($user['role'] === 'admin') {
                     redirect('admin/dashboard.php');

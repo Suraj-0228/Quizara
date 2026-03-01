@@ -18,7 +18,13 @@
             </a>
         </li>
         <li>
-            <a href="<?php echo base_url('admin/students.php'); ?>" class="nav-link text-white <?php echo basename($_SERVER['PHP_SELF']) == 'users.php' ? 'active' : ''; ?>">
+            <a href="<?php echo base_url('admin/categories.php'); ?>" class="nav-link text-white <?php echo basename($_SERVER['PHP_SELF']) == 'categories.php' ? 'active' : ''; ?>">
+                <i class="fas fa-folder me-2" style="width: 20px;"></i>
+                Categories
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo base_url('admin/students.php'); ?>" class="nav-link text-white <?php echo in_array(basename($_SERVER['PHP_SELF']), ['students.php', 'student-details.php']) ? 'active' : ''; ?>">
                 <i class="fas fa-users me-2" style="width: 20px;"></i>
                 Students
             </a>

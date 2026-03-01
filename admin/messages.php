@@ -112,43 +112,6 @@
                                 </div>
                             </div>
                         </div>
-
-                         <!-- View Modal (Optimized) -->
-                         <div class="modal fade" id="viewModal<?php echo $msg['id']; ?>" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content glass-modal border-0">
-                                    <div class="modal-header border-bottom border-secondary border-opacity-25 py-3 px-4">
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar-circle bg-<?php echo $color; ?> bg-opacity-25 text-<?php echo $color; ?> me-3 fw-bold">
-                                                <?php echo $initial; ?>
-                                            </div>
-                                            <div>
-                                                <h5 class="text-light mb-0"><?php echo sanitize($msg['name']); ?></h5>
-                                                <small class="text-muted"><?php echo sanitize($msg['email']); ?></small>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body p-4 p-lg-5">
-                                        <div class="d-flex justify-content-between align-items-start mb-4">
-                                            <h4 class="text-light fw-bold"><?php echo sanitize($msg['subject']); ?></h4>
-                                            <div class="text-muted small bg-dark-glass px-3 py-1 rounded-pill border border-secondary border-opacity-25">
-                                                <?php echo date('F j, Y at h:i A', strtotime($msg['created_at'])); ?>
-                                            </div>
-                                        </div>
-                                        <div class="message-content text-light opacity-90 lh-lg p-3 rounded bg-dark bg-opacity-25">
-                                            <?php echo nl2br(sanitize($msg['message'])); ?>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer border-top border-secondary border-opacity-25 px-4 py-3">
-                                         <a href="mailto:<?php echo sanitize($msg['email']); ?>?subject=Re: <?php echo urlencode($msg['subject']); ?>" class="btn btn-primary rounded-pill px-4">
-                                            <i class="fas fa-reply me-2"></i>Reply via Email
-                                        </a>
-                                        <button type="button" class="btn btn-outline-light rounded-pill px-4" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
@@ -181,6 +144,51 @@
         <?php endif; ?>
     </div>
 </div>
+
+<!-- Modals (Moved outside for better stacking context) -->
+<?php foreach ($messages as $msg): ?>
+    <?php 
+        $initial = strtoupper(substr($msg['name'], 0, 1));
+        $colors = ['primary', 'success', 'danger', 'warning', 'info', 'secondary'];
+        $color_index = ord($initial) % count($colors);
+        $color = $colors[$color_index];
+    ?>
+    <div class="modal fade" id="viewModal<?php echo $msg['id']; ?>" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content glass-modal border-0 shadow-lg">
+                <div class="modal-header border-bottom border-secondary border-opacity-25 py-3 px-4">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-circle bg-<?php echo $color; ?> bg-opacity-25 text-<?php echo $color; ?> me-3 fw-bold">
+                            <?php echo $initial; ?>
+                        </div>
+                        <div>
+                            <h5 class="text-light mb-0"><?php echo sanitize($msg['name']); ?></h5>
+                            <small class="text-muted"><?php echo sanitize($msg['email']); ?></small>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 p-lg-5">
+                    <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4 gap-3">
+                        <h4 class="text-light fw-bold mb-0"><?php echo sanitize($msg['subject']); ?></h4>
+                        <div class="text-muted small bg-dark-glass px-3 py-1 rounded-pill border border-secondary border-opacity-25 text-nowrap">
+                            <i class="far fa-clock me-2"></i><?php echo date('F j, Y \a\t h:i A', strtotime($msg['created_at'])); ?>
+                        </div>
+                    </div>
+                    <div class="message-content text-light opacity-90 lh-lg p-4 rounded-4 bg-dark bg-opacity-25 border border-white border-opacity-5">
+                        <?php echo nl2br(sanitize($msg['message'])); ?>
+                    </div>
+                </div>
+                <div class="modal-footer border-top border-secondary border-opacity-25 px-4 py-3">
+                        <a href="#" class="btn btn-primary rounded-pill px-4">
+                        <i class="fas fa-reply me-2"></i>Reply via Email
+                    </a>
+                    <button type="button" class="btn btn-outline-light rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
 
 <style>
 .avatar-circle {

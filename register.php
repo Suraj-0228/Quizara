@@ -14,19 +14,6 @@
                     <p class="text-muted small">Start your learning journey today</p>
                 </div>
 
-                <?php if (!isRegistrationAllowed()): ?>
-                    <div class="text-center py-4">
-                        <div class="mb-4">
-                            <span class="d-inline-flex bg-danger bg-opacity-10 text-danger p-3 rounded-circle">
-                                <i class="fas fa-user-slash fa-2x"></i>
-                            </span>
-                        </div>
-                        <h4 class="text-light fw-bold">Registration Closed</h4>
-                        <p class="text-muted">New account registration is currently disabled by the administrator.</p>
-                        <a href="login.php" class="btn btn-outline-light rounded-pill px-4 mt-3">Back to Login</a>
-                    </div>
-                <?php else: ?>
-
                 <?php if (!empty($errors)): ?>
                     <div class="alert alert-danger glass-alert mb-4 border-0 border-start border-danger border-4">
                         <ul class="mb-0 ps-3 small">
@@ -73,7 +60,6 @@
                         <p class="mb-0 text-muted small">Already have an account? <a href="login.php" class="text-primary fw-bold text-decoration-none">Login here</a></p>
                     </div>
                 </form>
-                <?php endif; ?>
             </div>
         </div>
     </div>

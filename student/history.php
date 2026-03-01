@@ -6,6 +6,9 @@
         <p class="text-muted">A journey of your achievements and attempts.</p>
     </div>
     <div class="col-md-4 text-md-end">
+        <a href="reports.php" class="btn btn-outline-info rounded-pill px-4 shadow-sm me-2">
+            <i class="fas fa-chart-line me-2"></i>View Report
+        </a>
         <a href="quizzes.php" class="btn btn-primary rounded-pill px-4 shadow-sm">
             <i class="fas fa-plus me-2"></i>New Attempt
         </a>

@@ -132,7 +132,7 @@
 
     // Prevent accidental navigation
     window.onbeforeunload = function() {
-        return "Are you sure? Your quiz progress will be lost.";
+        return "Are You Sure? You're About To Leave The Quiz. Your Quiz Progress Will Be Lost!!";
     };
     
     function advanceQuestion(isAutoAdvance = false) {

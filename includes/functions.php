@@ -1,5 +1,21 @@
 <?php
-session_start();
+// Set session lifetime to 30 days (2592000 seconds)
+$session_lifetime = 2592000;
+ini_set('session.gc_maxlifetime', $session_lifetime);
+ini_set('session.cookie_lifetime', $session_lifetime);
+
+// Start session with persistent cookie params
+if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'lifetime' => $session_lifetime,
+        'path' => '/QuizMaster/',
+        'domain' => '',
+        'secure' => isset($_SERVER['HTTPS']),
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
+    session_start();
+}
 
 /**
  * Sanitize input data

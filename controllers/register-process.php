@@ -6,13 +6,19 @@ if (isLoggedIn()) {
     redirect('index.php');
 }
 
+// Global Registration Access Control
+if (!isRegistrationAllowed()) {
+    flash('message', 'Registration is Currently Closed!!', 'warning');
+    redirect('login.php');
+}
+
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Check if registration is allowed
     if (!isRegistrationAllowed()) {
-        $errors[] = "Registration is currently closed.";
+        $errors[] = "Registration is Currently Closed!!";
     } else {
         $username = sanitize($_POST['username']);
         $email = sanitize($_POST['email']);
