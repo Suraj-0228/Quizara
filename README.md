@@ -1,4 +1,4 @@
-# QuizMaster - Online Quiz System
+# QuizMaster – Challenge Your Mind
 
 QuizMaster is a dynamic, web-based quiz application designed to facilitate online learning and assessment. It features a modern, glassmorphism-inspired UI and distinct roles for Students and Administrators.
 

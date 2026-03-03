@@ -3,7 +3,7 @@
 ## 1. Introduction
 
 ### 1.1 Project Profile
-**Project Title:** QuizMaster
+**Project Title:** QuizMaster – Challenge Your Mind
 **Domain:** Educational Technology (EdTech) & E-Learning
 **Technology Stack:** PHP/MySQL Stack (LAMP/WAMP/XAMPP)
 **Frontend:** HTML5, CSS3, Vanilla JavaScript, Bootstrap 5 (v5.3.0)
