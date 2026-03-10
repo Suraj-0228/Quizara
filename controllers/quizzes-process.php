@@ -59,6 +59,25 @@ $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $quizzes = $stmt->fetchAll();
 
+// Add highest_mode_completed to each quiz
+foreach ($quizzes as &$q) {
+    if (isset($_SESSION['user_id'])) {
+        $astmt = $pdo->prepare("SELECT highest_mode_completed FROM quiz_attempts WHERE user_id = ? AND quiz_id = ? ORDER BY FIELD(highest_mode_completed, 'high', 'medium', 'low', 'none') LIMIT 1");
+        $astmt->execute([$_SESSION['user_id'], $q['id']]);
+        $res = $astmt->fetch();
+        $q['highest_mode_completed'] = $res ? $res['highest_mode_completed'] : 'none';
+        
+        $pstmt = $pdo->prepare("SELECT id FROM user_quiz_purchases WHERE user_id = ? AND quiz_id = ? LIMIT 1");
+        $pstmt->execute([$_SESSION['user_id'], $q['id']]);
+        $q['is_purchased'] = $pstmt->fetch() ? true : false;
+    } else {
+        $q['highest_mode_completed'] = 'none';
+        $q['is_purchased'] = false;
+    }
+}
+unset($q);
+
+
 // Fetch Categories for Filter
 $categories = $pdo->query("SELECT * FROM categories ORDER BY name ASC")->fetchAll();
 

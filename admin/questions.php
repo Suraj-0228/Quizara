@@ -36,15 +36,23 @@
                                         <span class="badge bg-secondary bg-opacity-20 text-white rounded-pill px-3 py-1 mt-1">
                                             Marks: <?php echo $q['marks']; ?>
                                         </span>
+                                        <span class="badge bg-info bg-opacity-20 text-white rounded-pill px-3 py-1 mt-1 ms-2 text-capitalize">
+                                            <?php echo sanitize($q['difficulty_level'] ?? 'low'); ?>
+                                        </span>
                                     </div>
                                 </div>
                                 
-                                <form method="POST" class="d-inline ms-2" onsubmit="return confirm('Delete this question?');">
-                                    <input type="hidden" name="question_id" value="<?php echo $q['id']; ?>">
-                                    <button type="submit" name="delete_question" class="btn btn-icon btn-outline-danger rounded-circle border-0 bg-transparent opacity-50 hover-opacity-100" title="Delete Question">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
+                                <div class="d-flex align-items-center gap-2">
+                                    <a href="edit-question.php?id=<?php echo $q['id']; ?>&quiz_id=<?php echo $quiz_id; ?>" class="btn btn-icon btn-outline-success border-0 bg-transparent" title="Edit Question">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form method="POST" class="d-inline" onsubmit="return confirm('Delete this question?');">
+                                        <input type="hidden" name="question_id" value="<?php echo $q['id']; ?>">
+                                        <button type="submit" name="delete_question" class="btn btn-icon btn-outline-danger border-0 bg-transparent" title="Delete Question">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                             
                             <!-- Options Grid -->

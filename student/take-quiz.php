@@ -5,7 +5,7 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <div>
-                <h5 class="mb-0 text-light d-none d-md-block"><?php echo sanitize($quiz['title']); ?></h5>
+                <h5 class="mb-0 text-light d-none d-md-block"><?php echo sanitize($quiz['title']); ?> - <span class="text-info"><?php echo ucfirst($mode); ?> Mode</span></h5>
                 <small class="text-muted d-md-none">Question Progress</small>
             </div>
             
@@ -84,6 +84,34 @@
                 </div>
             <?php endforeach; ?>
         </form>
+    </div>
+</div>
+
+<!-- Cancel Confirmation Modal -->
+<div class="modal fade" id="cancelQuizModal" tabindex="-1" aria-labelledby="cancelQuizModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg" style="background-color: #1a2234; border-radius: 1.25rem;">
+            <div class="modal-body p-4 text-center">
+                <!-- Icon -->
+                <div class="mx-auto mb-4 rounded-circle d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background-color: rgba(220, 53, 69, 0.1);">
+                    <i class="fas fa-sign-out-alt fa-lg text-danger" style="margin-left: 2px;"></i>
+                </div>
+                
+                <!-- Text -->
+                <h4 class="fw-bold text-white mb-2">Confirm Cancel!</h4>
+                <p class="mb-4 pb-2" style="color: #8fa0b5 !important; font-size: 0.95rem; line-height: 1.5;">
+                    Are You Sure You Want To Cancel<br>This Quiz??
+                </p>
+                
+                <!-- Buttons -->
+                <button type="button" class="btn btn-danger w-100 rounded-pill py-2 fw-bold mb-3 shadow-sm" onclick="confirmCancelQuiz()" style="background-color: #e53e3e; border-color: #e53e3e;">
+                    Cancel Quiz
+                </button>
+                <button type="button" class="btn btn-link text-muted text-decoration-none w-100 fw-medium p-0" data-bs-dismiss="modal" style="color: #8fa0b5 !important;">
+                    Resume
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -179,10 +207,13 @@
     }
 
     function cancelQuiz() {
-        if(confirm("Are you sure you want to cancel the quiz? Your progress will be lost!!")) {
-            window.onbeforeunload = null;
-            window.location.href = 'quizzes.php';
-        }
+        const cancelModal = new bootstrap.Modal(document.getElementById('cancelQuizModal'));
+        cancelModal.show();
+    }
+
+    function confirmCancelQuiz() {
+        window.onbeforeunload = null; // Remove the standard beforeunload alert
+        window.location.href = 'quizzes.php';
     }
 
     // Attach event listeners to next buttons

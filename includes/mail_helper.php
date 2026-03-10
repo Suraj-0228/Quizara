@@ -6,7 +6,7 @@ require_once __DIR__ . '/../PHPMailer/src/Exception.php';
 require_once __DIR__ . '/../PHPMailer/src/PHPMailer.php';
 require_once __DIR__ . '/../PHPMailer/src/SMTP.php';
 
-function sendEmail($toEmail, $toName, $subject, $htmlBody, $plainTextBody = '') {
+function sendEmail($toEmail, $toName, $subject, $htmlBody, $plainTextBody = '', $attachmentPath = null, $attachmentName = '') {
     $mail = new PHPMailer(true);
     
     try {
@@ -25,6 +25,11 @@ function sendEmail($toEmail, $toName, $subject, $htmlBody, $plainTextBody = '') 
         // --- Recipients ---
         $mail->setFrom('quizmastera524@gmail.com', 'Quizara System');
         $mail->addAddress($toEmail, $toName);
+
+        // --- Attachments ---
+        if ($attachmentPath && file_exists($attachmentPath)) {
+            $mail->addAttachment($attachmentPath, $attachmentName ?: '');
+        }
 
         // --- Content ---
         $mail->isHTML(true);                                  

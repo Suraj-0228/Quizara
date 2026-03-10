@@ -47,19 +47,58 @@
                         <h4 class="card-title text-light mb-3"><?php echo sanitize($quiz['title']); ?></h4>
                         <p class="card-text text-muted flex-grow-1 small line-clamp-3 mb-4"><?php echo sanitize($quiz['description']); ?></p>
                         
-                        <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top border-light border-opacity-10">
+                        <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top border-light border-opacity-10 mb-2">
                             <div class="text-muted small">
                                 <i class="fas fa-question-circle me-1"></i> <?php echo $quiz['question_count']; ?> Questions
                             </div>
-                            
-                            <?php if($quiz['question_count'] > 0): ?>
-                                <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>" class="btn btn-sm btn-gradient-primary rounded-pill px-4 shadow-sm">
-                                    Start <i class="fas fa-arrow-right ms-1"></i>
-                                </a>
-                            <?php else: ?>
-                                <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" disabled>Coming Soon</button>
-                            <?php endif; ?>
                         </div>
+                        
+                        <?php if($quiz['question_count'] > 0): ?>
+                            <div class="w-100">
+                                <div class="d-flex justify-content-between text-center gap-2">
+                                    <!-- Low Mode -->
+                                    <div class="flex-fill">
+                                        <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=low" class="btn btn-sm <?php echo in_array($quiz['highest_mode_completed'], ['low','medium','high']) ? 'btn-success' : 'btn-primary'; ?> rounded-pill w-100 shadow-sm" title="Low Mode">
+                                            <i class="fas <?php echo in_array($quiz['highest_mode_completed'], ['low','medium','high']) ? 'fa-check' : 'fa-play'; ?>"></i> Low
+                                        </a>
+                                    </div>
+                                    
+                                    <!-- Medium Mode -->
+                                    <div class="flex-fill">
+                                        <?php if(in_array($quiz['highest_mode_completed'], ['low','medium','high'])): ?>
+                                            <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=medium" class="btn btn-sm <?php echo in_array($quiz['highest_mode_completed'], ['medium','high']) ? 'btn-success' : 'btn-primary'; ?> rounded-pill w-100 shadow-sm" title="Medium Mode">
+                                                <i class="fas <?php echo in_array($quiz['highest_mode_completed'], ['medium','high']) ? 'fa-check' : 'fa-play'; ?>"></i> Med
+                                            </a>
+                                        <?php else: ?>
+                                            <button class="btn btn-sm btn-outline-secondary rounded-pill w-100" disabled title="Complete Low to Unlock">
+                                                <i class="fas fa-lock"></i> Med
+                                            </button>
+                                        <?php endif; ?>
+                                    </div>
+                                    
+                                    <!-- High Mode -->
+                                    <div class="flex-fill">
+                                        <?php if(in_array($quiz['highest_mode_completed'], ['medium','high'])): ?>
+                                            <?php if($quiz['is_purchased']): ?>
+                                                <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=high" class="btn btn-sm <?php echo $quiz['highest_mode_completed'] == 'high' ? 'btn-success' : 'btn-primary'; ?> rounded-pill w-100 shadow-sm" title="High Mode">
+                                                    <i class="fas <?php echo $quiz['highest_mode_completed'] == 'high' ? 'fa-check' : 'fa-play'; ?>"></i> High
+                                                </a>
+                                            <?php else: ?>
+                                                <a href="upgrade-premium.php?quiz_id=<?php echo $quiz['id']; ?>" class="btn btn-sm btn-warning rounded-pill w-100 shadow-sm text-dark fw-bold" title="Premium Mode">
+                                                    <i class="fas fa-crown"></i> High
+                                                </a>
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <button class="btn btn-sm btn-outline-secondary rounded-pill w-100" disabled title="Complete Medium to Unlock">
+                                                <i class="fas fa-lock text-warning"></i> High
+                                            </button>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 w-100 disabled">Coming Soon</button>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

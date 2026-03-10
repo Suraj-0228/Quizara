@@ -20,6 +20,7 @@ if (!$quiz) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $question_text = sanitize($_POST['question_text']);
+    $difficulty_level = isset($_POST['difficulty_level']) ? sanitize($_POST['difficulty_level']) : 'low';
     $question_type = 'multiple_choice'; // Defaulting for simplicity
     $marks = (int)$_POST['marks'];
     $correct_option = (int)$_POST['correct_option'];
@@ -30,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->beginTransaction();
 
         // Insert Question
-        $stmt = $pdo->prepare("INSERT INTO questions (quiz_id, question_text, question_type, marks) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$quiz_id, $question_text, $question_type, $marks]);
+        $stmt = $pdo->prepare("INSERT INTO questions (quiz_id, question_text, difficulty_level, question_type, marks) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$quiz_id, $question_text, $difficulty_level, $question_type, $marks]);
         $question_id = $pdo->lastInsertId();
 
         // Insert Options

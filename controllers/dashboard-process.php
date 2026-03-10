@@ -21,7 +21,7 @@ $stmt = $pdo->prepare("
     FROM quiz_attempts qa 
     JOIN quizzes q ON qa.quiz_id = q.id 
     WHERE qa.user_id = ? 
-    ORDER BY qa.completed_at DESC LIMIT 5
+    ORDER BY qa.completed_at DESC LIMIT 4
 ");
 $stmt->execute([$user_id]);
 $recent_history = $stmt->fetchAll();
