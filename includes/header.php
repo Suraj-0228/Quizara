@@ -18,8 +18,8 @@ checkMaintenanceMode();
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/QuizMaster/assets/css/style.css">
-    <link rel="stylesheet" href="/QuizMaster/assets/css/quiz.css">
+    <link rel="stylesheet" href="/Quizara/assets/css/style.css">
+    <link rel="stylesheet" href="/Quizara/assets/css/quiz.css">
     
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -35,7 +35,7 @@ if (isLoggedIn() && isAdmin()) {
     echo '
     <nav class="navbar navbar-dark bg-dark-glass d-lg-none sticky-top shadow-sm p-3 mb-4 border-bottom border-light border-opacity-10">
         <div class="container-fluid d-flex flex-row justify-content-between align-items-center">
-        <span class="navbar-brand mb-0 h1">QuizMaster</span>
+        <span class="navbar-brand mb-0 h1">Quizara</span>
             <button class="btn btn-outline-light" type="button" id="sidebarToggle">
                 <i class="fas fa-bars"></i>
             </button>

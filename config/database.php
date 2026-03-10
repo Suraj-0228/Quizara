@@ -1,9 +1,12 @@
 <?php
+/* Set timezone to local time (IST) */
+date_default_timezone_set("Asia/Kolkata");
+
 /* Database details */
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'quizmaster_db');
+define('DB_NAME', 'quizara_db');
 
 /* Attempt to connect to MySQL database */
 try {

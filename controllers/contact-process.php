@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  // Send email notification to Admin
                  require_once __DIR__ . '/../includes/mail_helper.php';
                  
-                 $admin_email = 'quizmastera524@gmail.com';
+                 $admin_email = 'quizaraa524@gmail.com';
                  $email_subject = "New Contact Form Submission: $subject";
                  
                  $email_body = '
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                  </div>';
                  
                  // We send it to ourselves (admin), from ourselves
-                 sendEmail($admin_email, 'QuizMaster Admin', $email_subject, $email_body);
+                 sendEmail($admin_email, 'Quizara Admin', $email_subject, $email_body);
                  
                  $message = "Thank you for contacting us! We will get back to you shortly.";
                  $messageType = "success";

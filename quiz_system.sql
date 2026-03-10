@@ -2,9 +2,9 @@
    DATABASE CREATION
 ========================================= */
 
-DROP DATABASE IF EXISTS quizmaster_db;
-CREATE DATABASE quizmaster_db;
-USE quizmaster_db;
+DROP DATABASE IF EXISTS quizara_db;
+CREATE DATABASE quizara_db;
+USE quizara_db;
 
 
 /* =========================================
@@ -146,7 +146,7 @@ CREATE TABLE settings (
 
 /* Default Settings */
 INSERT INTO settings (setting_key, setting_value) VALUES
-('site_name', 'QuizMaster'),
+('site_name', 'Quizara'),
 ('maintenance_mode', '0');
 
 

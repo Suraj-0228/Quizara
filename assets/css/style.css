@@ -33,10 +33,11 @@
 body {
     background-color: var(--dark-bg);
     color: var(--light-text);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 h1,
@@ -62,16 +63,18 @@ a:hover {
 /* Card Styling */
 .card {
     background-color: var(--card-bg);
-    border: 1px solid rgba(119, 141, 169, 0.2);
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(13, 27, 42, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-    border-color: var(--dusk-blue);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 15px rgba(79, 134, 247, 0.2);
+    border-color: rgba(79, 134, 247, 0.5);
 }
 
 .card-header,
@@ -82,20 +85,25 @@ a:hover {
 
 /* Buttons */
 .btn-primary {
-    background-color: var(--dusk-blue);
-    border-color: var(--dusk-blue);
-    color: var(--alabaster-grey);
+    background: var(--gradient-accent);
+    border: none;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(79, 134, 247, 0.4);
+    transition: all 0.3s ease;
+    border-radius: 10px;
 }
 
 .btn-primary:hover {
-    background-color: var(--dusty-denim);
-    border-color: var(--dusty-denim);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 134, 247, 0.6);
 }
 
 .btn-secondary {
-    background-color: transparent;
-    border-color: var(--dusty-denim);
-    color: var(--dusty-denim);
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--light-text);
+    transition: all 0.3s ease;
+    border-radius: 10px;
 }
 
 .btn-secondary:hover {
@@ -480,20 +488,24 @@ a:hover {
 }
 
 .feature-icon-wrapper {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    background: rgba(65, 90, 119, 0.1);
+    width: 90px;
+    height: 90px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 20px;
-    transition: all 0.3s ease;
+    margin: 0 auto 25px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .card:hover .feature-icon-wrapper {
-    background: var(--dusk-blue);
-    transform: rotate(5deg);
+    background: var(--gradient-accent);
+    transform: rotate(10deg) scale(1.1);
+    border-color: transparent;
+    box-shadow: 0 10px 20px rgba(79, 134, 247, 0.4);
 }
 
 .card:hover .feature-icon-wrapper i {

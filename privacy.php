@@ -53,7 +53,7 @@ include_once 'includes/header.php';
 
                     <h3 class="fw-bold text-primary mb-3">6. Contact Us</h3>
                     <p class="text-muted mb-0 text-justify" style="line-height: 1.8;">
-                        If you have any questions about this Privacy Policy, please contact us at <a href="contact.php" class="text-info text-decoration-none">support@quizmaster.com</a>.
+                        If you have any questions about this Privacy Policy, please contact us at <a href="contact.php" class="text-info text-decoration-none">support@quizara.com</a>.
                     </p>
                 </div>
                 <!-- Decorative BG -->

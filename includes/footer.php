@@ -11,7 +11,7 @@
                 <div class="col-lg-4 col-md-6">
                     <a href="<?php echo base_url(); ?>" class="text-decoration-none d-flex align-items-center mb-3 footer-brand">
                         <i class="fas fa-graduation-cap fa-2x me-2"></i>
-                        <span class="h4 fw-bold text-light mb-0">QuizMaster</span>
+                        <span class="h4 fw-bold text-light mb-0">Quizara</span>
                     </a>
                     <p class="mb-4">
                         Empowering students and professionals to master new skills through interactive assessments and data-driven insights.
@@ -65,7 +65,7 @@
 
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0 small text-muted">&copy; <?php echo date('Y'); ?> QuizMaster. All rights reserved.</p>
+                    <p class="mb-0 small text-muted">&copy; <?php echo date('Y'); ?> Quizara. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end d-none d-md-block">
                     <p class="mb-0 small text-muted">Built with <i class="fas fa-lightbulb text-warning mx-1"></i> for learning and growth</p>

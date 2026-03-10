@@ -23,7 +23,7 @@ function sendEmail($toEmail, $toName, $subject, $htmlBody, $plainTextBody = '') 
         $mail->Port       = 465;                                    
 
         // --- Recipients ---
-        $mail->setFrom('quizmastera524@gmail.com', 'QuizMaster System');
+        $mail->setFrom('quizmastera524@gmail.com', 'Quizara System');
         $mail->addAddress($toEmail, $toName);
 
         // --- Content ---

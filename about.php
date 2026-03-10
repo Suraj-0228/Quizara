@@ -11,7 +11,7 @@ include_once 'includes/header.php';
         </span>
         <h1 class="display-3 fw-bold text-light mb-4">Empowering <span class="text-gradient">Knowledge</span> Through Innovation</h1>
         <p class="lead text-muted mb-4">
-            QuizMaster isn't just a platform; it's a movement to make learning measurable, interactive, and universally accessible. We bridge the gap between curiosity and mastery.
+            Quizara isn't just a platform; it's a movement to make learning measurable, interactive, and universally accessible. We bridge the gap between curiosity and mastery.
         </p>
         <div class="d-flex gap-3">
             <a href="register.php" class="btn btn-primary rounded-pill px-4 shadow-sm">Join Our Mission</a>
@@ -46,7 +46,7 @@ include_once 'includes/header.php';
 <!-- Values Grid -->
 <div class="row g-4 mb-5 pt-4">
     <div class="col-12 text-center mb-2">
-        <h2 class="text-light fw-bold">Why Choose QuizMaster?</h2>
+        <h2 class="text-light fw-bold">Why Choose Quizara?</h2>
     </div>
     
     <div class="col-md-4">

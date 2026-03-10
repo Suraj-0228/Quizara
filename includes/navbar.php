@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="<?php echo base_url(); ?>">
-            <i class="fas fa-graduation-cap me-2"></i>QuizMaster
+            <i class="fas fa-graduation-cap me-2"></i>Quizara
         </a>
         
         <!-- Custom Toggler -->

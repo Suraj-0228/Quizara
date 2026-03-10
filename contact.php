@@ -14,7 +14,7 @@
             </div>
             <div>
                 <h5 class="text-light mb-1">Email Us</h5>
-                <p class="text-muted mb-0">quizmastera524@gmail.com</p>
+                <p class="text-muted mb-0">quizaraa524@gmail.com</p>
             </div>
         </div>
         

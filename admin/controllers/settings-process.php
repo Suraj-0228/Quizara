@@ -9,7 +9,7 @@ $messageType = '';
 // Handle Form Submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $settings_to_update = [
-        'site_name' => $_POST['site_name'] ?? 'QuizMaster',
+        'site_name' => $_POST['site_name'] ?? 'Quizara',
         'site_description' => $_POST['site_description'] ?? '',
         'contact_email' => $_POST['contact_email'] ?? '',
         'items_per_page' => $_POST['items_per_page'] ?? '10',

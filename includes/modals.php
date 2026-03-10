@@ -1,6 +1,6 @@
 <?php
 /**
- * Global Modals for QuizMaster
+ * Global Modals for Quizara
  * Includes Welcome Popup and Logout Confirmation
  */
 ?>

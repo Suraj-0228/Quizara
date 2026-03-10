@@ -12,7 +12,7 @@ include_once 'includes/header.php';
             <!-- Header -->
             <div class="text-center mb-5">
                 <h1 class="display-4 fw-bold text-light mb-2">Terms of Service</h1>
-                <p class="lead text-muted">Rules and agreements for using QuizMaster.</p>
+                <p class="lead text-muted">Rules and agreements for using Quizara.</p>
             </div>
 
             <!-- Content Card -->
@@ -22,7 +22,7 @@ include_once 'includes/header.php';
 
                     <h3 class="fw-bold text-primary mb-3">1. Acceptance of Terms</h3>
                     <p class="text-muted mb-4 text-justify" style="line-height: 1.8;">
-                        By accessing or using QuizMaster, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
+                        By accessing or using Quizara, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
                     </p>
 
                     <h3 class="fw-bold text-primary mb-3">2. User Accounts</h3>
@@ -32,7 +32,7 @@ include_once 'includes/header.php';
 
                     <h3 class="fw-bold text-primary mb-3">3. Educational Content</h3>
                     <p class="text-muted mb-4 text-justify" style="line-height: 1.8;">
-                        The quizzes and educational materials provided on QuizMaster are for learning and assessment purposes. While we strive for accuracy, we do not guarantee that all content is free of errors. Report any discrepancies to our support team for review.
+                        The quizzes and educational materials provided on Quizara are for learning and assessment purposes. While we strive for accuracy, we do not guarantee that all content is free of errors. Report any discrepancies to our support team for review.
                     </p>
 
                     <h3 class="fw-bold text-primary mb-3">4. Prohibited Conduct</h3>
@@ -48,7 +48,7 @@ include_once 'includes/header.php';
 
                     <h3 class="fw-bold text-primary mb-3">5. Intellectual Property</h3>
                     <p class="text-muted mb-4 text-justify" style="line-height: 1.8;">
-                        The Service and its original content, features, and functionality are and will remain the exclusive property of QuizMaster and its licensors. The Service is protected by copyright, trademark, and other laws.
+                        The Service and its original content, features, and functionality are and will remain the exclusive property of Quizara and its licensors. The Service is protected by copyright, trademark, and other laws.
                     </p>
 
                     <h3 class="fw-bold text-primary mb-3">6. Termination</h3>

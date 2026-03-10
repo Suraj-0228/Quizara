@@ -1,7 +1,7 @@
 <div class="admin-sidebar d-flex flex-column flex-shrink-0 p-3 text-white">
     <a href="<?php echo base_url('admin/dashboard.php'); ?>" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <i class="fas fa-graduation-cap fa-2x me-2 text-primary"></i>
-        <span class="fs-4 fw-bold">QuizMaster</span>
+        <span class="fs-4 fw-bold">Quizara</span>
     </a>
     <hr class="border-secondary opacity-50">
     <ul class="nav nav-pills flex-column mb-auto">

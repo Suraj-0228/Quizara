@@ -63,7 +63,7 @@
                                         <label class="form-label text-muted small fw-bold">APPLICATION NAME</label>
                                         <div class="input-group">
                                             <span class="input-group-text bg-dark-glass text-secondary border-secondary border-opacity-25"><i class="fas fa-globe"></i></span>
-                                            <input type="text" class="form-control premium-control" name="site_name" value="<?php echo isset($settings['site_name']) ? sanitize($settings['site_name']) : 'QuizMaster'; ?>" required>
+                                            <input type="text" class="form-control premium-control" name="site_name" value="<?php echo isset($settings['site_name']) ? sanitize($settings['site_name']) : 'Quizara'; ?>" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

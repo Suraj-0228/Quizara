@@ -1,5 +1,5 @@
 /**
- * QuizMaster Form Validation & Enhancements
+ * Quizara Form Validation & Enhancements
  */
 
 document.addEventListener('DOMContentLoaded', function () {

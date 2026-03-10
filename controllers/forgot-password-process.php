@@ -30,21 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($update_stmt->execute([$token, $user['id']])) {
                 
                 // Construct URL dynamically to support both localhost and local network IP addresses
-                $reset_link = "http://" . $_SERVER['HTTP_HOST'] . "/QuizMaster/reset-password.php?token=" . $token;
+                $reset_link = "http://" . $_SERVER['HTTP_HOST'] . "/Quizara/reset-password.php?token=" . $token;
                 
                 // Format and send email
                 require_once __DIR__ . '/../includes/mail_helper.php';
-                $subject = 'Reset Your QuizMaster Password';
+                $subject = 'Reset Your Quizara Password';
                 $body = '
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f4f7f6; padding: 20px; border-radius: 8px;">
                     <div style="background-color: #4CAF50; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
-                        <h1 style="color: white; margin: 0; font-size: 24px;">QuizMaster Security</h1>
+                        <h1 style="color: white; margin: 0; font-size: 24px;">Quizara Security</h1>
                     </div>
                     <div style="background-color: white; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                         <h2 style="color: #333; margin-top: 0;">Password Reset Request</h2>
                         <p style="color: #555; line-height: 1.6; font-size: 16px;">
                             Hello ' . $user['username'] . ',<br><br>
-                            We received a request to reset your QuizMaster password. This link is valid for exactly 15 minutes.
+                            We received a request to reset your Quizara password. This link is valid for exactly 15 minutes.
                         </p>
                         <div style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
                             <a href="' . $reset_link . '" style="background-color: #4CAF50; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Reset Password</a>

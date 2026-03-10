@@ -1,5 +1,5 @@
 <?php
-require_once('c:\xampp\htdocs\QuizMaster\includes\fpdf\makefont\makefont.php');
+require_once('c:\xampp\htdocs\Quizara\includes\fpdf\makefont\makefont.php');
 
 $url = 'https://raw.githubusercontent.com/google/fonts/main/ofl/greatvibes/GreatVibes-Regular.ttf';
 $fontData = file_get_contents($url);

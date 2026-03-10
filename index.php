@@ -12,7 +12,7 @@ include_once 'includes/header.php';
         <div class="col-lg-7">
             <h1 class="display-3 fw-bold mb-4 lh-tight">
                 Unlock Your Potential with <br>
-                <span class="text-gradient">QuizMaster</span>
+                <span class="text-gradient">Quizara</span>
             </h1>
             <p class="lead text-muted mb-5 pe-lg-5">
                 The ultimate platform to test your knowledge, challenge your friends, and track your learning journey. Join thousands of learners today.
@@ -203,7 +203,7 @@ include_once 'includes/header.php';
 
 <!-- Features Grid -->
 <section class="py-5 text-center">
-    <h2 class="display-5 fw-bold text-light mb-5">Why Choose QuizMaster?</h2>
+    <h2 class="display-5 fw-bold text-light mb-5">Why Choose Quizara?</h2>
     
     <div class="row g-4">
         <div class="col-md-4">
@@ -260,7 +260,7 @@ include_once 'includes/header.php';
                 <div class="mb-4 text-warning">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
-                <p class="text-light fs-5 mb-4 position-relative z-1 opacity-90 fst-italic">"QuizMaster has transformed the way I revise for my exams. The instant feedback is incredibly helpful!"</p>
+                <p class="text-light fs-5 mb-4 position-relative z-1 opacity-90 fst-italic">"Quizara has transformed the way I revise for my exams. The instant feedback is incredibly helpful!"</p>
                 <div class="d-flex align-items-center mt-auto position-relative z-1">
                     <div class="bg-gradient-primary rounded-circle d-flex align-items-center justify-content-center text-white fw-bold me-3 shadow-sm" style="width: 50px; height: 50px;">JS</div>
                     <div>

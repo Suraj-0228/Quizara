@@ -7,7 +7,7 @@ include_once 'includes/header.php';
     <div class="col-lg-8">
         <div class="text-center mb-5">
             <h1 class="display-4 fw-bold text-light mb-3">Frequently Asked <span class="text-gradient">Questions</span></h1>
-            <p class="text-muted lead">Everything you need to know about QuizMaster.</p>
+            <p class="text-muted lead">Everything you need to know about Quizara.</p>
         </div>
 
         <div class="accordion" id="faqAccordion">
