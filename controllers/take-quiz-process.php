@@ -33,6 +33,21 @@ $astmt->execute([$user_id, $quiz_id]);
 $res = $astmt->fetch();
 $highest = $res ? $res['highest_mode_completed'] : 'none';
 
+// Prevent re-taking completed modes
+$is_completed = false;
+if ($highest == 'high') {
+    $is_completed = true;
+} elseif ($highest == 'medium' && in_array($mode, ['low', 'medium'])) {
+    $is_completed = true;
+} elseif ($highest == 'low' && $mode == 'low') {
+    $is_completed = true;
+}
+
+if ($is_completed) {
+    flash('message', 'You have already completed this mode!', 'info');
+    redirect('quizzes.php');
+}
+
 if ($mode == 'medium' && !in_array($highest, ['low', 'medium', 'high'])) {
     flash('message', 'You must complete Low mode first!', 'danger');
     redirect('quizzes.php');

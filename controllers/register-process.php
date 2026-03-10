@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 You can now Login and Start Taking Quizzes!
                             </p>
                             <div style="text-align: center; margin-top: 30px; margin-bottom: 10px;">
-                                <a href="http://localhost/Quizara/login.php" style="background-color: #4CAF50; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Login to your account</a>
+                                <a href="http://' . $_SERVER['HTTP_HOST'] . '/Quizara/login.php" style="background-color: #4CAF50; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">Login to your account</a>
                             </div>
                         </div>
                         <div style="text-align: center; margin-top: 20px; color: #888; font-size: 12px;">

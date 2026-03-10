@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p>We have detected a new Login to your Quizara Account on <strong>$time</strong>.</p>
                         <p>If this was you, you can safely ignore this email. If you did not log in, please secure your account immediately by changing your password.</p>
                         <div style='text-align: center; margin-top: 30px;'>
-                            <a href='http://localhost/Quizara/login.php' style='background: #4A90E2; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px;'>Secure My Account</a>
+                            <a href='http://" . $_SERVER['HTTP_HOST'] . "/Quizara/login.php' style='background: #4A90E2; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px;'>Secure My Account</a>
                         </div>
                     </div>
                     <div style='background: #f9f9f9; color: #777; padding: 15px; text-align: center; font-size: 12px;'>

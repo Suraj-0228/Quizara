@@ -58,16 +58,26 @@
                                 <div class="d-flex justify-content-between text-center gap-2">
                                     <!-- Low Mode -->
                                     <div class="flex-fill">
-                                        <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=low" class="btn btn-sm <?php echo in_array($quiz['highest_mode_completed'], ['low','medium','high']) ? 'btn-success' : 'btn-primary'; ?> rounded-pill w-100 shadow-sm" title="Low Mode">
-                                            <i class="fas <?php echo in_array($quiz['highest_mode_completed'], ['low','medium','high']) ? 'fa-check' : 'fa-play'; ?>"></i> Low
-                                        </a>
+                                        <?php if(in_array($quiz['highest_mode_completed'], ['low','medium','high'])): ?>
+                                            <button class="btn btn-sm btn-success rounded-pill w-100 shadow-sm" disabled title="Mode Completed">
+                                                <i class="fas fa-check"></i> Low
+                                            </button>
+                                        <?php else: ?>
+                                            <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=low" class="btn btn-sm btn-primary rounded-pill w-100 shadow-sm" title="Low Mode">
+                                                <i class="fas fa-play"></i> Low
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                     
                                     <!-- Medium Mode -->
                                     <div class="flex-fill">
-                                        <?php if(in_array($quiz['highest_mode_completed'], ['low','medium','high'])): ?>
-                                            <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=medium" class="btn btn-sm <?php echo in_array($quiz['highest_mode_completed'], ['medium','high']) ? 'btn-success' : 'btn-primary'; ?> rounded-pill w-100 shadow-sm" title="Medium Mode">
-                                                <i class="fas <?php echo in_array($quiz['highest_mode_completed'], ['medium','high']) ? 'fa-check' : 'fa-play'; ?>"></i> Med
+                                        <?php if(in_array($quiz['highest_mode_completed'], ['medium','high'])): ?>
+                                            <button class="btn btn-sm btn-success rounded-pill w-100 shadow-sm" disabled title="Mode Completed">
+                                                <i class="fas fa-check"></i> Med
+                                            </button>
+                                        <?php elseif(in_array($quiz['highest_mode_completed'], ['low'])): ?>
+                                            <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=medium" class="btn btn-sm btn-primary rounded-pill w-100 shadow-sm" title="Medium Mode">
+                                                <i class="fas fa-play"></i> Med
                                             </a>
                                         <?php else: ?>
                                             <button class="btn btn-sm btn-outline-secondary rounded-pill w-100" disabled title="Complete Low to Unlock">
@@ -78,10 +88,14 @@
                                     
                                     <!-- High Mode -->
                                     <div class="flex-fill">
-                                        <?php if(in_array($quiz['highest_mode_completed'], ['medium','high'])): ?>
+                                        <?php if($quiz['highest_mode_completed'] == 'high'): ?>
+                                            <button class="btn btn-sm btn-success rounded-pill w-100 shadow-sm" disabled title="Mode Completed">
+                                                <i class="fas fa-check"></i> High
+                                            </button>
+                                        <?php elseif(in_array($quiz['highest_mode_completed'], ['medium'])): ?>
                                             <?php if($quiz['is_purchased']): ?>
-                                                <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=high" class="btn btn-sm <?php echo $quiz['highest_mode_completed'] == 'high' ? 'btn-success' : 'btn-primary'; ?> rounded-pill w-100 shadow-sm" title="High Mode">
-                                                    <i class="fas <?php echo $quiz['highest_mode_completed'] == 'high' ? 'fa-check' : 'fa-play'; ?>"></i> High
+                                                <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=high" class="btn btn-sm btn-primary rounded-pill w-100 shadow-sm" title="High Mode">
+                                                    <i class="fas fa-play"></i> High
                                                 </a>
                                             <?php else: ?>
                                                 <a href="upgrade-premium.php?quiz_id=<?php echo $quiz['id']; ?>" class="btn btn-sm btn-warning rounded-pill w-100 shadow-sm text-dark fw-bold" title="Premium Mode">
