@@ -83,10 +83,6 @@
                 </form>
             </div>
         </div>
-        
-        <div class="mt-3 text-center d-lg-none">
-             <p class="text-muted small"><strong>Admin Demo:</strong> admin@quiz.com / admin123</p>
-        </div>
     </div>
 </div>
 
