@@ -29,4 +29,3 @@ $quizzes = $stmt->fetchAll();
 
 $pageTitle = 'Manage Quizzes';
 include_once '../includes/header.php';
-?>

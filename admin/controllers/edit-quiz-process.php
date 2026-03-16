@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category_id = $_POST['category_id'];
     $time_limit = (int)$_POST['time_limit'];
     $passing_score = (int)$_POST['passing_score'];
-    
+
     // Simplified handler: relies on JS for required checks
     try {
         $stmt = $pdo->prepare("UPDATE quizzes SET title = ?, description = ?, category_id = ?, time_limit = ?, passing_score = ? WHERE id = ?");
@@ -42,4 +42,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = 'Edit Quiz';
 include_once '../includes/header.php';
-?>

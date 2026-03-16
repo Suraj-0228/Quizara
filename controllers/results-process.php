@@ -30,4 +30,3 @@ $circle_color = $passed ? '#10b981' : '#ef4444'; // Success green or Danger red
 
 $pageTitle = 'Quiz Results';
 include_once '../includes/header.php';
-?>

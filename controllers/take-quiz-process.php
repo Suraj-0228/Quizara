@@ -57,7 +57,7 @@ if ($mode == 'high') {
         flash('message', 'You must complete Medium mode first!', 'danger');
         redirect('quizzes.php');
     }
-    
+
     // Check purchase
     $pstmt = $pdo->prepare("SELECT id FROM user_quiz_purchases WHERE user_id = ? AND quiz_id = ?");
     $pstmt->execute([$user_id, $quiz_id]);
@@ -82,22 +82,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $score = 0;
     $total_questions = count($questions);
     $correct_answers_count = 0;
-    
+
     // Start Transaction
     try {
         $pdo->beginTransaction();
-        
+
         // Create Attempt
         $stmt = $pdo->prepare("INSERT INTO quiz_attempts (user_id, quiz_id, total_questions, started_at, completed_at) VALUES (?, ?, ?, NOW(), NOW())");
         $stmt->execute([$user_id, $quiz_id, $total_questions]);
         $attempt_id = $pdo->lastInsertId();
-        
+
         // Process Answers
         foreach ($questions as $q) {
             $qid = $q['id'];
             $selected_option_id = isset($answers[$qid]) ? $answers[$qid] : null;
             $is_correct = 0;
-            
+
             if ($selected_option_id) {
                 // Check correctness
                 $chk = $pdo->prepare("SELECT is_correct FROM options WHERE id = ? AND question_id = ?");
@@ -109,14 +109,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $correct_answers_count++;
                 }
             }
-            
+
             // Save User Answer
             $ans_stmt = $pdo->prepare("INSERT INTO user_answers (attempt_id, question_id, selected_option_id, is_correct) VALUES (?, ?, ?, ?)");
             $ans_stmt->execute([$attempt_id, $qid, $selected_option_id, $is_correct]);
         }
-        
+
         $percentage = ($total_questions > 0) ? round(($score / $total_questions) * 100, 2) : 0;
-        
+
         $mode_completed_val = 'none';
         if ($percentage >= $quiz['passing_score']) {
             $mode_completed_val = $mode; // Passed this mode!
@@ -125,20 +125,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Update Attempt with Score and Mode
         $update_stmt = $pdo->prepare("UPDATE quiz_attempts SET score = ?, correct_answers = ?, highest_mode_completed = ? WHERE id = ?");
         $update_stmt->execute([$score, $correct_answers_count, $mode_completed_val, $attempt_id]);
-        
+
         // Fetch User Email
         $user_stmt = $pdo->prepare("SELECT email, username FROM users WHERE id = ?");
         $user_stmt->execute([$user_id]);
         $user = $user_stmt->fetch();
-        
+
         if ($user && $percentage >= 75) {
             // Send Results Email
             require_once __DIR__ . '/../includes/mail_helper.php';
             $subject = "Success! Quiz Results: {$quiz['title']}";
-            
+
             $cat_name = !empty($quiz['category_name']) ? htmlspecialchars($quiz['category_name']) : 'General';
             $mode_display = ucfirst($mode);
-            
+
             $body = '
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
                 <div style="background-color: #4a90e2; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
@@ -162,33 +162,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <p style="color: #777; font-size: 14px; text-align: center; margin-top: 30px;">Keep up the great work and take more quizzes to improve your skills!</p>
                 </div>
             </div>';
-            
+
             // --- GENERATE CERTIFICATE PDF ---
             require_once __DIR__ . '/../includes/certificate_helper.php';
-            
+
             // Build pseudo-attempt array for the helper
             $certificate_data = [
                 'username' => $user['username'],
                 'quiz_title' => $quiz['title'],
                 'completed_at' => date('Y-m-d H:i:s')
             ];
-            
+
             // Save to temp file
             $tmpPdfPath = sys_get_temp_dir() . '/Certificate_' . time() . '.pdf';
             generateCertificatePDF($certificate_data, $percentage, 'F', $tmpPdfPath);
-            
+
             // Send Email with Attachment
             sendEmail($user['email'], $user['username'], $subject, $body, '', $tmpPdfPath, 'Certificate_of_Completion.pdf');
-            
+
             // Clean up temp file
             if (file_exists($tmpPdfPath)) {
                 @unlink($tmpPdfPath);
             }
         }
-        
+
         $pdo->commit();
         redirect("results.php?attempt_id=$attempt_id");
-        
     } catch (Exception $e) {
         $pdo->rollBack();
         die("Error processing quiz: " . $e->getMessage());
@@ -197,4 +196,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = 'Take Quiz';
 include_once '../includes/header.php';
-?>

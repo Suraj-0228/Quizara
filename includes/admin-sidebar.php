@@ -1,7 +1,7 @@
 <div class="admin-sidebar d-flex flex-column flex-shrink-0 p-3 text-white">
     <a href="<?php echo base_url('admin/dashboard.php'); ?>" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-        <i class="fas fa-graduation-cap fa-2x me-2 text-primary"></i>
-        <span class="fs-4 fw-bold">Quizara</span>
+        <i class="fas fa-graduation-cap fa-2x me-2" style="color: var(--primary);"></i>
+        <span class="fs-4 fw-bold text-dark mt-1">Quizara</span>
     </a>
     <hr class="border-secondary opacity-50">
     <ul class="nav nav-pills flex-column mb-auto">
@@ -52,15 +52,15 @@
         <a href="<?php echo base_url('logout.php'); ?>" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center mb-4 hover-scale">
             <i class="fas fa-sign-out-alt me-2"></i> Log Out
         </a>
-        
+
         <hr class="border-secondary opacity-50">
-        
+
         <div class="d-flex align-items-center px-2">
             <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 38px; height: 38px; font-weight: bold;">
                 <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?>
             </div>
             <div>
-                <div class="fw-bold small"><?php echo sanitize($_SESSION['username']); ?></div>
+                <div class="fw-bold text-dark small"><?php echo sanitize($_SESSION['username']); ?></div>
                 <div class="text-muted" style="font-size: 0.75rem;">Administrator</div>
             </div>
         </div>

@@ -28,4 +28,3 @@ $recent_history = $stmt->fetchAll();
 
 $pageTitle = 'Student Dashboard';
 include_once '../includes/header.php';
-?>

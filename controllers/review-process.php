@@ -50,4 +50,3 @@ $questions = $stmt->fetchAll();
 
 $pageTitle = 'Review Quiz: ' . $attempt['title'];
 include_once '../includes/header.php';
-?>

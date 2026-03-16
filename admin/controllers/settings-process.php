@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'maintenance_mode' => isset($_POST['maintenance_mode']) ? '1' : '0',
         'allow_registration' => isset($_POST['allow_registration']) ? '1' : '0'
     ];
-    
+
     try {
         $pdo->beginTransaction();
-        
+
         $stmt_check = $pdo->prepare("SELECT COUNT(*) FROM settings WHERE setting_key = ?");
         $stmt_insert = $pdo->prepare("INSERT INTO settings (setting_key, setting_value) VALUES (?, ?)");
         $stmt_update = $pdo->prepare("UPDATE settings SET setting_value = ? WHERE setting_key = ?");
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt_update->execute([$value, $key]);
             }
         }
-        
+
         $pdo->commit();
         $message = 'Settings updated successfully.';
         $messageType = 'success';
@@ -55,4 +55,3 @@ while ($row = $stmt->fetch()) {
 
 $pageTitle = 'Site Settings';
 include_once '../includes/header.php';
-?>

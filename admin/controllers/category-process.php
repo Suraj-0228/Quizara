@@ -58,4 +58,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     redirect('../../admin/categories.php');
 }
-?>

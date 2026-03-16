@@ -58,4 +58,3 @@ $today_count = $stmt_today->fetchColumn();
 
 $pageTitle = 'Messages';
 include_once '../includes/header.php';
-?>

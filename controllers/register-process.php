@@ -15,7 +15,7 @@ if (!isRegistrationAllowed()) {
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+
     // Check if registration is allowed
     if (!isRegistrationAllowed()) {
         $errors[] = "Registration is Currently Closed!!";
@@ -84,4 +84,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = 'Register';
 include_once 'includes/header.php';
-?>

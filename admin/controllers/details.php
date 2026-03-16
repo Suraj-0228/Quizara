@@ -33,4 +33,3 @@ $attempts = $stmt->fetchAll();
 
 $pageTitle = 'Student Details: ' . $student['username'];
 include_once '../includes/header.php';
-?>

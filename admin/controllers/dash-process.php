@@ -22,4 +22,3 @@ $recent_attempts = $stmt->fetchAll();
 
 $pageTitle = 'Admin Dashboard';
 include_once '../includes/header.php';
-?>

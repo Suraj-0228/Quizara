@@ -38,22 +38,22 @@ if ($user) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $isValidToken) {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
-    
+
     if (strlen($password) < 6) {
         $errors[] = "Password must be at least 6 characters long.";
     }
-    
+
     if ($password !== $confirm_password) {
         $errors[] = "Passwords do not match.";
     }
-    
+
     if (empty($errors)) {
         // Securely hash the new password
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        
+
         // Update user, and nullify the tokens so the link cannot be reused
         $update_stmt = $pdo->prepare("UPDATE users SET password = ?, reset_token = NULL, reset_token_expires_at = NULL WHERE id = ?");
-        
+
         if ($update_stmt->execute([$hashed_password, $user_id])) {
             flash('message', 'Your password has been successfully reset! You may now login.', 'success');
             redirect('login.php');
@@ -66,4 +66,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $isValidToken) {
 
 $pageTitle = 'Set New Password';
 include_once 'includes/header.php';
-?>

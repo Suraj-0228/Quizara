@@ -10,28 +10,28 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
-    
+
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Please enter a valid email address.";
     }
-    
+
     if (empty($errors)) {
         // Check if user exists
         $stmt = $pdo->prepare("SELECT id, username FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
-        
+
         if ($user) {
             // Generate unique secure token
             $token = bin2hex(random_bytes(32));
-            
+
             // Save token mapping to DB using MySQL's NOW() to prevent timezone mismatch expiration issues
             $update_stmt = $pdo->prepare("UPDATE users SET reset_token = ?, reset_token_expires_at = DATE_ADD(NOW(), INTERVAL 15 MINUTE) WHERE id = ?");
             if ($update_stmt->execute([$token, $user['id']])) {
-                
+
                 // Construct URL dynamically to support both localhost and local network IP addresses
                 $reset_link = "http://" . $_SERVER['HTTP_HOST'] . "/Quizara/reset-password.php?token=" . $token;
-                
+
                 // Format and send email
                 require_once __DIR__ . '/../includes/mail_helper.php';
                 $subject = 'Reset Your Quizara Password';
@@ -52,11 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p style="color: #888; font-size: 13px;">If you did not request this, you can safely ignore this email.</p>
                     </div>
                 </div>';
-                
+
                 sendEmail($email, $user['username'], $subject, $body);
             }
         }
-        
+
         // Security Best Practice: Never reveal if the email exists in the DB.
         // Always flash success message regardless of if the email was found.
         flash('message', 'If that email exists in our system, a password reset link has been sent.', 'info');
@@ -66,4 +66,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = 'Forgot Password';
 include_once 'includes/header.php';
-?>

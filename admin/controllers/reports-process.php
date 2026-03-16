@@ -33,4 +33,3 @@ $pass_rate = $total_attempts > 0 ? round(($passed_count / $total_attempts) * 100
 
 $pageTitle = 'Reports & Analytics';
 include_once '../includes/header.php';
-?>

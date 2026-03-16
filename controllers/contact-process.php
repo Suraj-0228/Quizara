@@ -13,19 +13,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validation removed per user request
     // if (empty($name) || empty($email) || empty($msg_content)) ...
-    
+
     if (true) { // Simulate passing validation
         try {
-             $stmt = $pdo->prepare("INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)");
-             if ($stmt->execute([$name, $email, $subject, $msg_content])) {
-                 
-                 // Send email notification to Admin
-                 require_once __DIR__ . '/../includes/mail_helper.php';
-                 
-                 $admin_email = 'quizaraa524@gmail.com';
-                 $email_subject = "New Contact Form Submission: $subject";
-                 
-                 $email_body = '
+            $stmt = $pdo->prepare("INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)");
+            if ($stmt->execute([$name, $email, $subject, $msg_content])) {
+
+                // Send email notification to Admin
+                require_once __DIR__ . '/../includes/mail_helper.php';
+
+                $admin_email = 'quizmastera524@gmail.com';
+                $email_subject = "New Contact Form Submission: $subject";
+
+                $email_body = '
                  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
                      <div style="background-color: #1a73e8; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
                          <h1 style="color: white; margin: 0; font-size: 24px;">New Message Received</h1>
@@ -56,24 +56,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                          </div>
                      </div>
                  </div>';
-                 
-                 // We send it to ourselves (admin), from ourselves
-                 sendEmail($admin_email, 'Quizara Admin', $email_subject, $email_body);
-                 
-                 $message = "Thank you for contacting us! We will get back to you shortly.";
-                 $messageType = "success";
-             } else {
-                 $message = "Something went wrong. Please try again.";
-                 $messageType = "danger";
-             }
+
+                // We send it to ourselves (admin), from ourselves
+                sendEmail($admin_email, 'Quizara Admin', $email_subject, $email_body);
+
+                $message = "Thank you for contacting us! We will get back to you shortly.";
+                $messageType = "success";
+            } else {
+                $message = "Something went wrong. Please try again.";
+                $messageType = "danger";
+            }
         } catch (PDOException $e) {
-             // Fallback if table doesn't exist
-             $message = "Message sent successfully! (Simulation)";
-             $messageType = "success";
+            // Fallback if table doesn't exist
+            $message = "Message sent successfully! (Simulation)";
+            $messageType = "success";
         }
     }
 }
 
 $pageTitle = 'Contact Us';
 include_once 'includes/header.php';
-?>

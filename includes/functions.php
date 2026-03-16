@@ -20,28 +20,32 @@ if (session_status() === PHP_SESSION_NONE) {
 /**
  * Sanitize input data
  */
-function sanitize($data) {
+function sanitize($data)
+{
     return htmlspecialchars(strip_tags(trim($data)));
 }
 
 /**
  * Check if user is logged in
  */
-function isLoggedIn() {
+function isLoggedIn()
+{
     return isset($_SESSION['user_id']);
 }
 
 /**
  * Check if current user is admin
  */
-function isAdmin() {
+function isAdmin()
+{
     return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 }
 
 /**
  * Redirect if not logged in
  */
-function requireLogin() {
+function requireLogin()
+{
     if (!isLoggedIn()) {
         redirect('/Quizara/login.php');
     }
@@ -59,7 +63,8 @@ function requireLogin() {
 /**
  * Redirect if not admin
  */
-function requireAdmin() {
+function requireAdmin()
+{
     requireLogin();
     if (!isAdmin()) {
         redirect('/Quizara/student/dashboard.php'); // Redirect non-admins to student dashboard
@@ -69,7 +74,8 @@ function requireAdmin() {
 /**
  * Redirect helper
  */
-function redirect($url) {
+function redirect($url)
+{
     header("Location: " . $url);
     exit;
 }
@@ -77,7 +83,8 @@ function redirect($url) {
 /**
  * Flash message helper
  */
-function flash($name = '', $message = '', $class = 'success') {
+function flash($name = '', $message = '', $class = 'success')
+{
     if (!empty($name)) {
         if (!empty($message) && empty($_SESSION[$name])) {
             $_SESSION[$name] = $message;
@@ -96,18 +103,20 @@ function flash($name = '', $message = '', $class = 'success') {
 /**
  * Base URL helper
  */
-function base_url($path = '') {
+function base_url($path = '')
+{
     return '/Quizara/' . ltrim($path, '/');
 }
 /**
  * Check Maintenance Mode
  */
-function checkMaintenanceMode() {
+function checkMaintenanceMode()
+{
     global $pdo;
 
     $current_script = basename($_SERVER['PHP_SELF']);
     $allowed_scripts = ['maintenance.php', 'login.php', 'register.php'];
-    
+
     if (in_array($current_script, $allowed_scripts)) {
         return;
     }
@@ -130,7 +139,8 @@ function checkMaintenanceMode() {
     }
 }
 
-function getSetting($key, $default = null) {
+function getSetting($key, $default = null)
+{
     global $pdo;
     try {
         if (isset($pdo)) {
@@ -147,8 +157,8 @@ function getSetting($key, $default = null) {
     return $default;
 }
 
-function isRegistrationAllowed() {
-    $val = getSetting('allow_registration', '1'); 
+function isRegistrationAllowed()
+{
+    $val = getSetting('allow_registration', '1');
     return $val === '1';
 }
-?>

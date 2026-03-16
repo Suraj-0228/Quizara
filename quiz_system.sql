@@ -27,7 +27,7 @@ CREATE TABLE users (
 
 /* Default Admin User */
 INSERT INTO users (username, email, password, role, is_blocked, bio)
-VALUES ('admin', 'quizmastera524@gmail.com', '$2y$10$w6lKvOAg7VlNeKCEOD89Fux3TD/1V6pDJLIKfwJUpdWZ1jaG2HumG', 'admin', 0, 'Default Admin User!');
+VALUES ('Admin', 'quizmastera524@gmail.com', '$2y$10$w6lKvOAg7VlNeKCEOD89Fux3TD/1V6pDJLIKfwJUpdWZ1jaG2HumG', 'admin', 0, 'Default Admin User!');
 
 
 /* =========================================

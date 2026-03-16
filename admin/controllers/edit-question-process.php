@@ -64,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->commit();
         flash('message', 'Question updated successfully', 'success');
         redirect("questions.php?quiz_id=$quiz_id");
-
     } catch (Exception $e) {
         $pdo->rollBack();
         flash('message', 'Error: ' . $e->getMessage(), 'danger');
@@ -73,4 +72,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = 'Edit Question';
 include_once '../includes/header.php';
-?>

@@ -66,7 +66,7 @@ foreach ($quizzes as &$q) {
         $astmt->execute([$_SESSION['user_id'], $q['id']]);
         $res = $astmt->fetch();
         $q['highest_mode_completed'] = $res ? $res['highest_mode_completed'] : 'none';
-        
+
         $pstmt = $pdo->prepare("SELECT id FROM user_quiz_purchases WHERE user_id = ? AND quiz_id = ? LIMIT 1");
         $pstmt->execute([$_SESSION['user_id'], $q['id']]);
         $q['is_purchased'] = $pstmt->fetch() ? true : false;
@@ -83,4 +83,3 @@ $categories = $pdo->query("SELECT * FROM categories ORDER BY name ASC")->fetchAl
 
 $pageTitle = 'Available Quizzes';
 include_once '../includes/header.php';
-?>

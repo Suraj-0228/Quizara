@@ -6,10 +6,10 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-2">
                     <li class="breadcrumb-item"><a href="quizzes.php" class="text-secondary text-decoration-none">Quizzes</a></li>
-                    <li class="breadcrumb-item active text-light opacity-75" aria-current="page">Manage Questions</li>
+                    <li class="breadcrumb-item active opacity-75" aria-current="page">Manage Questions</li>
                 </ol>
             </nav>
-            <h2 class="text-light fw-bold"><?php echo sanitize($quiz['title']); ?></h2>
+            <h2 class="fw-bold"><?php echo sanitize($quiz['title']); ?></h2>
             <p class="text-muted small mb-0">Manage and organize the questions for this quiz.</p>
         </div>
         <a href="add-question.php?quiz_id=<?php echo $quiz_id; ?>" class="btn btn-gradient-primary rounded-pill px-4 hover-scale shadow-sm">
@@ -21,52 +21,52 @@
         <div class="col-12">
             <?php if (count($questions) > 0): ?>
                 <div class="vstack gap-4">
-                    <?php foreach($questions as $index => $q): ?>
+                    <?php foreach ($questions as $index => $q): ?>
                         <div class="glass-card border-0 p-4 position-relative overflow-hidden group-hover-effect">
                             <!-- Question Header -->
                             <div class="d-flex justify-content-between align-items-start mb-3">
                                 <div class="d-flex gap-3">
                                     <div class="flex-shrink-0">
-                                        <span class="d-flex align-items-center justify-content-center rounded-circle bg-primary bg-opacity-20 text-white fw-bold" style="width: 40px; height: 40px;">
+                                        <span class="d-flex align-items-center justify-content-center rounded-circle bg-indigo-50 text-primary fw-bold" style="width: 40px; height: 40px;">
                                             Q<?php echo $index + 1; ?>
                                         </span>
                                     </div>
                                     <div>
-                                        <h5 class="text-light mb-1"><?php echo sanitize($q['question_text']); ?></h5>
-                                        <span class="badge bg-secondary bg-opacity-20 text-white rounded-pill px-3 py-1 mt-1">
+                                        <h5 class="fw-bold mb-1"><?php echo sanitize($q['question_text']); ?></h5>
+                                        <span class="badge bg-slate-100 text-slate-700 rounded-pill px-3 py-1 mt-1">
                                             Marks: <?php echo $q['marks']; ?>
                                         </span>
-                                        <span class="badge bg-info bg-opacity-20 text-white rounded-pill px-3 py-1 mt-1 ms-2 text-capitalize">
+                                        <span class="badge bg-indigo-50 text-indigo-600 rounded-pill px-3 py-1 mt-1 ms-2 text-capitalize">
                                             <?php echo sanitize($q['difficulty_level'] ?? 'low'); ?>
                                         </span>
                                     </div>
                                 </div>
-                                
+
                                 <div class="d-flex align-items-center gap-2">
-                                    <a href="edit-question.php?id=<?php echo $q['id']; ?>&quiz_id=<?php echo $quiz_id; ?>" class="btn btn-icon btn-outline-success border-0 bg-transparent" title="Edit Question">
+                                    <a href="edit-question.php?id=<?php echo $q['id']; ?>&quiz_id=<?php echo $quiz_id; ?>" class="btn btn-icon border-0 bg-transparent rounded-circle" style="color: var(--success);" title="Edit Question">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form method="POST" class="d-inline" onsubmit="return confirm('Delete this question?');">
                                         <input type="hidden" name="question_id" value="<?php echo $q['id']; ?>">
-                                        <button type="submit" name="delete_question" class="btn btn-icon btn-outline-danger border-0 bg-transparent" title="Delete Question">
+                                        <button type="submit" name="delete_question" class="btn btn-icon border-0 bg-transparent rounded-circle" style="color: var(--danger);" title="Delete Question">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
                                 </div>
                             </div>
-                            
+
                             <!-- Options Grid -->
-                            <div class="ps-5 ms-2 rounded-3 bg-dark bg-opacity-25 p-3">
-                                <?php 
-                                    $opt_stmt = $pdo->prepare("SELECT * FROM options WHERE question_id = ?");
-                                    $opt_stmt->execute([$q['id']]);
-                                    $options = $opt_stmt->fetchAll();
+                            <div class="ps-5 ms-2 rounded-3 bg-slate-50 p-3 border border-slate-100">
+                                <?php
+                                $opt_stmt = $pdo->prepare("SELECT * FROM options WHERE question_id = ?");
+                                $opt_stmt->execute([$q['id']]);
+                                $options = $opt_stmt->fetchAll();
                                 ?>
                                 <div class="row g-2">
-                                    <?php foreach($options as $opt): ?>
+                                    <?php foreach ($options as $opt): ?>
                                         <div class="col-md-6">
                                             <div class="d-flex align-items-center p-2 rounded <?php echo $opt['is_correct'] ? 'bg-success bg-opacity-10 border border-success border-opacity-25' : 'bg-transparent'; ?>">
-                                                <?php if($opt['is_correct']): ?>
+                                                <?php if ($opt['is_correct']): ?>
                                                     <i class="fas fa-check-circle text-success me-3"></i>
                                                 <?php else: ?>
                                                     <i class="far fa-circle text-muted me-3 opacity-50"></i>
@@ -87,9 +87,9 @@
                     <div class="mb-4 text-muted opacity-50">
                         <i class="fas fa-clipboard-question fa-4x"></i>
                     </div>
-                    <h4 class="text-light">No Questions Yet</h4>
+                    <h4 class="fw-bold">No Questions Yet</h4>
                     <p class="text-muted mb-4">This quiz is empty. Start adding questions to build it.</p>
-                    <a href="add-question.php?quiz_id=<?php echo $quiz_id; ?>" class="btn btn-outline-light rounded-pill px-4">
+                    <a href="add-question.php?quiz_id=<?php echo $quiz_id; ?>" class="btn btn-outline-primary rounded-pill px-4">
                         <i class="fas fa-plus me-2"></i> Add First Question
                     </a>
                 </div>
@@ -99,4 +99,3 @@
 </div>
 
 <?php include_once '../includes/admin-footer.php'; ?>
-

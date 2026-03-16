@@ -34,4 +34,3 @@ $questions = $stmt->fetchAll();
 
 $pageTitle = 'Manage Questions';
 include_once '../includes/header.php';
-?>

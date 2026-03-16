@@ -2,48 +2,61 @@
 require_once __DIR__ . '/fpdf/fpdf.php';
 
 if (!class_exists('PDF_Certificate')) {
-    class PDF_Certificate extends FPDF {
-        function Polygon($points, $style='D') {
-            if(count($points) % 2 != 0) {
+    class PDF_Certificate extends FPDF
+    {
+        function Polygon($points, $style = 'D')
+        {
+            if (count($points) % 2 != 0) {
                 $this->Error('Polygon: Invalid number of points (must be an even number)');
             }
             $points[] = $points[0];
             $points[] = $points[1];
             $op = 'S';
-            if($style=='F')
+            if ($style == 'F')
                 $op = 'f';
-            elseif($style=='FD' || $style=='DF')
+            elseif ($style == 'FD' || $style == 'DF')
                 $op = 'b';
-            
-            $this->_out(sprintf('%.2F %.2F m', $points[0]*$this->k, ($this->h-$points[1])*$this->k));
-            for($i=2; $i<count($points)-2; $i+=2) {
-                $this->_out(sprintf('%.2F %.2F l', $points[$i]*$this->k, ($this->h-$points[$i+1])*$this->k));
+
+            $this->_out(sprintf('%.2F %.2F m', $points[0] * $this->k, ($this->h - $points[1]) * $this->k));
+            for ($i = 2; $i < count($points) - 2; $i += 2) {
+                $this->_out(sprintf('%.2F %.2F l', $points[$i] * $this->k, ($this->h - $points[$i + 1]) * $this->k));
             }
             $this->_out($op);
         }
-        
-        function DrawShapeScaled($commands, $scaleX = 0.27, $scaleY = 0.2692, $style='F') {
+
+        function DrawShapeScaled($commands, $scaleX = 0.27, $scaleY = 0.2692, $style = 'F')
+        {
             $op = 'f';
-            if($style=='D') $op = 'S';
-            elseif($style=='FD' || $style=='DF') $op = 'B';
-            
+            if ($style == 'D') $op = 'S';
+            elseif ($style == 'FD' || $style == 'DF') $op = 'B';
+
             $out = '';
-            foreach($commands as $cmd) {
+            foreach ($commands as $cmd) {
                 $type = $cmd[0];
                 if ($type == 'M') {
-                    $x = $cmd[1] * $scaleX; $y = $cmd[2] * $scaleY;
-                    $out .= sprintf('%.2F %.2F m ', $x*$this->k, ($this->h-$y)*$this->k);
+                    $x = $cmd[1] * $scaleX;
+                    $y = $cmd[2] * $scaleY;
+                    $out .= sprintf('%.2F %.2F m ', $x * $this->k, ($this->h - $y) * $this->k);
                 } elseif ($type == 'L') {
-                    $x = $cmd[1] * $scaleX; $y = $cmd[2] * $scaleY;
-                    $out .= sprintf('%.2F %.2F l ', $x*$this->k, ($this->h-$y)*$this->k);
+                    $x = $cmd[1] * $scaleX;
+                    $y = $cmd[2] * $scaleY;
+                    $out .= sprintf('%.2F %.2F l ', $x * $this->k, ($this->h - $y) * $this->k);
                 } elseif ($type == 'C') {
-                    $x1 = $cmd[1] * $scaleX; $y1 = $cmd[2] * $scaleY;
-                    $x2 = $cmd[3] * $scaleX; $y2 = $cmd[4] * $scaleY;
-                    $x3 = $cmd[5] * $scaleX; $y3 = $cmd[6] * $scaleY;
-                    $out .= sprintf('%.2F %.2F %.2F %.2F %.2F %.2F c ', 
-                        $x1*$this->k, ($this->h-$y1)*$this->k,
-                        $x2*$this->k, ($this->h-$y2)*$this->k,
-                        $x3*$this->k, ($this->h-$y3)*$this->k);
+                    $x1 = $cmd[1] * $scaleX;
+                    $y1 = $cmd[2] * $scaleY;
+                    $x2 = $cmd[3] * $scaleX;
+                    $y2 = $cmd[4] * $scaleY;
+                    $x3 = $cmd[5] * $scaleX;
+                    $y3 = $cmd[6] * $scaleY;
+                    $out .= sprintf(
+                        '%.2F %.2F %.2F %.2F %.2F %.2F c ',
+                        $x1 * $this->k,
+                        ($this->h - $y1) * $this->k,
+                        $x2 * $this->k,
+                        ($this->h - $y2) * $this->k,
+                        $x3 * $this->k,
+                        ($this->h - $y3) * $this->k
+                    );
                 }
             }
             $out .= $op;
@@ -60,7 +73,8 @@ if (!class_exists('PDF_Certificate')) {
  * @param string $outputPath Path to save if $outputMode is 'F', or filename if 'D'
  * @return mixed PDF content or true on success
  */
-function generateCertificatePDF($attempt, $percentage, $outputMode = 'S', $outputPath = '') {
+function generateCertificatePDF($attempt, $percentage, $outputMode = 'S', $outputPath = '')
+{
     $pdf = new PDF_Certificate('L', 'mm', 'A4');
     $pdf->AddPage();
     $pdf->SetAutoPageBreak(false);
@@ -77,21 +91,35 @@ function generateCertificatePDF($attempt, $percentage, $outputMode = 'S', $outpu
     // Gray Sweeps
     $pdf->SetFillColor(244, 245, 247);
     $pdf->DrawShapeScaled([
-        ['M', 0, 0], ['L', 350, 0], ['C', 200, 300, 150, 550, 0, 780], ['L', 0, 0]
+        ['M', 0, 0],
+        ['L', 350, 0],
+        ['C', 200, 300, 150, 550, 0, 780],
+        ['L', 0, 0]
     ]);
     $pdf->DrawShapeScaled([
-        ['M', 1100, 0], ['L', 850, 0], ['C', 1000, 300, 1050, 550, 1100, 780], ['L', 1100, 0]
+        ['M', 1100, 0],
+        ['L', 850, 0],
+        ['C', 1000, 300, 1050, 550, 1100, 780],
+        ['L', 1100, 0]
     ]);
 
     // Bottom Gold and Navy Sweeps
     $pdf->SetFillColor($gold[0], $gold[1], $gold[2]);
     $pdf->DrawShapeScaled([
-        ['M', 0, 540], ['C', 400, 760, 800, 820, 1100, 560], ['L', 1100, 800], ['L', 0, 800], ['L', 0, 540]
+        ['M', 0, 540],
+        ['C', 400, 760, 800, 820, 1100, 560],
+        ['L', 1100, 800],
+        ['L', 0, 800],
+        ['L', 0, 540]
     ]);
 
     $pdf->SetFillColor($navy[0], $navy[1], $navy[2]);
     $pdf->DrawShapeScaled([
-        ['M', 0, 560], ['C', 400, 780, 800, 840, 1100, 580], ['L', 1100, 800], ['L', 0, 800], ['L', 0, 560]
+        ['M', 0, 560],
+        ['C', 400, 780, 800, 840, 1100, 580],
+        ['L', 1100, 800],
+        ['L', 0, 800],
+        ['L', 0, 560]
     ]);
 
     // Gold Border
@@ -105,16 +133,21 @@ function generateCertificatePDF($attempt, $percentage, $outputMode = 'S', $outpu
     $ribbonH = 108;
     $pdf->SetFillColor($navy[0], $navy[1], $navy[2]);
     $pdf->Polygon([
-        $ribbonX, 0,
-        $ribbonX + $ribbonW, 0,
-        $ribbonX + $ribbonW, $ribbonH,
-        $ribbonX + ($ribbonW/2), $ribbonH - 13,
-        $ribbonX, $ribbonH
+        $ribbonX,
+        0,
+        $ribbonX + $ribbonW,
+        0,
+        $ribbonX + $ribbonW,
+        $ribbonH,
+        $ribbonX + ($ribbonW / 2),
+        $ribbonH - 13,
+        $ribbonX,
+        $ribbonH
     ], 'F');
 
     $sealSize = 90;
-    $sealX = $ribbonX + ($ribbonW/2) - ($sealSize/2);
-    $sealY = $ribbonH - 18 - ($sealSize/2);
+    $sealX = $ribbonX + ($ribbonW / 2) - ($sealSize / 2);
+    $sealY = $ribbonH - 18 - ($sealSize / 2);
     $imagePath = __DIR__ . '/../assets/images/Achievement Badge.png';
     if (file_exists($imagePath)) {
         $pdf->Image($imagePath, $sealX, $sealY, $sealSize, $sealSize, 'PNG');
@@ -122,7 +155,7 @@ function generateCertificatePDF($attempt, $percentage, $outputMode = 'S', $outpu
 
     // Typography
     $centerX = 148.5;
-    
+
     // Fallbacks for sanitization if function not available
     $username = htmlspecialchars_decode($attempt['username'] ?? '');
     $quiz_title = htmlspecialchars_decode($attempt['quiz_title'] ?? '');
@@ -151,7 +184,7 @@ function generateCertificatePDF($attempt, $percentage, $outputMode = 'S', $outpu
     $pdf->SetX($centerX - 100);
     $pdf->Cell(200, 10, 'THIS CERTIFICATE IS PROUDLY PRESENTED TO', 0, 1, 'C');
 
-    $pdf->SetFont('Times', 'I', 42); 
+    $pdf->SetFont('Times', 'I', 42);
     $pdf->SetTextColor($navy[0], $navy[1], $navy[2]);
     $pdf->SetY(100);
     $pdf->SetX($centerX - 100);
@@ -195,7 +228,7 @@ function generateCertificatePDF($attempt, $percentage, $outputMode = 'S', $outpu
     } else {
         $pdf->SetFont('Times', 'I', 24);
     }
-    
+
     $pdf->SetTextColor($navy[0], $navy[1], $navy[2]);
     $pdf->SetY(162);
     $pdf->SetX($centerX + 35);

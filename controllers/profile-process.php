@@ -5,6 +5,7 @@ requireLogin();
 
 $user_id = $_SESSION['user_id'];
 $message = '';
+$errors = []; // Field-specific errors
 
 // Handle POST Requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -35,12 +36,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
         
+        if (empty($password)) {
+            $errors['password'] = 'Password is required.';
+        }
+        if (empty($confirm_password)) {
+            $errors['confirm_password'] = 'Confirm Password is required.';
+        }
+        
+        if (empty($errors)) {
             $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
             if ($stmt->execute([$password, $user_id])) {
                 flash('message', 'Password Updated Successfully.', 'success');
+                redirect('profile.php');
+                exit;
             } else {
                 flash('message', 'Error Updating Password.', 'danger');
             }
+        }
     }
 
     // 2. Update Profile (Username, Email, Bio, Profile Pic)
@@ -51,6 +63,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $profile_pic_name = null;
         $remove_pic = isset($_POST['remove_profile_pic']) && $_POST['remove_profile_pic'] == '1';
 
+        if (empty($new_username)) {
+            $errors['username'] = 'Username is required.';
+        }
+        if (empty($new_email)) {
+            $errors['email'] = 'Email is required.';
+        }
+
         // Fetch current user details to get existing profile pic if needed
         $stmt_current = $pdo->prepare("SELECT profile_pic FROM users WHERE id = ?");
         $stmt_current->execute([$user_id]);
@@ -58,49 +77,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $current_pic = $current_user['profile_pic'] ?? null;
 
         // Handle Profile Picture Upload OR Removal
-        if ($remove_pic) {
-            // Flag to remove
-            $profile_pic_name = 'REMOVE'; 
-        } elseif (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] === UPLOAD_ERR_OK) {
-            $upload_dir = '../assets/images/profiles/';
-            
-            // Create directory if it doesn't exist
-            if (!file_exists($upload_dir)) {
-                mkdir($upload_dir, 0777, true);
-            }
-
-            $file_tmp = $_FILES['profile_pic']['tmp_name'];
-            $file_name = $_FILES['profile_pic']['name'];
-            $file_size = $_FILES['profile_pic']['size'];
-            
-            $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-            $allowed_exts = ['jpg', 'jpeg', 'png', 'gif'];
-
-            if (!in_array($file_ext, $allowed_exts)) {
-                flash('message', 'Invalid image format. Only JPG, PNG, and GIF are allowed.', 'danger');
-                redirect('profile.php');
-                exit;
-            } elseif ($file_size > 2097152) { // 2MB limit
-                flash('message', 'Image size must be less than 2MB.', 'danger');
-                redirect('profile.php');
-                exit;
-            } else {
-                // Generate a unique file name
-                $profile_pic_name = $user_id . '_' . time() . '.' . $file_ext;
-                $upload_path = $upload_dir . $profile_pic_name;
+        if (empty($errors)) {
+            if ($remove_pic) {
+                // Flag to remove
+                $profile_pic_name = 'REMOVE'; 
+            } elseif (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] === UPLOAD_ERR_OK) {
+                $upload_dir = '../assets/images/profiles/';
                 
-                if (!move_uploaded_file($file_tmp, $upload_path)) {
-                    flash('message', 'Error uploading image.', 'danger');
-                    redirect('profile.php');
-                    exit;
+                // Create directory if it doesn't exist
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+
+                $file_tmp = $_FILES['profile_pic']['tmp_name'];
+                $file_name = $_FILES['profile_pic']['name'];
+                $file_size = $_FILES['profile_pic']['size'];
+                
+                $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+                $allowed_exts = ['jpg', 'jpeg', 'png', 'gif'];
+
+                if (!in_array($file_ext, $allowed_exts)) {
+                    $errors['profile_pic'] = 'Invalid image format. Only JPG, PNG, and GIF allowed.';
+                } elseif ($file_size > 2097152) { // 2MB limit
+                    $errors['profile_pic'] = 'Image size must be less than 2MB.';
+                } else {
+                    // Generate a unique file name
+                    $profile_pic_name = $user_id . '_' . time() . '.' . $file_ext;
+                    $upload_path = $upload_dir . $profile_pic_name;
+                    
+                    if (!move_uploaded_file($file_tmp, $upload_path)) {
+                        $errors['profile_pic'] = 'Error uploading image.';
+                    }
                 }
             }
         }
         
-        // Basic Validation
-        if (empty($new_username) || empty($new_email)) {
-             flash('message', 'Username and Email are required.', 'warning');
-        } else {
+        // Final Database Update if no errors
+        if (empty($errors)) {
             // Check for duplicate username/email (excluding current user)
             $check = $pdo->prepare("SELECT id FROM users WHERE (username = ? OR email = ?) AND id != ?");
             $check->execute([$new_username, $new_email, $user_id]);
@@ -185,4 +198,4 @@ $avg_score = round((float)$avg_score_stmt->fetchColumn(), 1);
 
 $pageTitle = 'My Profile';
 include_once '../includes/header.php';
-?>
+?>

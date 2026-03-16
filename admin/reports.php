@@ -4,10 +4,10 @@
     <!-- Hero Header -->
     <div class="d-flex justify-content-between align-items-center mb-5">
         <div>
-            <h1 class="display-5 fw-bold text-light mb-2">Result Reports</h1>
+            <h1 class="display-5 fw-bold mb-2">Result Reports</h1>
             <p class="text-muted lead mb-0">Analytics and performance overview.</p>
         </div>
-        <button onclick="window.print()" class="btn btn-outline-light d-print-none rounded-pill px-4">
+        <button onclick="window.print()" class="btn btn-outline-primary d-print-none rounded-pill px-4">
             <i class="fas fa-print me-2"></i>Print Report
         </button>
     </div>
@@ -17,7 +17,7 @@
         <div class="col-md-4">
             <div class="glass-card border-0 shadow-sm p-4 text-center h-100">
                 <div class="text-muted text-uppercase small mb-2">Total Attempts</div>
-                <div class="display-4 fw-bold text-white mb-0"><?php echo $total_attempts; ?></div>
+                <div class="display-4 fw-bold mb-0"><?php echo $total_attempts; ?></div>
             </div>
         </div>
         <div class="col-md-4">
@@ -38,8 +38,8 @@
     <div class="glass-card border-0 shadow-lg position-relative overflow-hidden mb-5">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-dark table-hover align-middle mb-0" style="--bs-table-bg: transparent; --bs-table-hover-bg: rgba(255,255,255,0.05); color: var(--light-text);">
-                    <thead class="bg-dark bg-opacity-50 border-bottom border-secondary border-opacity-25">
+                <table class="table table-hover align-middle mb-0" style="--bs-table-bg: #fff; --bs-table-hover-bg: var(--slate-50); color: var(--slate-800);">
+                    <thead class="bg-slate-50 border-bottom border-slate-200">
                         <tr>
                             <th class="ps-4 py-3 text-uppercase text-muted small border-0">Student</th>
                             <th class="py-3 text-uppercase text-muted small border-0">Quiz Title</th>
@@ -50,23 +50,23 @@
                     </thead>
                     <tbody class="border-top-0">
                         <?php if (count($attempts) > 0): ?>
-                            <?php foreach($attempts as $attempt): ?>
-                                <?php 
-                                    $q_total = $attempt['total_questions'];
-                                    $percentage = $q_total > 0 ? ($attempt['score'] / $q_total) * 100 : 0;
-                                    $status = $percentage >= 50 ? 'Passed' : 'Failed';
-                                    $status_class = $status === 'Passed' ? 'success' : 'danger';
-                                    $bg_class = $status === 'Passed' ? 'bg-success' : 'bg-danger';
+                            <?php foreach ($attempts as $attempt): ?>
+                                <?php
+                                $q_total = $attempt['total_questions'];
+                                $percentage = $q_total > 0 ? ($attempt['score'] / $q_total) * 100 : 0;
+                                $status = $percentage >= 50 ? 'Passed' : 'Failed';
+                                $status_class = $status === 'Passed' ? 'success' : 'danger';
+                                $bg_class = $status === 'Passed' ? 'bg-success' : 'bg-danger';
                                 ?>
-                                <tr class="border-bottom border-light border-opacity-10 transition-all">
-                                    <td class="ps-4 py-3 fw-bold text-light">
+                                <tr class="border-bottom border-slate-100 transition-all">
+                                    <td class="ps-4 py-3 fw-bold">
                                         <?php echo sanitize($attempt['username']); ?>
                                     </td>
                                     <td class="py-3 text-muted">
                                         <?php echo sanitize($attempt['quiz_title']); ?>
                                     </td>
                                     <td class="py-3">
-                                        <span class="fw-bold text-white"><?php echo $attempt['score']; ?>/<?php echo $q_total; ?></span>
+                                        <span class="fw-bold"><?php echo $attempt['score']; ?>/<?php echo $q_total; ?></span>
                                         <small class="text-muted ms-1">(<?php echo round($percentage); ?>%)</small>
                                     </td>
                                     <td class="py-3 text-center">
@@ -83,7 +83,7 @@
                             <tr>
                                 <td colspan="5" class="text-center py-5">
                                     <div class="text-muted opacity-50 mb-3"><i class="fas fa-chart-bar fa-3x"></i></div>
-                                    <h5 class="text-light">No results found</h5>
+                                    <h5 class="fw-bold">No results found</h5>
                                     <p class="text-muted small">Students haven't completed any quizzes yet.</p>
                                 </td>
                             </tr>

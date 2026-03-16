@@ -18,4 +18,3 @@ $history = $stmt->fetchAll();
 
 $pageTitle = 'My Quiz History';
 include_once '../includes/header.php';
-?>

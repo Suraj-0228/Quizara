@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,29 +11,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/Quizara/assets/css/maintenance.css">
 </head>
+
 <body>
-    <div class="card maintenance-card border-0 rounded-4 text-center p-5">
-        <div class="mb-4 position-relative d-inline-block">
-            <i class="fas fa-cog fa-5x gear-icon opacity-75"></i>
-            <i class="fas fa-wrench fa-2x tool-icon"></i>
+
+    <div class="card maintenance-card border-0 rounded-5 text-center p-5 shadow-premium">
+        <div class="status-badge text-dark">
+            <i class="fas fa-circle"></i> System Relay Status: Maintenance
         </div>
-        
-        <h1 class="display-5 fw-bold text-light mb-3">Under Maintenance</h1>
-        <p class="lead text-light opacity-75 mb-4">
-            We are currently upgrading our system to provide you a better experience. 
-            We'll be back shortly!
+
+        <div class="mb-5 position-relative d-inline-block">
+            <i class="fas fa-cog fa-5x gear-icon"></i>
+            <div class="tool-icon">
+                <i class="fas fa-wrench"></i>
+            </div>
+        </div>
+
+        <h1 class="fw-black text-dark mb-3">System Maintenance</h1>
+        <p class="text-muted fw-medium px-md-4 mb-5">
+            We are currently optimizing our quiz engine and refreshing core modules to serve you better. We'll be back online in briefly.
         </p>
-        
-        <div class="d-flex justify-content-center gap-3">
-            <a href="/Quizara/logout.php" class="btn btn-outline-light rounded-pill px-4 py-2">
-                <i class="fas fa-sign-out-alt me-2"></i>Logout
-            </a>
-            <a href="#" onclick="window.location.reload()" class="btn btn-primary rounded-pill px-4 py-2 btn-glow">Check Again</a>
+
+        <div class="row g-3 d-flex justify-content-center">
+            <div class="col-sm-auto">
+                <a href="/Quizara/logout.php" class="btn btn-danger rounded-pill px-4 py-3 fw-bold border-opacity-25">
+                    <i class="fas fa-sign-out-alt me-2"></i>Exit Portal
+                </a>
+            </div>
+            <div class="col-sm-auto">
+                <a href="#" onclick="window.location.reload()" class="btn btn-indigo rounded-pill px-5 py-3 fw-bold shadow-premium hover-scale btn-glow">
+                    Re-verify Status <i class="fas fa-sync-alt ms-2 small"></i>
+                </a>
+            </div>
         </div>
-        
-        <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
-            <small class="text-muted">Expected downtime: ~1 hour</small>
+
+        <div class="mt-5 pt-4 border-top border-white border-opacity-10">
+            <div class="d-flex align-items-center justify-content-center text-slate-400 small fw-bold">
+                <i class="fas fa-hourglass-half me-2 text-indigo-400"></i> Estimated Recovery: 60 Minutes
+            </div>
         </div>
     </div>
+
 </body>
+
 </html>

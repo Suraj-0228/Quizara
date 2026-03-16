@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $user = null; // Initialize
     // if (empty($email) || empty($password)) { $error = ... } REMOVED per user request
-    
+
     if (!preg_match('/^[a-zA-Z0-9._%+-]+@gmail\.com$/', $email)) {
         $error = "invalid email id";
     }
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
-            
+
             // Check if blocked
             if (isset($user['is_blocked']) && $user['is_blocked'] == 1) {
                 $error = "Your account has been suspended by the administrator.";
@@ -83,4 +83,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = 'Login';
 include_once 'includes/header.php';
-?>

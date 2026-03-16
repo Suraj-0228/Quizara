@@ -68,4 +68,3 @@ $detailed_history = $stmt->fetchAll();
 
 $pageTitle = 'My Progress Report';
 include_once '../includes/header.php';
-?>

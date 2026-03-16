@@ -11,13 +11,13 @@ include_once 'includes/header.php';
         <div class="col-lg-10">
             <!-- Header -->
             <div class="text-center mb-5">
-                <h1 class="display-4 fw-bold text-light mb-2">Privacy Policy</h1>
+                <h1 class="display-4 fw-bold mb-2">Privacy Policy</h1>
                 <p class="lead text-muted">How we handle and protect your data.</p>
             </div>
 
             <!-- Content Card -->
             <div class="glass-card border-0 shadow-lg position-relative overflow-hidden mb-5">
-                <div class="card-body p-4 p-md-5 text-light">
+                <div class="card-body p-4 p-md-5">
                     <p class="text-muted mb-5">Last updated: <?php echo date('F d, Y'); ?></p>
 
                     <h3 class="fw-bold text-primary mb-3">1. Information We Collect</h3>
@@ -28,12 +28,12 @@ include_once 'includes/header.php';
                     <h3 class="fw-bold text-primary mb-3">2. How We Use Your Information</h3>
                     <p class="text-muted mb-4 text-justify" style="line-height: 1.8;">
                         We use the information we collect to operate, maintain, and improve our services. Specifically, we use your data to:
-                        <ul class="text-muted mt-2">
-                            <li>Provide and personalize your quiz experience.</li>
-                            <li>Track your progress and generate performance reports.</li>
-                            <li>Send administrative notifications and updates.</li>
-                            <li>Detect and prevent fraudulent or unauthorized activity.</li>
-                        </ul>
+                    <ul class="text-muted mt-2">
+                        <li>Provide and personalize your quiz experience.</li>
+                        <li>Track your progress and generate performance reports.</li>
+                        <li>Send administrative notifications and updates.</li>
+                        <li>Detect and prevent fraudulent or unauthorized activity.</li>
+                    </ul>
                     </p>
 
                     <h3 class="fw-bold text-primary mb-3">3. Data Security</h3>
@@ -61,7 +61,7 @@ include_once 'includes/header.php';
             </div>
 
             <div class="text-center">
-                <a href="index.php" class="btn btn-outline-light rounded-pill px-4">
+                <a href="index.php" class="btn btn-outline-primary rounded-pill px-4">
                     <i class="fas fa-arrow-left me-2"></i>Back to Home
                 </a>
             </div>

@@ -11,13 +11,13 @@ include_once 'includes/header.php';
         <div class="col-lg-10">
             <!-- Header -->
             <div class="text-center mb-5">
-                <h1 class="display-4 fw-bold text-light mb-2">Terms of Service</h1>
+                <h1 class="display-4 fw-bold mb-2">Terms of Service</h1>
                 <p class="lead text-muted">Rules and agreements for using Quizara.</p>
             </div>
 
             <!-- Content Card -->
             <div class="glass-card border-0 shadow-lg position-relative overflow-hidden mb-5">
-                <div class="card-body p-4 p-md-5 text-light">
+                <div class="card-body p-4 p-md-5">
                     <p class="text-muted mb-5">Effective Date: <?php echo date('F d, Y'); ?></p>
 
                     <h3 class="fw-bold text-primary mb-3">1. Acceptance of Terms</h3>
@@ -38,12 +38,12 @@ include_once 'includes/header.php';
                     <h3 class="fw-bold text-primary mb-3">4. Prohibited Conduct</h3>
                     <p class="text-muted mb-4 text-justify" style="line-height: 1.8;">
                         You agree not to use the service to:
-                        <ul class="text-muted mt-2">
-                            <li>Violate any local, state, national, or international law.</li>
-                            <li>Attempt to exploit vulnerabilities or bypass authentication measures.</li>
-                            <li>Cheating or manipulating quiz scores through automated means.</li>
-                            <li>Harass, abuse, or harm another person or group.</li>
-                        </ul>
+                    <ul class="text-muted mt-2">
+                        <li>Violate any local, state, national, or international law.</li>
+                        <li>Attempt to exploit vulnerabilities or bypass authentication measures.</li>
+                        <li>Cheating or manipulating quiz scores through automated means.</li>
+                        <li>Harass, abuse, or harm another person or group.</li>
+                    </ul>
                     </p>
 
                     <h3 class="fw-bold text-primary mb-3">5. Intellectual Property</h3>
@@ -66,7 +66,7 @@ include_once 'includes/header.php';
             </div>
 
             <div class="text-center">
-                <a href="index.php" class="btn btn-outline-light rounded-pill px-4">
+                <a href="index.php" class="btn btn-outline-primary rounded-pill px-4">
                     <i class="fas fa-arrow-left me-2"></i>Back to Home
                 </a>
             </div>
