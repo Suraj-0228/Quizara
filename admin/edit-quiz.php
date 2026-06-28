@@ -1,80 +1,79 @@
 <?php include_once 'controllers/edit-quiz-process.php'; ?>
 
-<div class="container py-4">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <!-- Navigation -->
-            <div class="mb-4">
-                <a href="quizzes.php" class="btn btn-outline-primary btn-sm rounded-pill px-3">
-                    <i class="fas fa-arrow-left me-2"></i>Back to Quizzes
-                </a>
-            </div>
+<!-- Navigation -->
+<div class="mb-6">
+    <a href="quizzes.php" class="inline-flex items-center border border-primary-200 text-primary-600 hover:bg-primary-50 font-bold px-5 py-2 rounded-full transition-all text-xs focus:outline-none shadow-sm">
+        <i class="fas fa-arrow-left mr-2"></i>Back to Quizzes
+    </a>
+</div>
 
-            <div class="glass-card border-0 shadow-lg position-relative overflow-hidden">
-                <div class="card-header bg-transparent border-bottom border-secondary border-opacity-25 py-3 px-4">
-                    <h5 class="mb-0 fw-bold"><i class="fas fa-edit me-2 text-warning"></i> Edit Quiz</h5>
-                </div>
+<div class="bg-white border border-slate-200 rounded-[32px] shadow-premium max-w-2xl mx-auto overflow-hidden">
+    <div class="bg-primary-600 p-6 text-white">
+        <h4 class="text-xl font-black mb-1 flex items-center"><i class="fas fa-edit mr-2 text-amber-305 text-amber-300"></i> Edit Quiz</h4>
+        <p class="text-primary-100 text-xs opacity-75">Modify quiz configuration details below.</p>
+    </div>
 
-                <div class="card-body p-4 p-md-5">
-                    <form action="" method="POST">
-                        <!-- Title -->
-                        <div class="mb-4">
-                            <label for="title" class="form-label small text-uppercase fw-bold mb-2">Quiz Title</label>
-                            <div class="input-group premium-input-group">
-                                <span class="input-group-text bg-transparent border-secondary border-opacity-50 text-secondary"><i class="fas fa-heading"></i></span>
-                                <input type="text" class="form-control bg-white text-slate-800 border-slate-200" id="title" name="title" value="<?php echo sanitize($quiz['title']); ?>" required>
-                            </div>
-                        </div>
-
-                        <!-- Description -->
-                        <div class="mb-4">
-                            <label for="description" class="form-label small text-uppercase fw-bold mb-2">Description</label>
-                            <textarea class="form-control bg-white text-slate-800 border-slate-200" id="description" name="description" rows="3"><?php echo sanitize($quiz['description']); ?></textarea>
-                        </div>
-
-                        <div class="row g-4 mb-4">
-                            <!-- Category -->
-                            <div class="col-md-12">
-                                <label for="category_id" class="form-label small text-uppercase fw-bold mb-2">Category</label>
-                                <select class="form-select bg-white text-slate-800 border-slate-200" id="category_id" name="category_id" required>
-                                    <option value="" disabled>Choose a category...</option>
-                                    <?php foreach ($categories as $cat): ?>
-                                        <option value="<?php echo $cat['id']; ?>" <?php echo $cat['id'] == $quiz['category_id'] ? 'selected' : ''; ?>>
-                                            <?php echo sanitize($cat['name']); ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-
-                            <!-- Time Limit -->
-                            <div class="col-md-6">
-                                <label for="time_limit" class="form-label small text-uppercase fw-bold mb-2">Time Limit (Minutes)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-transparent border-secondary border-opacity-50 text-secondary"><i class="fas fa-clock"></i></span>
-                                    <input type="number" class="form-control bg-white text-slate-800 border-slate-200" id="time_limit" name="time_limit" value="<?php echo $quiz['time_limit']; ?>" min="0">
-                                </div>
-                            </div>
-
-                            <!-- Passing Score -->
-                            <div class="col-md-6">
-                                <label for="passing_score" class="form-label small text-uppercase fw-bold mb-2">Passing Score (%)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-transparent border-secondary border-opacity-50 text-secondary"><i class="fas fa-percentage"></i></span>
-                                    <input type="number" class="form-control bg-white text-slate-800 border-slate-200" id="passing_score" name="passing_score" value="<?php echo $quiz['passing_score']; ?>" min="1" max="100" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Actions -->
-                        <div class="d-grid pt-2">
-                            <button type="submit" class="btn btn-gradient-primary btn-lg shadow-lg fw-bold">
-                                <i class="fas fa-save me-2"></i>Update Quiz
-                            </button>
-                        </div>
-                    </form>
+    <div class="p-6 md:p-10">
+        <form action="" method="POST" class="space-y-6">
+            <!-- Title -->
+            <div>
+                <label for="title" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Quiz Title</label>
+                <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-600 transition-all">
+                    <span class="px-3 bg-slate-50 border-r border-slate-200 flex items-center text-slate-400 text-sm"><i class="fas fa-heading"></i></span>
+                    <input type="text" class="flex-grow px-4 py-2.5 text-sm bg-white focus:outline-none text-slate-800" id="title" name="title" value="<?php echo sanitize($quiz['title']); ?>">
                 </div>
             </div>
-        </div>
+
+            <!-- Description -->
+            <div>
+                <label for="description" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Description</label>
+                <textarea class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-600 transition-all resize-none" id="description" name="description" rows="3"><?php echo sanitize($quiz['description']); ?></textarea>
+            </div>
+
+            <!-- Category -->
+            <div>
+                <label for="category_id" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Category</label>
+                <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-600 transition-all relative">
+                    <select class="w-full pl-4 pr-10 py-2.5 text-sm bg-white focus:outline-none text-slate-800 cursor-pointer appearance-none" id="category_id" name="category_id">
+                        <option value="" disabled>Choose a category...</option>
+                        <?php foreach ($categories as $cat): ?>
+                            <option value="<?php echo $cat['id']; ?>" <?php echo $cat['id'] == $quiz['category_id'] ? 'selected' : ''; ?>>
+                                <?php echo sanitize($cat['name']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <i class="fas fa-chevron-down absolute right-4 top-3.5 text-slate-400 pointer-events-none text-xs"></i>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Time Limit -->
+                <div>
+                    <label for="time_limit" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Time Limit (Minutes)</label>
+                    <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-600 transition-all">
+                        <span class="px-3 bg-slate-50 border-r border-slate-200 flex items-center text-slate-400 text-sm"><i class="fas fa-clock"></i></span>
+                        <input type="number" class="flex-grow px-4 py-2.5 text-sm bg-white focus:outline-none text-slate-800" id="time_limit" name="time_limit" value="<?php echo $quiz['time_limit']; ?>" min="0">
+                    </div>
+                    <div class="text-slate-400 text-[10px] mt-1.5 font-semibold"><i class="fas fa-info-circle mr-1"></i> Set to 0 for no time limit.</div>
+                </div>
+
+                <!-- Passing Score -->
+                <div>
+                    <label for="passing_score" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Passing Score (%)</label>
+                    <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-600 transition-all">
+                        <span class="px-3 bg-slate-50 border-r border-slate-200 flex items-center text-slate-400 text-sm"><i class="fas fa-percentage"></i></span>
+                        <input type="number" class="flex-grow px-4 py-2.5 text-sm bg-white focus:outline-none text-slate-800" id="passing_score" name="passing_score" value="<?php echo $quiz['passing_score']; ?>" min="1" max="100">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="pt-4">
+                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs flex items-center justify-center focus:outline-none">
+                    <i class="fas fa-save mr-2 text-[10px]"></i>Update Quiz
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 

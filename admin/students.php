@@ -1,106 +1,103 @@
 <?php include_once 'controllers/students-process.php'; ?>
 
-<div class="container py-4">
-    <!-- Hero Header -->
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <div>
-            <h1 class="display-5 fw-bold mb-2">Registered Students</h1>
-            <p class="text-muted lead mb-0">Monitor student progress and activity.</p>
-        </div>
-        <div class="glass-badge px-4 py-2 rounded-pill">
-            <i class="fas fa-users text-primary me-2"></i>
-            <span class="fw-bold"><?php echo count($students); ?></span> <span class="text-muted">Total Students</span>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+    <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">Registered Students</h1>
+        <p class="text-slate-505 text-sm mb-0">Monitor student progress and activity.</p>
+    </div>
+    <div class="flex-shrink-0">
+        <div class="bg-primary-50 text-primary-600 border border-primary-100/30 text-xs font-bold px-4 py-2.5 rounded-full flex items-center shadow-sm">
+            <i class="fas fa-users mr-2 text-[10px]"></i>
+            <span><?php echo count($students); ?></span>&nbsp;<span class="text-primary-400 font-medium">Total Students</span>
         </div>
     </div>
+</div>
 
-    <!-- Students Table -->
-    <div class="glass-card border-0 shadow-lg position-relative overflow-hidden mb-5">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0" style="--bs-table-bg: #fff; --bs-table-hover-bg: var(--slate-50); color: var(--slate-800);">
-                    <thead class="bg-slate-50 border-bottom border-slate-200">
-                        <tr>
-                            <th class="ps-4 py-3 text-uppercase text-muted small border-0">Student</th>
-                            <th class="py-3 text-uppercase text-muted small border-0">Email</th>
-                            <th class="py-3 text-uppercase text-muted small border-0">Joined</th>
-                            <th class="py-3 text-uppercase text-muted small border-0 text-center">Quizzes Taken</th>
-                            <th class="py-3 text-uppercase text-muted small border-0 text-end pe-4">Actions</th>
+<!-- Students Table -->
+<div class="bg-white border border-slate-200 rounded-3xl shadow-premium overflow-hidden mb-8">
+    <div class="overflow-x-auto w-full">
+        <table class="w-full text-left text-sm text-slate-600 border-collapse">
+            <thead class="bg-slate-50 border-b border-slate-100">
+                <tr>
+                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Student</th>
+                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Email</th>
+                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Joined</th>
+                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Quizzes Taken</th>
+                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (count($students) > 0): ?>
+                    <?php foreach ($students as $student): ?>
+                        <tr class="border-b border-slate-100 last:border-0 hover:bg-slate-50/30 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <div class="w-9 h-9 bg-primary-50 border border-slate-100 flex items-center justify-center font-bold text-primary-600 mr-3 text-[10px] select-none flex-shrink-0 rounded-full">
+                                        <?php echo strtoupper(substr($student['username'], 0, 1)); ?>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-slate-800"><?php echo sanitize($student['username']); ?></div>
+                                        <div class="text-slate-400 text-[10px] font-bold">ID: #<?php echo $student['id']; ?></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-slate-505 font-semibold"><?php echo sanitize($student['email']); ?></td>
+                            <td class="px-6 py-4 text-slate-400 text-xs font-semibold">
+                                <i class="far fa-calendar-alt mr-1.5 opacity-60"></i>
+                                <?php echo date('M d, Y', strtotime($student['created_at'])); ?>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <?php if ($student['quizzes_taken'] > 0): ?>
+                                    <span class="bg-emerald-50 text-emerald-600 border border-emerald-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">
+                                        <?php echo $student['quizzes_taken']; ?> Quizzes
+                                    </span>
+                                <?php else: ?>
+                                    <span class="bg-amber-50 text-amber-600 border border-amber-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">
+                                        Inactive
+                                    </span>
+                                <?php endif; ?>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <div class="flex items-center justify-end space-x-1.5">
+                                    <a href="student-details.php?id=<?php echo $student['id']; ?>" class="w-8 h-8 rounded-full flex items-center justify-center text-sky-500 hover:bg-sky-50 transition-all" title="View History">
+                                        <i class="fas fa-chart-line"></i>
+                                    </a>
+
+                                    <!-- Block Toggle -->
+                                    <form action="" method="POST" class="inline">
+                                        <input type="hidden" name="user_id" value="<?php echo $student['id']; ?>">
+                                        <input type="hidden" name="action" value="toggle_block">
+                                        <button type="submit" class="w-8 h-8 rounded-full flex items-center justify-center <?php echo $student['is_blocked'] ? 'text-rose-500 hover:bg-rose-50' : 'text-amber-500 hover:bg-amber-50'; ?> transition-all focus:outline-none"
+                                            title="<?php echo $student['is_blocked'] ? 'Unblock Student' : 'Block Student'; ?>">
+                                            <i class="fas <?php echo $student['is_blocked'] ? 'fa-ban' : 'fa-user-lock'; ?>"></i>
+                                        </button>
+                                    </form>
+
+                                    <!-- Delete -->
+                                    <form action="" method="POST" class="inline" onsubmit="return confirm('Are you sure? This will delete the student and all their quiz attempts.');">
+                                        <input type="hidden" name="user_id" value="<?php echo $student['id']; ?>">
+                                        <input type="hidden" name="action" value="delete">
+                                        <button type="submit" class="w-8 h-8 rounded-full flex items-center justify-center text-rose-500 hover:bg-rose-50 transition-all focus:outline-none" title="Delete Student">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody class="border-top-0">
-                        <?php if (count($students) > 0): ?>
-                            <?php foreach ($students as $student): ?>
-                                <tr class="border-bottom border-slate-100 transition-all">
-                                    <td class="ps-4 py-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="rounded-circle bg-gradient-primary d-flex align-items-center justify-content-center me-3 shadow-sm" style="width: 40px; height: 40px;">
-                                                <span class="fw-bold text-white"><?php echo strtoupper(substr($student['username'], 0, 1)); ?></span>
-                                            </div>
-                                            <div>
-                                                <div class="fw-bold"><?php echo sanitize($student['username']); ?></div>
-                                                <small class="text-muted">ID: #<?php echo $student['id']; ?></small>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="py-3 text-muted">
-                                        <?php echo sanitize($student['email']); ?>
-                                    </td>
-                                    <td class="py-3 text-muted">
-                                        <i class="far fa-calendar-alt me-1 opacity-50"></i>
-                                        <?php echo date('M d, Y', strtotime($student['created_at'])); ?>
-                                    </td>
-                                    <td class="py-3 text-center">
-                                        <?php if ($student['quizzes_taken'] > 0): ?>
-                                            <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 rounded-pill px-3">
-                                                <?php echo $student['quizzes_taken']; ?> Quizzes
-                                            </span>
-                                        <?php else: ?>
-                                            <span class="badge bg-warning bg-opacity-20 text-dark rounded-pill px-3">
-                                                Inactive
-                                            </span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td class="text-end pe-4 py-3">
-                                        <div class="d-flex justify-content-end gap-2">
-                                            <a href="student-details.php?id=<?php echo $student['id']; ?>" class="btn btn-icon btn-sm btn-info text-white rounded-circle" title="View History">
-                                                <i class="fas fa-chart-line"></i>
-                                            </a>
-
-                                            <!-- Block Toggle -->
-                                            <form action="" method="POST" class="d-inline">
-                                                <input type="hidden" name="user_id" value="<?php echo $student['id']; ?>">
-                                                <input type="hidden" name="action" value="toggle_block">
-                                                <button type="submit" class="btn btn-icon btn-sm <?php echo $student['is_blocked'] ? 'btn-danger' : 'btn-warning'; ?> rounded-circle"
-                                                    title="<?php echo $student['is_blocked'] ? 'Unblock Student' : 'Block Student'; ?>">
-                                                    <i class="fas <?php echo $student['is_blocked'] ? 'fa-ban' : 'fa-user-lock'; ?>"></i>
-                                                </button>
-                                            </form>
-
-                                            <!-- Delete -->
-                                            <form action="" method="POST" class="d-inline" onsubmit="return confirm('Are you sure? This will delete the student and all their quiz attempts.');">
-                                                <input type="hidden" name="user_id" value="<?php echo $student['id']; ?>">
-                                                <input type="hidden" name="action" value="delete">
-                                                <button type="submit" class="btn btn-icon btn-sm btn-danger rounded-circle" title="Delete Student">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="5" class="text-center py-5">
-                                    <div class="text-muted opacity-50 mb-3"><i class="fas fa-users-slash fa-3x"></i></div>
-                                    <h5 class="fw-bold">No students found</h5>
-                                    <p class="text-muted small">Share your quiz link to get students started.</p>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5" class="text-center py-12">
+                            <div class="mb-4">
+                                <i class="fas fa-users-slash text-slate-350 text-5xl"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-800 text-base mb-1">No students found</h5>
+                            <p class="text-slate-400 text-xs">Share your quiz link to get students started.</p>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </div>
 

@@ -1,5 +1,5 @@
-<div class="admin-sidebar flex flex-col flex-shrink-0 p-4 bg-white border-r border-slate-200 shadow-md">
-    <a href="<?php echo base_url('admin/dashboard.php'); ?>" class="flex items-center mb-6 text-primary-600 hover:text-primary-700 transition-colors font-extrabold text-xl tracking-wider">
+<div class="student-sidebar flex flex-col flex-shrink-0 p-4 bg-white border-r border-slate-200 shadow-md">
+    <a href="<?php echo base_url('student/dashboard.php'); ?>" class="flex items-center mb-6 text-primary-600 hover:text-primary-700 transition-colors font-extrabold text-xl tracking-wider">
         <i class="fas fa-graduation-cap text-2xl mr-2 text-primary-600"></i>
         <span class="text-xl font-extrabold text-slate-900 tracking-wider">Quizara</span>
     </a>
@@ -10,12 +10,10 @@
         $current_page = basename($_SERVER['PHP_SELF']);
         $menu_items = [
             ['dashboard.php', 'Dashboard', 'fas fa-tachometer-alt', ['dashboard.php']],
-            ['quizzes.php', 'Quizzes', 'fas fa-book', ['quizzes.php', 'add-quiz.php', 'edit-quiz.php', 'questions.php', 'add-question.php', 'edit-question.php']],
-            ['categories.php', 'Categories', 'fas fa-folder', ['categories.php']],
-            ['students.php', 'Students', 'fas fa-users', ['students.php', 'student-details.php']],
-            ['messages.php', 'Messages', 'fas fa-envelope', ['messages.php']],
-            ['reports.php', 'Reports', 'fas fa-chart-bar', ['reports.php']],
-            ['settings.php', 'Settings', 'fas fa-cog', ['settings.php']]
+            ['quizzes.php', 'Quizzes', 'fas fa-list-check', ['quizzes.php', 'take-quiz.php', 'results.php', 'review.php', 'upgrade-premium.php', 'checkout.php']],
+            ['history.php', 'History', 'fas fa-history', ['history.php']],
+            ['reports.php', 'Reports', 'fas fa-chart-line', ['reports.php']],
+            ['profile.php', 'Profile', 'fas fa-user-cog', ['profile.php']]
         ];
 
         foreach ($menu_items as $item):
@@ -26,7 +24,7 @@
             $icon_color = $is_active ? 'text-white' : 'text-slate-400 group-hover:text-primary-600';
         ?>
             <li>
-                <a href="<?php echo base_url('admin/' . $item[0]); ?>" class="group flex items-center px-4 py-2.5 rounded-lg text-sm font-semibold transition-all <?php echo $active_classes; ?>">
+                <a href="<?php echo base_url('student/' . $item[0]); ?>" class="group flex items-center px-4 py-2.5 rounded-lg text-sm font-semibold transition-all <?php echo $active_classes; ?>">
                     <i class="<?php echo $item[2]; ?> mr-3 w-5 text-center transition-colors <?php echo $icon_color; ?>"></i>
                     <?php echo $item[1]; ?>
                 </a>
@@ -42,12 +40,12 @@
         <hr class="border-slate-200 my-3">
 
         <div class="flex items-center px-2 py-2 bg-slate-50 rounded-xl border border-slate-200">
-            <div class="rounded-full bg-primary-600 text-white flex items-center justify-content-center w-9 h-9 font-bold mr-3 pl-[12.5px] shadow-sm flex-shrink-0">
+            <div class="rounded-full bg-primary-600 text-white flex items-center justify-content-center w-9 h-9 font-bold mr-3 pl-3.5 shadow-sm flex-shrink-0">
                 <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?>
             </div>
             <div class="min-w-0">
                 <div class="font-bold text-slate-800 text-xs truncate max-w-[120px]"><?php echo sanitize($_SESSION['username']); ?></div>
-                <div class="text-slate-400 text-[0.65rem] font-medium uppercase tracking-wider">Administrator</div>
+                <div class="text-slate-400 text-[0.65rem] font-medium uppercase tracking-wider">Student</div>
             </div>
         </div>
     </div>

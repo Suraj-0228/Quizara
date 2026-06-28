@@ -1,185 +1,222 @@
 <?php include_once 'controllers/settings-process.php'; ?>
 
-<div class="container py-5">
-    <!-- Page Header -->
-    <div class="row mb-5 align-items-center">
-        <div class="col-md-8">
-            <h2 class="fw-black text-slate-900 mb-2">Settings & Configuration</h2>
-            <p class="text-slate-500 small fw-medium">Manage global application settings and platform preferences.</p>
-        </div>
-        <div class="col-md-4 text-md-end">
-            <div class="d-inline-flex bg-slate-50 rounded-pill p-2 border border-slate-200">
-                <span class="px-3 py-1 text-slate-600 small fw-bold"><i class="fas fa-server text-indigo-500 me-2"></i>System Engine Online</span>
-            </div>
-        </div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+    <div>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">Settings & Configuration</h2>
+        <p class="text-slate-500 text-sm md:text-base mb-0">Manage global application settings and platform preferences.</p>
     </div>
-
-    <?php if ($message): ?>
-        <div class="alert alert-<?php echo $messageType; ?> glass-alert mb-5 border-0 border-start border-<?php echo $messageType; ?> border-4 shadow-premium">
-            <div class="d-flex align-items-center p-2">
-                <i class="fas fa-<?php echo $messageType == 'success' ? 'check-circle' : 'exclamation-circle'; ?> fs-4 me-3 text-<?php echo $messageType; ?>"></i>
-                <div class="fw-bold text-slate-800"><?php echo $message; ?></div>
-            </div>
-        </div>
-    <?php endif; ?>
-
-    <div class="row g-4">
-        <!-- Sidebar Navigation -->
-        <div class="col-lg-3">
-            <div class="card glass-card border-0 shadow-premium sticky-top" style="top: 100px; z-index: 10; border-radius: 20px;">
-                <div class="nav flex-column nav-pills p-3" id="v-pills-tab" role="tablist">
-                    <button class="nav-link active d-flex align-items-center p-3 mb-2 rounded-4" id="v-pills-general-tab" data-bs-toggle="pill" data-bs-target="#v-pills-general" type="button" role="tab">
-                        <div class="icon-square-vibrant bg-indigo-50 text-indigo-600 me-3">
-                            <i class="fas fa-sliders-h"></i>
-                        </div>
-                        <span class="fw-bold small text-uppercase tracking-wider">General</span>
-                    </button>
-                    <button class="nav-link d-flex align-items-center p-3 mb-2 rounded-4" id="v-pills-system-tab" data-bs-toggle="pill" data-bs-target="#v-pills-system" type="button" role="tab">
-                        <div class="icon-square-vibrant bg-rose-50 text-rose-600 me-3">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <span class="fw-bold small text-uppercase tracking-wider">Security</span>
-                    </button>
-                    <button class="nav-link d-flex align-items-center p-3 mb-2 rounded-4" id="v-pills-email-tab" data-bs-toggle="pill" data-bs-target="#v-pills-email" type="button" role="tab">
-                        <div class="icon-square-vibrant bg-blue-50 text-blue-600 me-3">
-                            <i class="fas fa-envelope-open-text"></i>
-                        </div>
-                        <span class="fw-bold small text-uppercase tracking-wider">Messaging</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- content -->
-        <div class="col-lg-9">
-            <form action="" method="POST">
-                <div class="tab-content" id="v-pills-tabContent">
-
-                    <!-- General Settings -->
-                    <div class="tab-pane fade show active" id="v-pills-general" role="tabpanel">
-                        <div class="card glass-card border-0 shadow-premium mb-4 rounded-4 overflow-hidden">
-                            <div class="card-header bg-slate-50 border-bottom border-slate-100 py-3 px-4">
-                                <h5 class="fw-black text-slate-800 mb-0"><i class="fas fa-fingerprint text-indigo-500 me-2"></i>Site Identity</h5>
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row g-4">
-                                    <div class="col-md-6">
-                                        <label class="form-label text-slate-400 x-small fw-black text-uppercase tracking-widest">Platform Name</label>
-                                        <div class="premium-input-group">
-                                            <i class="fas fa-globe input-icon"></i>
-                                            <input type="text" class="premium-control" name="site_name" value="<?php echo isset($settings['site_name']) ? sanitize($settings['site_name']) : 'Quizara'; ?>" placeholder=" ">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label text-slate-400 x-small fw-black text-uppercase tracking-widest">Contact Email</label>
-                                        <div class="premium-input-group">
-                                            <i class="fas fa-at input-icon"></i>
-                                            <input type="email" class="premium-control" name="contact_email" value="<?php echo isset($settings['contact_email']) ? sanitize($settings['contact_email']) : ''; ?>" placeholder=" ">
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <label class="form-label text-slate-400 x-small fw-black text-uppercase tracking-widest">Site Description</label>
-                                        <textarea class="form-control premium-control" name="site_description" rows="3" placeholder="Brief description of your platform..."><?php echo isset($settings['site_description']) ? sanitize($settings['site_description']) : ''; ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card glass-card border-0 shadow-premium mb-4 rounded-4 overflow-hidden">
-                            <div class="card-header bg-slate-50 border-bottom border-slate-100 py-3 px-4">
-                                <h5 class="fw-black text-slate-800 mb-0"><i class="fas fa-layer-group text-indigo-500 me-2"></i>Display Preferences</h5>
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center g-4">
-                                    <div class="col-md-8">
-                                        <h6 class="fw-bold text-slate-900 mb-1">Pagination Limit</h6>
-                                        <p class="text-slate-500 small fw-medium mb-0">How many items should we show per page in administrative tables?</p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <select class="form-select premium-control border-slate-200" name="items_per_page">
-                                            <option value="10" <?php echo (isset($settings['items_per_page']) && $settings['items_per_page'] == '10') ? 'selected' : ''; ?>>10 Rows Per Page</option>
-                                            <option value="20" <?php echo (isset($settings['items_per_page']) && $settings['items_per_page'] == '20') ? 'selected' : ''; ?>>20 Rows Per Page</option>
-                                            <option value="50" <?php echo (isset($settings['items_per_page']) && $settings['items_per_page'] == '50') ? 'selected' : ''; ?>>50 Rows Per Page</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- System Settings -->
-                    <div class="tab-pane fade" id="v-pills-system" role="tabpanel">
-                        <div class="card glass-card border-0 shadow-premium mb-4 rounded-4 overflow-hidden">
-                            <div class="card-header bg-slate-50 border-bottom border-slate-100 py-3 px-4">
-                                <h5 class="fw-black text-slate-800 mb-0"><i class="fas fa-user-lock text-rose-500 me-2"></i>Access Control</h5>
-                            </div>
-                            <div class="card-body p-4">
-                                <!-- Maintenance Mode -->
-                                <div class="d-flex align-items-center justify-content-between p-4 rounded-4 bg-slate-50 border border-slate-100 mb-4 hover-lift transition-all">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-square-vibrant bg-amber-50 text-amber-600 me-4">
-                                            <i class="fas fa-tools fa-lg"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="fw-black text-slate-900 mb-1">Maintenance Mode</h6>
-                                            <p class="text-slate-500 small fw-medium mb-0">Put the site into read-only mode for maintenance.</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-check form-switch p-0 m-0">
-                                        <input class="form-check-input fs-3 cursor-pointer ms-0" type="checkbox" name="maintenance_mode" <?php echo (isset($settings['maintenance_mode']) && $settings['maintenance_mode'] == '1') ? 'checked' : ''; ?>>
-                                    </div>
-                                </div>
-
-                                <!-- Registration -->
-                                <div class="d-flex align-items-center justify-content-between p-4 rounded-4 bg-slate-50 border border-slate-100 mb-0 hover-lift transition-all">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-square-vibrant bg-emerald-50 text-emerald-600 me-4">
-                                            <i class="fas fa-user-plus fa-lg"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="fw-black text-slate-900 mb-1">Open Registration</h6>
-                                            <p class="text-slate-500 small fw-medium mb-0">Allow new students to create accounts on the platform.</p>
-                                        </div>
-                                    </div>
-                                    <div class="form-check form-switch p-0 m-0">
-                                        <input class="form-check-input fs-3 cursor-pointer ms-0" type="checkbox" name="allow_registration" <?php echo (isset($settings['allow_registration']) && $settings['allow_registration'] == '1') ? 'checked' : ''; ?>>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Email Settings (Placeholder for future expansion) -->
-                    <div class="tab-pane fade" id="v-pills-email" role="tabpanel">
-                        <div class="card glass-card border-0 shadow-premium mb-4 rounded-4 overflow-hidden">
-                            <div class="card-header bg-slate-50 border-bottom border-slate-100 py-3 px-4">
-                                <h5 class="fw-black text-slate-800 mb-0"><i class="fas fa-paper-plane text-blue-500 me-2"></i>Email Relay</h5>
-                            </div>
-                            <div class="card-body p-5 text-center">
-                                <div class="icon-square-vibrant bg-blue-50 text-blue-600 mx-auto mb-4" style="width: 80px; height: 80px; border-radius: 25px;">
-                                    <i class="fas fa-envelope-open-text fa-2x"></i>
-                                </div>
-                                <h4 class="fw-black text-slate-900 mb-2">Email Configuration</h4>
-                                <p class="text-slate-500 small fw-medium mb-4 mx-auto" style="max-width: 400px;">Messaging services are currently handled by the core system relay. SMTP configuration will be available in future enterprise updates.</p>
-                                <button type="button" class="btn btn-outline-slate rounded-pill px-4" disabled>Coming Soon</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer Actions -->
-                <div class="d-flex justify-content-end gap-3 mt-5 pb-5">
-                    <button type="button" class="btn btn-outline-slate rounded-pill px-4 fw-bold" onclick="window.history.back()">Discard Changes</button>
-                    <button type="submit" class="btn btn-indigo rounded-pill px-5 py-3 shadow-premium fw-black hover-scale">
-                        Save Configuration <i class="fas fa-check-circle ms-2"></i>
-                    </button>
-                </div>
-            </form>
+    <div class="flex-shrink-0">
+        <div class="bg-primary-50 text-primary-600 border border-primary-100/30 text-xs font-bold px-4 py-2.5 rounded-full flex items-center shadow-sm">
+            <i class="fas fa-server mr-2 text-primary-500 text-[10px]"></i>
+            <span>System Engine Online</span>
         </div>
     </div>
 </div>
 
+<?php if ($message): ?>
+    <div class="p-4 mb-6 rounded-2xl bg-primary-50 border border-primary-200 text-primary-700 text-sm font-medium flex items-center justify-between">
+        <div class="flex items-center">
+            <i class="fas fa-info-circle mr-2.5"></i> <?php echo $message; ?>
+        </div>
+        <button type="button" onclick="this.parentElement.remove()" class="text-primary-500 hover:text-primary-700"><i class="fas fa-times"></i></button>
+    </div>
+<?php endif; ?>
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Sidebar Navigation -->
+    <div class="lg:col-span-3">
+        <div class="bg-white border border-slate-200 rounded-3xl p-4 shadow-sm sticky top-[100px] z-10 space-y-2" id="v-pills-tab">
+            <button type="button" class="tab-btn w-full flex items-center p-3 rounded-2xl text-left text-sm font-bold transition-all focus:outline-none bg-primary-600 text-white shadow-sm" data-bs-target="#v-pills-general">
+                <div class="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center mr-3 text-sm flex-shrink-0">
+                    <i class="fas fa-sliders-h text-[11px]"></i>
+                </div>
+                <span class="uppercase tracking-wider text-[11px]">General</span>
+            </button>
+            <button type="button" class="tab-btn w-full flex items-center p-3 rounded-2xl text-left text-sm font-bold transition-all focus:outline-none text-slate-550 hover:text-primary-600" data-bs-target="#v-pills-system">
+                <div class="w-8 h-8 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center mr-3 text-sm flex-shrink-0">
+                    <i class="fas fa-shield-alt text-[11px]"></i>
+                </div>
+                <span class="uppercase tracking-wider text-[11px]">Security</span>
+            </button>
+            <button type="button" class="tab-btn w-full flex items-center p-3 rounded-2xl text-left text-sm font-bold transition-all focus:outline-none text-slate-555 hover:text-primary-600" data-bs-target="#v-pills-email">
+                <div class="w-8 h-8 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center mr-3 text-sm flex-shrink-0">
+                    <i class="fas fa-envelope-open-text text-[11px]"></i>
+                </div>
+                <span class="uppercase tracking-wider text-[11px]">Messaging</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="lg:col-span-9">
+        <form action="" method="POST">
+            <div id="v-pills-tabContent">
+
+                <!-- General Settings -->
+                <div class="tab-pane block" id="v-pills-general">
+                    <div class="bg-white border border-slate-200 rounded-3xl shadow-premium overflow-hidden mb-6">
+                        <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                            <h5 class="font-extrabold text-slate-900 text-base flex items-center"><i class="fas fa-fingerprint text-primary-500 mr-2.5"></i>Site Identity</h5>
+                        </div>
+                        <div class="p-6 md:p-8 space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Platform Name</label>
+                                    <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-600 transition-all">
+                                        <span class="px-3 bg-slate-50 border-r border-slate-200 flex items-center text-slate-400 text-xs"><i class="fas fa-globe"></i></span>
+                                        <input type="text" class="flex-grow px-4 py-2.5 text-sm bg-white focus:outline-none text-slate-800" name="site_name" value="<?php echo isset($settings['site_name']) ? sanitize($settings['site_name']) : 'Quizara'; ?>" placeholder="Site name...">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Contact Email</label>
+                                    <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-600 transition-all">
+                                        <span class="px-3 bg-slate-50 border-r border-slate-200 flex items-center text-slate-400 text-xs"><i class="fas fa-envelope"></i></span>
+                                        <input type="email" class="flex-grow px-4 py-2.5 text-sm bg-white focus:outline-none text-slate-800" name="contact_email" value="<?php echo isset($settings['contact_email']) ? sanitize($settings['contact_email']) : ''; ?>" placeholder="support@domain.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Site Description</label>
+                                <textarea class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-600 transition-all resize-none" name="site_description" rows="3" placeholder="Brief description of your platform..."><?php echo isset($settings['site_description']) ? sanitize($settings['site_description']) : ''; ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-slate-200 rounded-3xl shadow-premium overflow-hidden">
+                        <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                            <h5 class="font-extrabold text-slate-900 text-base flex items-center"><i class="fas fa-layer-group text-primary-500 mr-2.5"></i>Display Preferences</h5>
+                        </div>
+                        <div class="p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div>
+                                <h6 class="font-extrabold text-slate-850 text-sm mb-1">Pagination Limit</h6>
+                                <p class="text-slate-400 text-xs">How many items should we show per page in administrative tables?</p>
+                            </div>
+                            <div class="w-full md:w-auto">
+                                <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-600 transition-all relative min-w-[200px]">
+                                    <select class="w-full pl-4 pr-10 py-2.5 text-sm bg-white focus:outline-none text-slate-800 cursor-pointer appearance-none" name="items_per_page">
+                                        <option value="10" <?php echo (isset($settings['items_per_page']) && $settings['items_per_page'] == '10') ? 'selected' : ''; ?>>10 Rows Per Page</option>
+                                        <option value="20" <?php echo (isset($settings['items_per_page']) && $settings['items_per_page'] == '20') ? 'selected' : ''; ?>>20 Rows Per Page</option>
+                                        <option value="50" <?php echo (isset($settings['items_per_page']) && $settings['items_per_page'] == '50') ? 'selected' : ''; ?>>50 Rows Per Page</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down absolute right-4 top-3.5 text-slate-400 pointer-events-none text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="tab-pane hidden" id="v-pills-system">
+                    <div class="bg-white border border-slate-200 rounded-3xl shadow-premium overflow-hidden">
+                        <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                            <h5 class="font-extrabold text-slate-900 text-base flex items-center"><i class="fas fa-user-lock text-rose-500 mr-2.5"></i>Access Control</h5>
+                        </div>
+                        <div class="p-6 md:p-8 space-y-4">
+                            <!-- Maintenance Mode Switch -->
+                            <div class="flex items-center justify-between p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-sm transition-all">
+                                <div class="flex items-center min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-amber-500 flex items-center justify-center text-base mr-4 flex-shrink-0">
+                                        <i class="fas fa-tools"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <h6 class="font-extrabold text-slate-800 text-sm truncate mb-0.5">Maintenance Mode</h6>
+                                        <p class="text-slate-400 text-xs truncate">Put the site into read-only mode for maintenance.</p>
+                                    </div>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer select-none">
+                                    <input type="checkbox" name="maintenance_mode" value="1" <?php echo (isset($settings['maintenance_mode']) && $settings['maintenance_mode'] == '1') ? 'checked' : ''; ?> class="sr-only peer">
+                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                </label>
+                            </div>
+
+                            <!-- Open Registration Switch -->
+                            <div class="flex items-center justify-between p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-sm transition-all">
+                                <div class="flex items-center min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-white border border-slate-200 text-emerald-500 flex items-center justify-center text-base mr-4 flex-shrink-0">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <h6 class="font-extrabold text-slate-800 text-sm truncate mb-0.5">Open Registration</h6>
+                                        <p class="text-slate-400 text-xs truncate">Allow new students to create accounts on the platform.</p>
+                                    </div>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer select-none">
+                                    <input type="checkbox" name="allow_registration" value="1" <?php echo (isset($settings['allow_registration']) && $settings['allow_registration'] == '1') ? 'checked' : ''; ?> class="sr-only peer">
+                                    <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messaging/Email Settings -->
+                <div class="tab-pane hidden" id="v-pills-email">
+                    <div class="bg-white border border-slate-200 rounded-3xl shadow-premium overflow-hidden">
+                        <div class="p-6 border-b border-slate-100 bg-slate-50/50">
+                            <h5 class="font-extrabold text-slate-900 text-base flex items-center"><i class="fas fa-paper-plane text-blue-500 mr-2.5"></i>Email Relay</h5>
+                        </div>
+                        <div class="p-8 text-center max-w-sm mx-auto">
+                            <div class="w-16 h-16 bg-primary-50 border border-primary-100/30 text-primary-600 flex items-center justify-center rounded-2xl mx-auto mb-4 text-2xl">
+                                <i class="fas fa-envelope-open-text"></i>
+                            </div>
+                            <h4 class="font-extrabold text-slate-800 text-base mb-1">Email Configuration</h4>
+                            <p class="text-slate-400 text-xs leading-relaxed">Messaging services are currently handled by the core system relay. SMTP configuration will be available in future updates.</p>
+                            <button type="button" class="border border-slate-200 text-slate-455 font-bold px-6 py-2 rounded-full text-xs cursor-not-allowed mt-4 focus:outline-none" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="flex justify-end space-x-3 pt-6 border-t border-slate-100 mt-6">
+                <button type="button" class="border border-slate-200 text-slate-505 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-full text-xs transition-all focus:outline-none" onclick="window.history.back()">Discard Changes</button>
+                <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white font-bold px-6 py-2.5 rounded-full shadow-md text-xs transition-all focus:outline-none hover:scale-105">
+                    Save Configuration <i class="fas fa-check-circle ml-1.5 text-[10px]"></i>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
-</div>
+
+<script>
+    // Tab switching logic
+    document.querySelectorAll('#v-pills-tab button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active classes from all buttons
+            document.querySelectorAll('#v-pills-tab button').forEach(b => {
+                b.classList.remove('bg-primary-600', 'text-white', 'shadow-sm');
+                b.classList.add('text-slate-500', 'hover:text-primary-600');
+                
+                // Reset internal icon square wrapper classes
+                const iconBox = b.querySelector('.w-8');
+                if (iconBox) {
+                    iconBox.classList.remove('bg-white/15');
+                    iconBox.classList.add('bg-slate-50', 'border', 'border-slate-200');
+                }
+            });
+            // Add active classes to current button
+            this.classList.add('bg-primary-600', 'text-white', 'shadow-sm');
+            this.classList.remove('text-slate-500', 'hover:text-primary-600');
+            
+            const iconBox = this.querySelector('.w-8');
+            if (iconBox) {
+                iconBox.classList.remove('bg-slate-50', 'border', 'border-slate-200');
+                iconBox.classList.add('bg-white/15');
+            }
+
+            // Hide all tab content panes
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.add('hidden');
+                pane.classList.remove('block');
+            });
+            // Show target pane
+            const target = this.getAttribute('data-bs-target');
+            const targetEl = document.querySelector(target);
+            targetEl.classList.remove('hidden');
+            targetEl.classList.add('block');
+        });
+    });
+</script>
 
 <?php include_once '../includes/admin-footer.php'; ?>

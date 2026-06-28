@@ -1,6 +1,8 @@
 # Quizara – Challenge Your Mind
 
-Quizara is a dynamic, web-based quiz application designed to facilitate online learning and assessment. It features a modern, glassmorphism-inspired UI and distinct roles for Students and Administrators.
+Quizara is a dynamic, web-based quiz application designed to facilitate online learning and assessment. It features a modern, glassmorphism-inspired premium user interface and distinct portals for Students and Administrators.
+
+---
 
 ## 🚀 How It Works
 
@@ -9,40 +11,49 @@ The application follows a standard **PHP Multi-Page Application (MPA)** architec
 1.  **Authentication**: Users register or login. The system assigns a role (`admin` or `student`) based on the database record.
 2.  **State Management**: PHP `$_SESSION` is used to track logged-in users and enforce access control (e.g., preventing students from accessing `/admin` pages).
 3.  **Data Layer**: A `database.php` config file establishes a connection to the MySQL database using **PDO**, ensuring secure data transactions.
-4.  **Frontend**: The UI is built with HTML/CSS (Bootstrap 5 + Custom CSS) and uses PHP to render dynamic content server-side.
+4.  **Frontend**: The UI is built with HTML5, CSS3, and styled entirely with **Tailwind CSS (via Play CDN)** using a customized premium **Violet & Emerald Light Theme**. All Bootstrap 5 dependencies and inline styles have been removed.
+5.  **Interactive Component Mocking**: Standard Bootstrap JavaScript components (like collapses, dropdowns, alerts, and modals) are handled via a custom, lightweight Vanilla JS mock script (`assets/js/script.js`), keeping the portal fast and dependency-free.
+
+---
 
 ## 🛠️ Technology Stack
 
 -   **Backend**: Native PHP (8.x recommended)
 -   **Database**: MySQL
--   **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
--   **Styling**: Bootstrap 5 (CDN), FontAwesome (Icons), Custom Glassmorphism Theme
+-   **Frontend**: HTML5, CSS3, JavaScript (Vanilla JS)
+-   **Styling**: Tailwind CSS (Play CDN), FontAwesome (Icons), Custom Violet & Emerald Premium Light Theme
+-   **Document Generation**: FPDF (PDF creation)
 -   **Architecture**: Logic-Separated Page Model (includes/components pattern)
+
+---
 
 ## ✨ Features
 
 ### 🎓 Student Portal
 -   **Dashboard**: View statistics (Total Attempts, Average Score, XP) and recent activity.
--   **Take Quizzes**: Interactive interface for Multiple Choice and True/False questions.
+-   **Take Quizzes**: Interactive interface for Multiple Choice and True/False questions with visual options selectors and timers.
 -   **Quizzes Browsing**: Server-side pagination, category filtering, and keyword search.
 -   **History Timeline**: Visual timeline of past attempts with scores, pass/fail status, and certificate downloads.
--   **Leaderboard**: See top-performing students.
--   **Profile**: Manage account details (Overview, Security).
--   **Certificate Generation**: Downloadable PDF Certificates (via FPDF) awarded for scores >= 75%.
+-   **Leaderboard**: View top-performing students.
+-   **Profile**: Manage account details (Overview, Security, Bio, and custom profile picture uploads).
+-   **Certificate Generation**: Downloadable PDF Certificates (via FPDF) and browser previews awarded for scores >= 75% featuring premium asymmetric gold and violet frames.
 
 ### 🛡️ Admin Portal
 -   **Dashboard**: Overview of system health (Total Students, Active Quizzes, Question Bank).
 -   **Quiz Management**: Create, edit, and delete quizzes.
--   **Student Management**: View registered students and their details.
--   **Reports**: Detailed analytics of student performance.
--   **Settings**: Configure site-wide options.
+-   **Student Management**: View registered students, view detailed user profiles, block/delete credentials, and view attempt histories.
+-   **Reports**: Detailed analytics of student performance and average accuracy.
+-   **Settings**: Configure site-wide options and toggle maintenance modes.
 
-### � Security & System
+### 🔒 Security & System
 -   **Authentication**: Secure login, registration, and role-based access control.
 -   **Password Reset**: Secure forgot-password flow delivering time-limited (15m) database tokens via email.
 -   **Email Integration**: PHPMailer integration for Registration Welcomes, Quiz Results, Password Resets, and Contact Form Admin Notifications.
+-   **Form Validation**: Custom validation layer (`validation.js`) with instant parent border highlight indicators and clear error states.
 
-## �📦 Setup & Installation
+---
+
+## ⚙️ Setup & Installation
 
 1.  **Prerequisites**:
     -   XAMPP/WAMP/MAMP (Apache + MySQL + PHP).
@@ -52,7 +63,7 @@ The application follows a standard **PHP Multi-Page Application (MPA)** architec
     -   Clone or extract the project to your web server root (e.g., `htdocs/Quizara`).
     -   Open `phpMyAdmin` and create a database named `quiz_system`.
     -   Import the `quiz_system.sql` file located in the project root.
-    -   Configure database and SMTP email credentials in `config/database.php` and `includes/mail_helper.php`.
+    -   Configure database credentials inside `config/database.php` and SMTP email credentials inside `includes/mail_helper.php`.
 
 3.  **Access**:
     -   Public/Student: `http://localhost/Quizara/`
@@ -61,32 +72,15 @@ The application follows a standard **PHP Multi-Page Application (MPA)** architec
         -   Username: `admin`
         -   Password: `adminPassword`
 
-## 📊 Product Level Assessment
-
-**Current Status:** **Advanced MVP / Top-Tier Educational Project**
-
-This project has been heavily upgraded with real-world features (Email queues, PDF Generation, Secure Token resets) making it an excellent portfolio piece or final year project. 
-
-### ⚠️ Areas for Enterprise Scalability:
-1.  **Security**: While it uses PDO and secure password hashing, enterprise apps require CSRF protection middleware and strict rate limiting.
-2.  **Scalability**: Native PHP sessions typically rely on the file system, which doesn't scale well across multiple servers without Redis/Memcached.
-3.  **Testing**: There are no automated unit or feature tests (PHPUnit/Jest).
-
-## 🚀 Recommended Future Extensions
-
-To elevate this project even further, consider implementing these features:
-
-1.  **⏱️ Real-Time Countdown Timer**:
-    *   Add a visual countdown timer to the quiz interface that auto-submits the attempt when time runs out.
-2.  **👤 Profile Customization**:
-    *   Allow students to upload custom profile pictures instead of using default initials.
-
-## 🛠️ Technical Improvements Roadmap
-
-1.  **Security Hardening**: Implement **CSRF Tokens** for forms and robust **Password Hashing** (if not already strictly enforced).
-2.  **Framework Migration**: Port to **Laravel** or **Symfony** for better routing, middleware, and ORM capabilities.
-3.  **Real-Time Features**: Use **WebSockets** (Pusher/Socket.io) for live leaderboard updates.
-4.  **API Layer**: Create a JSON REST API to support a future mobile app.
-
 ---
-*Generated by Quizara Dev Team*
+
+## 🌐 Deployment (Free Hosting)
+
+To deploy Quizara online for free, we recommend using **InfinityFree**:
+
+1.  **Export database**: Export your local `quiz_system` database using phpMyAdmin.
+2.  **Create Host account**: Register at [InfinityFree](https://infinityfree.com/) and create a free subdomain web space.
+3.  **Create MySQL DB**: Setup a database inside the InfinityFree client panel and import your SQL file.
+4.  **Upload code**: Transfer all project files using **FileZilla** into the remote `/htdocs` folder.
+5.  **Edit DB configuration**: Modify `config/database.php` with your online MySQL hostname, DB name, username, and password.
+6.  **Setup SSL**: Generate a free SSL certificate from the client portal to serve the site securely via `https://` to protect login data.

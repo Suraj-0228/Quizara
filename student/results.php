@@ -1,120 +1,106 @@
 <?php include_once '../controllers/results-process.php'; ?>
 
-<div class="row justify-content-center position-relative">
+<style>
+    /* Circular Chart SVG styles */
+    .circle-bg {
+        fill: none;
+        stroke: #F1F5F9;
+        stroke-width: 2.8;
+    }
+    .circle {
+        fill: none;
+        stroke-width: 2.8;
+        stroke-linecap: round;
+        transition: stroke-dasharray 1s ease-in-out;
+    }
+</style>
+
+<div class="max-w-2xl mx-auto py-12 relative">
     <?php if ($passed): ?>
-        <canvas id="confetti" class="position-absolute top-0 start-0 w-100 h-100" style="pointer-events: none; z-index: 999;"></canvas>
+        <canvas id="confetti" class="absolute top-0 left-0 w-full h-full pointer-events-none z-[999]"></canvas>
     <?php endif; ?>
 
-    <div class="col-md-9 col-lg-7 text-center">
-        <div class="results-card-premium mb-5">
-            <div class="p-4 border-bottom border-slate-50 mt-2">
-                <span class="badge bg-indigo-50 text-dark px-3 py-2 rounded-pill small fw-bold mb-2">QUIZ RESULTS</span>
-                <h2 class="fw-extrabold text-slate-900 mb-0"><?php echo sanitize($attempt['title']); ?></h2>
+    <div class="bg-white border border-slate-200 rounded-[32px] shadow-premium p-8 md:p-12 text-center relative overflow-hidden">
+        <div class="pb-6 border-b border-slate-100 mb-8">
+            <span class="bg-primary-50 text-primary-600 text-xs font-bold px-3.5 py-1.5 rounded-full mb-3 inline-block uppercase tracking-wider">Quiz Results</span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-0"><?php echo sanitize($attempt['title']); ?></h2>
+        </div>
+
+        <!-- Circular Progress Bar -->
+        <div class="relative w-48 h-48 mx-auto mb-8">
+            <svg viewBox="0 0 36 36" class="w-full h-full">
+                <path class="circle-bg"
+                    d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path class="circle"
+                    stroke-dasharray="<?php echo $percentage; ?>, 100"
+                    stroke="<?php echo $passed ? '#10b981' : '#ef4444'; ?>"
+                    d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <div class="text-4xl md:text-5xl font-black text-slate-900 leading-none mb-1"><?php echo round($percentage); ?>%</div>
+                <div class="text-[10px] font-bold uppercase tracking-wider <?php echo $passed ? 'text-emerald-500' : 'text-rose-500'; ?>">
+                    <?php echo $passed ? 'PASSED' : 'FAILED'; ?>
+                </div>
             </div>
+        </div>
 
-            <div class="card-body p-4 p-md-5">
-                <!-- Circular Progress Bar -->
-                <div class="position-relative d-inline-block mb-5">
-                    <div class="circular-chart-premium">
-                        <svg viewBox="0 0 36 36" class="w-100 h-100">
-                            <path class="circle-bg"
-                                d="M18 2.0845
-                                    a 15.9155 15.9155 0 0 1 0 31.831
-                                    a 15.9155 15.9155 0 0 1 0 -31.831" />
-                            <path class="circle"
-                                stroke-dasharray="<?php echo $percentage; ?>, 100"
-                                stroke="<?php echo $passed ? '#10b981' : '#ef4444'; ?>"
-                                d="M18 2.0845
-                                    a 15.9155 15.9155 0 0 1 0 31.831
-                                    a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        </svg>
-                        <div class="position-absolute top-50 start-50 translate-middle text-center w-100">
-                            <div class="fw-black mb-0" style="font-size: 3.5rem; color: var(--slate-900); white-space: nowrap;"><?php echo round($percentage); ?>%</div>
-                            <div class="small fw-bold text-uppercase tracking-wider <?php echo $passed ? 'text-success' : 'text-danger'; ?>">
-                                <?php echo $passed ? 'PASSED' : 'FAILED'; ?>
-                            </div>
-                        </div>
-                    </div>
+        <div class="mb-8">
+            <?php if ($passed): ?>
+                <h2 class="text-xl font-bold text-slate-900 mb-3">Excellent Job!</h2>
+                <p class="text-slate-500 text-xs md:text-sm leading-relaxed max-w-md mx-auto">You've mastered this topic with flying colors. Your performance shows a strong understanding of the material.</p>
+            <?php else: ?>
+                <h2 class="text-xl font-bold text-slate-900 mb-3">Don't Give Up!</h2>
+                <p class="text-slate-500 text-xs md:text-sm leading-relaxed max-w-md mx-auto">Progress is a journey, not a destination. Review your answers and sharpen your knowledge for the next round!</p>
+            <?php endif; ?>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 mb-8">
+            <!-- Score box -->
+            <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center text-base mx-auto mb-2 bg-primary-50 border border-primary-100/30 text-primary-600">
+                    <i class="fas fa-bullseye"></i>
                 </div>
-
-                <div class="mb-5">
-                    <?php if ($passed): ?>
-                        <h2 class="fw-bold text-slate-900 mb-3">Excellent Job!</h2>
-                        <p class="result-message-premium">You've mastered this topic with flying colors. Your performance shows a strong understanding of the material.</p>
-                    <?php else: ?>
-                        <h2 class="fw-bold text-slate-900 mb-3">Don't Give Up!</h2>
-                        <p class="result-message-premium">Progress is a journey, not a destination. Review your answers and sharpen your knowledge for the next round!</p>
-                    <?php endif; ?>
+                <h3 class="text-slate-800 mb-0.5 font-extrabold text-base"><?php echo $attempt['score']; ?>/<?php echo $attempt['total_questions']; ?></h3>
+                <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Score</div>
+            </div>
+            <!-- Correct box -->
+            <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center text-base mx-auto mb-2 bg-emerald-50 text-emerald-500">
+                    <i class="fas fa-check"></i>
                 </div>
-
-                <div class="row text-center mb-5 g-4 px-md-3">
-                    <div class="col-4">
-                        <div class="result-stat-box">
-                            <div class="icon-circle bg-primary bg-opacity-10 text-primary">
-                                <i class="fas fa-bullseye"></i>
-                            </div>
-                            <h3 class="text-slate-900 mb-1 fw-black"><?php echo $attempt['score']; ?>/<?php echo $attempt['total_questions']; ?></h3>
-                            <div class="text-muted text-uppercase small fw-bold" style="font-size: 0.7rem; letter-spacing: 1px;">Score</div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="result-stat-box">
-                            <div class="icon-circle bg-success bg-opacity-10 text-success">
-                                <i class="fas fa-check"></i>
-                            </div>
-                            <h3 class="text-slate-900 mb-1 fw-black"><?php echo $attempt['correct_answers']; ?></h3>
-                            <div class="text-muted text-uppercase small fw-bold" style="font-size: 0.7rem; letter-spacing: 1px;">Correct</div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="result-stat-box">
-                            <div class="icon-circle bg-danger bg-opacity-10 text-danger">
-                                <i class="fas fa-times"></i>
-                            </div>
-                            <h3 class="text-slate-900 mb-1 fw-black"><?php echo $attempt['total_questions'] - $attempt['correct_answers']; ?></h3>
-                            <div class="text-muted text-uppercase small fw-bold" style="font-size: 0.7rem; letter-spacing: 1px;">Wrong</div>
-                        </div>
-                    </div>
+                <h3 class="text-slate-800 mb-0.5 font-extrabold text-base"><?php echo $attempt['correct_answers']; ?></h3>
+                <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Correct</div>
+            </div>
+            <!-- Wrong box -->
+            <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center text-base mx-auto mb-2 bg-rose-50 text-rose-500">
+                    <i class="fas fa-times"></i>
                 </div>
+                <h3 class="text-slate-800 mb-0.5 font-extrabold text-base"><?php echo $attempt['total_questions'] - $attempt['correct_answers']; ?></h3>
+                <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Wrong</div>
+            </div>
+        </div>
 
-                <div class="px-md-3">
-                    <div class="d-grid gap-3 col-lg-12 mx-auto">
-                        <a href="review.php?attempt_id=<?php echo $attempt_id; ?>" class="btn btn-primary rounded-pill shadow-premium py-3 hover-scale">
-                            <span class="fw-bold">Explore Answer Review</span> <i class="fas fa-arrow-right ms-2 opacity-50"></i>
-                        </a>
+        <div class="space-y-4">
+            <a href="review.php?attempt_id=<?php echo $attempt_id; ?>" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs flex items-center justify-center focus:outline-none">
+                <span>Explore Answer Review</span> <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
+            </a>
 
-                        <div class="row g-3">
-                            <div class="col-6">
-                                <a href="quizzes.php" class="btn btn-outline-slate w-100 rounded-pill py-2 fw-bold text-decoration-none">
-                                    <i class="fas fa-redo me-2 small"></i>New Challenge
-                                </a>
-                            </div>
-                            <div class="col-6">
-                                <a href="dashboard.php" class="btn btn-outline-slate w-100 rounded-pill py-2 fw-bold text-decoration-none">
-                                    <i class="fas fa-home me-2 small px-2"></i>Dashboard
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="grid grid-cols-2 gap-4">
+                <a href="quizzes.php" class="border border-slate-200 text-slate-500 hover:bg-primary-50 hover:border-primary-500 hover:text-primary-600 font-bold py-2.5 rounded-full text-xs transition-all text-center focus:outline-none">
+                    <i class="fas fa-redo mr-2 text-[9px]"></i>New Challenge
+                </a>
+                <a href="dashboard.php" class="border border-slate-200 text-slate-500 hover:bg-primary-50 hover:border-primary-500 hover:text-primary-600 font-bold py-2.5 rounded-full text-xs transition-all text-center focus:outline-none">
+                    <i class="fas fa-home mr-2 text-[9px]"></i>Dashboard
+                </a>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-    .btn-outline-slate {
-        border-color: var(--slate-200);
-        color: var(--slate-700);
-    }
-
-    .btn-outline-slate:hover {
-        background-color: var(--indigo-50);
-        border-color: var(--indigo-700);
-        color: var(--indigo-700);
-    }
-</style>
-
 
 <?php if ($passed): ?>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
@@ -141,7 +127,6 @@
             }
 
             var particleCount = 50 * (timeLeft / duration);
-            // since particles fall down, start a bit higher than random
             confetti(Object.assign({}, defaults, {
                 particleCount,
                 origin: {

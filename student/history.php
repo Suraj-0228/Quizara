@@ -1,121 +1,118 @@
 <?php include_once '../controllers/history-process.php'; ?>
 
 <!-- History Header -->
-<div class="history-hero-banner mb-5">
-    <div class="hero-shape" style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
-    <div class="container-fluid p-0">
-        <div class="row align-items-center">
-            <div class="col-md-7">
-                <span class="badge bg-white bg-opacity-20 text-dark mb-3 badge-premium border-0">
-                    <i class="fas fa-clock-rotate-left me-2"></i> Progress Tracker
-                </span>
-                <h1 class="display-5 fw-bold mb-2 text-white">Learning <span class="text-info">Timeline</span></h1>
-                <p class="lead text-white-50 mb-0">A detailed journey of your achievements and challenges.</p>
-            </div>
-            <div class="col-md-5 text-md-end mt-4 mt-md-0">
-                <div class="d-flex gap-2 justify-content-md-end">
-                    <a href="reports.php" class="btn btn-light rounded-pill px-4 shadow-sm">
-                        <i class="fas fa-chart-pie me-2 text-primary"></i>Analytics
-                    </a>
-                    <a href="quizzes.php" class="btn btn-primary rounded-pill px-4 shadow-sm border-white border-opacity-25">
-                        <i class="fas fa-plus me-2"></i>New Quiz
-                    </a>
-                </div>
-            </div>
+<div class="relative rounded-[32px] bg-primary-600 p-8 md:p-10 overflow-hidden mb-8 shadow-md">
+    <!-- Decorative shapes -->
+    <div class="absolute -top-16 -right-16 w-36 h-36 rounded-full bg-primary-500 opacity-20"></div>
+    <div class="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-primary-700 opacity-30"></div>
+
+    <div class="relative z-1 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+            <span class="inline-flex items-center bg-white/20 text-white border-0 px-3.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-3">
+                <i class="fas fa-clock-rotate-left mr-2 text-[10px]"></i> Progress Tracker
+            </span>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-2">Learning <span class="text-primary-250 opacity-95">Timeline</span></h1>
+            <p class="text-white/80 text-sm mb-0">A detailed journey of your achievements and challenges.</p>
+        </div>
+        <div class="flex-shrink-0 flex gap-2">
+            <a href="reports.php" class="bg-white hover:bg-slate-50 text-primary-600 font-bold px-5 py-2.5 rounded-full shadow-sm text-xs flex items-center transition-all">
+                <i class="fas fa-chart-pie mr-2"></i>Analytics
+            </a>
+            <a href="quizzes.php" class="bg-primary-700 hover:bg-primary-800 text-white font-bold px-5 py-2.5 rounded-full shadow-sm text-xs flex items-center border border-white/10 transition-all">
+                <i class="fas fa-plus mr-2 text-[10px]"></i>New Quiz
+            </a>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12 px-lg-5">
-        <?php if (count($history) > 0): ?>
-            <div class="premium-timeline">
-                <?php foreach ($history as $item): ?>
-                    <?php
-                    $percentage = ($item['total_questions'] > 0) ? ($item['score'] / $item['total_questions']) * 100 : 0;
-                    $passed = $percentage >= $item['passing_score'];
-                    $statusClass = $passed ? 'success' : 'fail';
-                    ?>
+<div class="max-w-4xl mx-auto py-6">
+    <?php if (count($history) > 0): ?>
+        <div class="relative border-l-2 border-slate-200 ml-4 md:ml-32 space-y-8 pb-4">
+            <?php foreach ($history as $item): ?>
+                <?php
+                $percentage = ($item['total_questions'] > 0) ? ($item['score'] / $item['total_questions']) * 100 : 0;
+                $passed = $percentage >= $item['passing_score'];
+                $statusColor = $passed ? 'emerald' : 'rose';
+                $dotColor = $passed ? 'bg-emerald-500' : 'bg-rose-500';
+                ?>
 
-                    <div class="premium-timeline-item <?php echo $statusClass; ?>">
-                        <div class="history-date-box">
-                            <div class="fw-bold text-dark mb-0"><?php echo date('M d, Y', strtotime($item['completed_at'])); ?></div>
-                            <small class="text-muted"><?php echo date('h:i A', strtotime($item['completed_at'])); ?></small>
-                        </div>
+                <div class="relative pl-8">
+                    <!-- Date Marker (Desktop) -->
+                    <div class="absolute right-full top-1 mr-8 hidden md:block text-right w-24">
+                        <div class="font-extrabold text-slate-800 text-sm"><?php echo date('M d, Y', strtotime($item['completed_at'])); ?></div>
+                        <small class="text-slate-400 text-[10px] font-bold uppercase tracking-wider"><?php echo date('h:i A', strtotime($item['completed_at'])); ?></small>
+                    </div>
+                    
+                    <!-- Timeline dot marker -->
+                    <span class="absolute -left-2.5 top-2.5 w-5 h-5 rounded-full border-4 border-white <?php echo $dotColor; ?> shadow-sm"></span>
 
-                        <div class="timeline-marker"></div>
-
-                        <div class="timeline-content-card">
-                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
-                                <div class="flex-grow-1">
-                                    <div class="d-flex align-items-center mb-3">
-                                        <?php if ($passed): ?>
-                                            <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 rounded-pill px-3 py-1 me-3">
-                                                <i class="fas fa-check-circle me-1"></i> Passed
-                                            </span>
-                                        <?php else: ?>
-                                            <span class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-25 rounded-pill px-3 py-1 me-3">
-                                                <i class="fas fa-times-circle me-1"></i> Failed
-                                            </span>
-                                        <?php endif; ?>
-                                        <div class="text-muted small">
-                                            <i class="fas fa-bullseye me-1"></i> Target: <?php echo $item['passing_score']; ?>%
-                                        </div>
-                                    </div>
-
-                                    <h4 class="fw-bold mb-2 text-slate-900"><?php echo sanitize($item['title']); ?></h4>
-
-                                    <!-- Mobile Date (visible only on small screens) -->
-                                    <div class="d-md-none text-muted small mb-3">
-                                        <i class="far fa-calendar-alt me-1"></i> <?php echo date('M d, Y • h:i A', strtotime($item['completed_at'])); ?>
-                                    </div>
-
-                                    <div class="d-flex align-items-center gap-3 mt-3">
-                                        <div class="progress progress-premium flex-grow-1" style="height: 8px; max-width: 200px;">
-                                            <div class="progress-bar <?php echo $passed ? 'bg-success' : 'bg-danger'; ?>" role="progressbar" style="width: <?php echo $percentage; ?>%"></div>
-                                        </div>
-                                        <span class="fw-bold <?php echo $passed ? 'text-success' : 'text-danger'; ?>">
-                                            <?php echo round($percentage); ?>% Accuracy
+                    <!-- Timeline Content Card -->
+                    <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                            <div class="flex-grow min-w-0">
+                                <div class="flex flex-wrap items-center gap-3 mb-3">
+                                    <?php if ($passed): ?>
+                                        <span class="bg-emerald-50 text-emerald-600 border border-emerald-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center">
+                                            <i class="fas fa-check-circle mr-1"></i> Passed
                                         </span>
+                                    <?php else: ?>
+                                        <span class="bg-rose-50 text-rose-600 border border-rose-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center">
+                                            <i class="fas fa-times-circle mr-1"></i> Failed
+                                        </span>
+                                    <?php endif; ?>
+                                    <div class="text-slate-400 text-xs font-semibold">
+                                        <i class="fas fa-bullseye mr-1"></i> Target: <?php echo $item['passing_score']; ?>%
                                     </div>
                                 </div>
 
-                                <div class="d-flex gap-2 align-items-center">
-                                    <?php if ($percentage >= 75): ?>
-                                        <a href="download-certificate.php?attempt_id=<?php echo $item['id']; ?>" class="btn btn-outline-warning rounded-circle" style="width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;" title="Achievement Certificate" target="_blank">
-                                            <i class="fas fa-award"></i>
-                                        </a>
-                                    <?php endif; ?>
+                                <h4 class="font-extrabold text-slate-900 text-base mb-1.5"><?php echo sanitize($item['title']); ?></h4>
 
-                                    <a href="results.php?attempt_id=<?php echo $item['id']; ?>" class="btn btn-outline-primary rounded-pill px-3" title="View Detailed Analysis">
-                                        <i class="fas fa-chart-bar me-1"></i> Stats
-                                    </a>
-                                    <a href="review.php?attempt_id=<?php echo $item['id']; ?>" class="btn btn-primary rounded-pill px-4 shadow-sm">
-                                        Review <i class="fas fa-chevron-right ms-1 small"></i>
-                                    </a>
+                                <!-- Mobile Date (visible only on small screens) -->
+                                <div class="md:hidden text-slate-400 text-xs mb-3 font-semibold">
+                                    <i class="far fa-calendar-alt mr-1"></i> <?php echo date('M d, Y • h:i A', strtotime($item['completed_at'])); ?>
                                 </div>
+
+                                <div class="flex items-center gap-3 mt-4">
+                                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden max-w-[200px]">
+                                        <div class="h-full rounded-full <?php echo $passed ? 'bg-emerald-500' : 'bg-rose-500'; ?>" style="width: <?php echo $percentage; ?>%"></div>
+                                    </div>
+                                    <span class="font-bold text-xs <?php echo $passed ? 'text-emerald-600' : 'text-rose-600'; ?>">
+                                        <?php echo round($percentage); ?>% Accuracy
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-2 items-center flex-shrink-0 mt-4 lg:mt-0 w-full lg:w-auto justify-end">
+                                <?php if ($percentage >= 75): ?>
+                                    <a href="download-certificate.php?attempt_id=<?php echo $item['id']; ?>" class="w-10 h-10 border border-amber-200 hover:border-transparent text-amber-500 hover:bg-amber-500 hover:text-white rounded-full flex items-center justify-center transition-all focus:outline-none shadow-sm" title="Achievement Certificate" target="_blank">
+                                        <i class="fas fa-award"></i>
+                                    </a>
+                                <?php endif; ?>
+
+                                <a href="results.php?attempt_id=<?php echo $item['id']; ?>" class="border border-primary-200 text-primary-600 hover:bg-primary-50 font-bold px-4 py-2.5 rounded-full text-xs transition-all focus:outline-none flex items-center shadow-sm" title="View Detailed Analysis">
+                                    <i class="fas fa-chart-bar mr-1.5"></i> Stats
+                                </a>
+                                <a href="review.php?attempt_id=<?php echo $item['id']; ?>" class="bg-primary-600 hover:bg-primary-700 text-white font-bold px-5 py-2.5 rounded-full shadow-md text-xs transition-all focus:outline-none hover:scale-105 flex items-center">
+                                    Review <i class="fas fa-chevron-right ml-1.5 text-[8px]"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            </div>
-        <?php else: ?>
-            <div class="card border-0 shadow-lg rounded-4 text-center py-5 px-4 mt-5">
-                <div class="card-body">
-                    <div class="bg-slate-50 rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 100px; height: 100px;">
-                        <i class="fas fa-clock-rotate-left fa-4x text-muted opacity-25"></i>
-                    </div>
-                    <h3 class="fw-bold mb-3">No Journey Logged Yet</h3>
-                    <p class="text-muted mb-4 mx-auto" style="max-width: 400px;">Your learning timeline is waiting for its first record. Start a challenge and begin building your history today!</p>
-                    <a href="quizzes.php" class="btn btn-primary rounded-pill px-5 py-3 shadow-premium hover-scale">
-                        <i class="fas fa-rocket me-2"></i>Start Your First Quiz
-                    </a>
                 </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-premium text-center py-12 px-4 mt-8 max-w-xl mx-auto">
+            <div class="w-20 h-20 rounded-full bg-slate-50 text-slate-300 flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-clock-rotate-left text-3xl"></i>
             </div>
-        <?php endif; ?>
-    </div>
+            <h3 class="font-extrabold text-slate-800 text-lg mb-2">No Journey Logged Yet</h3>
+            <p class="text-slate-400 text-xs mb-6 max-w-xs mx-auto leading-relaxed">Your learning timeline is waiting for its first record. Start a challenge and begin building your history today!</p>
+            <a href="quizzes.php" class="inline-block bg-primary-600 hover:bg-primary-700 text-white font-bold px-8 py-3 rounded-full shadow-md text-sm transition-all hover:scale-105">
+                <i class="fas fa-rocket mr-2"></i>Start Your First Quiz
+            </a>
+        </div>
+    <?php endif; ?>
 </div>
-
-
 
 <?php include_once '../includes/footer.php'; ?>

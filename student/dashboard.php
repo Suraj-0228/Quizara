@@ -1,158 +1,159 @@
 <?php include_once '../controllers/dashboard-process.php'; ?>
 
 <!-- Welcome Banner -->
-<div class="student-hero-banner mb-5">
-    <div class="hero-shape-1"></div>
-    <div class="hero-shape-2"></div>
-    <div class="hero-content container-fluid p-0">
-        <div class="row align-items-center">
-            <div class="col-md-8">
-                <span class="badge bg-white bg-opacity-20 text-primary mb-3 badge-premium border-0">
-                    <i class="fas fa-sparkles me-2"></i> Dashboard Overview
-                </span>
-                <h1 class="display-4 fw-bold mb-2 text-white">Welcome back, <?php echo sanitize($_SESSION['username']); ?>!</h1>
-                <p class="lead opacity-75 mb-0">You've completed <?php echo $total_attempts; ?> quizzes so far. Keep up the great work!</p>
-            </div>
-            <div class="col-md-4 text-md-end mt-4 mt-md-0">
-                <div class="d-inline-block bg-white bg-opacity-10 p-3 rounded-4 backdrop-blur">
-                    <div class="text-white-50 small mb-1">Today's Date</div>
-                    <div class="h5 mb-0 fw-bold text-white"><?php echo date('l, M j'); ?></div>
-                </div>
+<div class="relative rounded-[32px] bg-primary-600 p-8 md:p-10 overflow-hidden mb-8 shadow-md">
+    <!-- Decorative shapes -->
+    <div class="absolute -top-16 -right-16 w-36 h-36 rounded-full bg-primary-500 opacity-20"></div>
+    <div class="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-primary-700 opacity-30"></div>
+
+    <div class="relative z-1 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+            <span class="inline-flex items-center bg-white/20 text-white border-0 px-3.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-4">
+                <i class="fas fa-sparkles mr-2 text-[10px]"></i> Dashboard Overview
+            </span>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-2">Welcome back, <?php echo sanitize($_SESSION['username']); ?>!</h1>
+            <p class="text-white/80 text-sm">You've completed <?php echo $total_attempts; ?> quizzes so far. Keep up the great work!</p>
+        </div>
+        <div class="flex-shrink-0">
+            <div class="bg-white/10 p-4 rounded-2xl backdrop-blur-md border border-white/5">
+                <div class="text-white/60 text-[10px] uppercase font-bold tracking-wider mb-1">Today's Date</div>
+                <div class="text-white font-bold text-xs md:text-sm"><?php echo date('l, M j'); ?></div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Stats Grid -->
-<div class="row g-4 mb-5">
-    <div class="col-md-4">
-        <div class="premium-stat-card">
-            <div class="icon-box text-warning bg-warning bg-opacity-10">
-                <i class="fas fa-trophy"></i>
-            </div>
-            <div class="stat-value"><?php echo $total_attempts; ?></div>
-            <div class="stat-label text-uppercase letter-spacing-1">Quizzes Completed</div>
-            <div class="stat-decoration"><i class="fas fa-trophy text-warning"></i></div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <!-- Stat Item 1 -->
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-lg mb-4 bg-amber-50 text-amber-500">
+            <i class="fas fa-trophy"></i>
         </div>
+        <div class="text-3xl font-extrabold text-slate-800 mb-1"><?php echo $total_attempts; ?></div>
+        <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Quizzes Completed</div>
+        <div class="absolute right-4 bottom-4 text-5xl text-slate-100/50 group-hover:scale-110 transition-transform -z-10"><i class="fas fa-trophy"></i></div>
     </div>
-    <div class="col-md-4">
-        <div class="premium-stat-card">
-            <div class="icon-box text-info bg-info bg-opacity-10">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <div class="stat-value"><?php echo $avg_score; ?>%</div>
-            <div class="stat-label text-uppercase letter-spacing-1">Average Accuracy</div>
-            <div class="stat-decoration"><i class="fas fa-chart-line text-info"></i></div>
+
+    <!-- Stat Item 2 -->
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-lg mb-4 bg-sky-50 text-sky-500">
+            <i class="fas fa-chart-line"></i>
         </div>
+        <div class="text-3xl font-extrabold text-slate-800 mb-1"><?php echo $avg_score; ?>%</div>
+        <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Average Accuracy</div>
+        <div class="absolute right-4 bottom-4 text-5xl text-slate-100/50 group-hover:scale-110 transition-transform -z-10"><i class="fas fa-chart-line"></i></div>
     </div>
-    <div class="col-md-4">
-        <div class="premium-stat-card">
-            <div class="icon-box text-primary bg-primary bg-opacity-10">
-                <i class="fas fa-star"></i>
-            </div>
-            <div class="stat-value"><?php echo $total_attempts * 10; ?></div>
-            <div class="stat-label text-uppercase letter-spacing-1">Total Experience (XP)</div>
-            <div class="stat-decoration"><i class="fas fa-star text-primary"></i></div>
+
+    <!-- Stat Item 3 -->
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-lg mb-4 bg-primary-50 text-primary-500 border border-primary-100/30">
+            <i class="fas fa-star"></i>
         </div>
+        <div class="text-3xl font-extrabold text-slate-800 mb-1"><?php echo $total_attempts * 10; ?></div>
+        <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Total Experience (XP)</div>
+        <div class="absolute right-4 bottom-4 text-5xl text-slate-100/50 group-hover:scale-110 transition-transform -z-10"><i class="fas fa-star"></i></div>
     </div>
 </div>
 
-<div class="row g-4">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
     <!-- Recent Activity -->
-    <div class="col-lg-8">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="fw-bold mb-0">
-                <i class="fas fa-history me-2 text-primary"></i>Recent Activity
+    <div class="lg:col-span-8">
+        <div class="flex justify-between items-center mb-6">
+            <h4 class="font-extrabold text-slate-900 text-xl flex items-center">
+                <i class="fas fa-history mr-2.5 text-primary-600"></i>Recent Activity
             </h4>
-            <a href="history.php" class="btn btn-sm btn-outline-primary rounded-pill px-3 transition-all hover-scale">View All</a>
+            <a href="history.php" class="text-xs text-primary-600 hover:text-primary-700 font-bold border border-primary-200 hover:bg-primary-50/50 px-3.5 py-1.5 rounded-full transition-all shadow-sm">View All</a>
         </div>
 
         <?php if (count($recent_history) > 0): ?>
-            <div class="activity-feed-premium">
+            <div class="space-y-4">
                 <?php foreach ($recent_history as $history): ?>
                     <?php
                     $score_pct = ($history['total_questions'] > 0) ? ($history['score'] / $history['total_questions']) : 0;
                     $is_passed = $score_pct >= 0.5;
                     $pct_value = round($score_pct * 100);
-                    $status_color = $is_passed ? 'success' : 'danger';
+                    $status_color = $is_passed ? 'emerald' : 'rose';
+                    $status_icon = $is_passed ? 'fa-check-circle' : 'fa-times-circle';
                     ?>
-                    <div class="activity-item-premium">
-                        <div class="activity-icon bg-<?php echo $status_color; ?> bg-opacity-10 text-<?php echo $status_color; ?>">
-                            <i class="fas <?php echo $is_passed ? 'fa-check-circle' : 'fa-times-circle'; ?>"></i>
-                        </div>
-                        <div class="activity-info">
-                            <h6 class="mb-1 fw-bold"><?php echo sanitize($history['title']); ?></h6>
-                            <div class="d-flex align-items-center text-muted small">
-                                <span class="me-3"><i class="far fa-calendar-alt me-1"></i> <?php echo date('M d', strtotime($history['completed_at'])); ?></span>
-                                <span><i class="far fa-clock me-1"></i> <?php echo date('h:i A', strtotime($history['completed_at'])); ?></span>
+                    <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
+                        <div class="flex items-center min-w-0">
+                            <!-- Status Indicator Icon -->
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg mr-4 flex-shrink-0 bg-<?php echo $status_color; ?>-50 text-<?php echo $status_color; ?>-500">
+                                <i class="fas <?php echo $status_icon; ?>"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <h6 class="font-bold text-slate-800 text-sm truncate"><?php echo sanitize($history['title']); ?></h6>
+                                <div class="flex items-center text-slate-400 text-xs mt-1 space-x-3">
+                                    <span class="flex items-center"><i class="far fa-calendar-alt mr-1.5"></i> <?php echo date('M d', strtotime($history['completed_at'])); ?></span>
+                                    <span class="flex items-center"><i class="far fa-clock mr-1.5"></i> <?php echo date('h:i A', strtotime($history['completed_at'])); ?></span>
+                                </div>
                             </div>
                         </div>
-                        <div class="activity-score">
-                            <div class="h5 mb-0 fw-bold text-<?php echo $status_color; ?>"><?php echo $pct_value; ?>%</div>
-                            <a href="review.php?attempt_id=<?php echo $history['id']; ?>" class="small text-muted text-decoration-none hover-primary">
-                                Details <i class="fas fa-chevron-right ms-1"></i>
+                        <div class="text-right flex-shrink-0 ml-4">
+                            <div class="font-extrabold text-sm text-<?php echo $status_color; ?>-600 mb-0.5"><?php echo $pct_value; ?>%</div>
+                            <a href="review.php?attempt_id=<?php echo $history['id']; ?>" class="text-[10px] text-slate-400 hover:text-primary-600 font-bold transition-all inline-flex items-center">
+                                Details <i class="fas fa-chevron-right ml-1 text-[8px]"></i>
                             </a>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
         <?php else: ?>
-            <div class="card glass-card border-0 shadow-lg text-center py-5">
-                <div class="card-body">
-                    <div class="bg-slate-100 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
-                        <i class="fas fa-clipboard-list fa-3x text-muted opacity-50"></i>
-                    </div>
-                    <h4 class="fw-bold">No Recent Activity</h4>
-                    <p class="text-muted mb-4">You haven't taken any quizzes yet. Start your journey now!</p>
-                    <a href="quizzes.php" class="btn btn-primary rounded-pill px-4 shadow-sm hover-scale">
-                        Browse Quizzes
-                    </a>
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-10 text-center">
+                <div class="w-16 h-16 rounded-full bg-slate-50 text-slate-400 flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-clipboard-list text-2xl"></i>
                 </div>
+                <h4 class="font-bold text-slate-800 text-base mb-1">No Recent Activity</h4>
+                <p class="text-slate-400 text-xs mb-6">You haven't taken any quizzes yet. Start your journey now!</p>
+                <a href="quizzes.php" class="inline-block bg-primary-600 hover:bg-primary-700 text-white font-bold px-6 py-2.5 rounded-full shadow-md text-sm transition-all hover:scale-105">
+                    Browse Quizzes
+                </a>
             </div>
         <?php endif; ?>
     </div>
 
     <!-- Quick Actions -->
-    <div class="col-lg-4">
-        <div class="action-card-premium mb-4">
-            <div class="position-relative z-index-2">
-                <i class="fas fa-rocket fa-2x text-primary mb-3"></i>
-                <h4 class="fw-bold text-white mb-2">New Challenge?</h4>
-                <p class="text-white-50 small mb-4">Level up your skills by taking a new quiz today.</p>
-                <a href="quizzes.php" class="btn btn-light w-100 py-2">
-                    Browse Library <i class="fas fa-arrow-right ms-2"></i>
+    <div class="lg:col-span-4 space-y-6">
+        <!-- New Challenge Action Card -->
+        <div class="bg-primary-600 text-white rounded-[32px] p-6 shadow-md relative overflow-hidden group">
+            <div class="absolute -top-10 -right-10 w-28 h-28 rounded-full bg-primary-550 opacity-20 group-hover:scale-125 transition-transform duration-500"></div>
+            
+            <div class="relative z-10">
+                <i class="fas fa-rocket text-2xl text-primary-200 mb-4 block"></i>
+                <h4 class="font-bold text-base text-white mb-1.5">New Challenge?</h4>
+                <p class="text-primary-200 text-xs mb-6">Level up your skills by taking a new quiz today.</p>
+                <a href="quizzes.php" class="block text-center w-full bg-white hover:bg-slate-50 text-primary-600 font-bold py-2.5 rounded-xl text-xs transition-all shadow-sm">
+                    Browse Library <i class="fas fa-arrow-right ml-1 text-[10px]"></i>
                 </a>
             </div>
-            <div class="hero-shape-2" style="top: -20px; right: -20px; left: auto; opacity: 0.1;"></div>
         </div>
 
-        <div class="card border-0 shadow-sm rounded-4">
-            <div class="card-body p-4">
-                <h6 class="fw-bold mb-4">Performance Insights</h6>
+        <!-- Performance Insights Info Card -->
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
+            <h6 class="font-bold text-slate-800 text-sm mb-6">Performance Insights</h6>
 
-                <div class="mb-4">
-                    <div class="d-flex justify-content-between mb-2">
-                        <span class="text-muted small">Overall Completion</span>
-                        <span class="fw-bold small text-primary">75%</span>
-                    </div>
-                    <div class="progress progress-premium">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 75%"></div>
-                    </div>
+            <div class="mb-5">
+                <div class="flex justify-between items-center mb-1.5">
+                    <span class="text-slate-400 text-xs font-semibold">Overall Completion</span>
+                    <span class="font-bold text-xs text-primary-600">75%</span>
                 </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div class="bg-primary-600 h-full rounded-full" style="width: 75%"></div>
+                </div>
+            </div>
 
-                <div class="mb-0">
-                    <div class="d-flex justify-content-between mb-2">
-                        <span class="text-muted small">Accuracy Rate</span>
-                        <span class="fw-bold small text-success"><?php echo $avg_score; ?>%</span>
-                    </div>
-                    <div class="progress progress-premium">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $avg_score; ?>%"></div>
-                    </div>
+            <div>
+                <div class="flex justify-between items-center mb-1.5">
+                    <span class="text-slate-400 text-xs font-semibold">Accuracy Rate</span>
+                    <span class="font-bold text-xs text-emerald-600"><?php echo $avg_score; ?>%</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div class="bg-emerald-500 h-full rounded-full" style="width: <?php echo $avg_score; ?>%"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <?php include_once '../includes/footer.php'; ?>

@@ -1,81 +1,74 @@
 </div> <!-- End Container -->
 
-<?php if (isLoggedIn() && isAdmin()): ?>
-    </div> <!-- End Admin Main Content -->
-<?php endif; ?>
+<?php if (isLoggedIn()): ?>
+    </div> <!-- End Main Content (Admin or Student) -->
+<?php else: ?>
+    <footer class="bg-white border-t border-slate-200 mt-auto py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Brand Column -->
+                <div class="space-y-4">
+                    <a href="<?php echo base_url(); ?>" class="flex items-center text-primary-600 hover:text-primary-700 transition-colors">
+                        <i class="fas fa-graduation-cap text-2xl mr-2"></i>
+                        <span class="text-xl font-extrabold text-slate-900 tracking-wider">Quizara</span>
+                    </a>
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Empowering students and professionals to master new skills through interactive assessments and data-driven insights.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-primary-600 hover:text-white hover:border-transparent transition-all"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-primary-600 hover:text-white hover:border-transparent transition-all"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-primary-600 hover:text-white hover:border-transparent transition-all"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-primary-600 hover:text-white hover:border-transparent transition-all"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
 
-<footer class="footer mt-auto py-5 relative-footer">
-    <div class="container">
-        <div class="row g-5">
-            <!-- Brand Column -->
-            <div class="col-lg-4 col-md-6">
-                <a href="<?php echo base_url(); ?>" class="text-decoration-none d-flex align-items-center mb-3">
-                    <i class="fas fa-graduation-cap fa-2x me-2 footer-brand"></i>
-                    <span class="h4 fw-bold text-dark mb-0">Quizara</span>
-                </a>
-                <p class="mb-4">
-                    Empowering students and professionals to master new skills through interactive assessments and data-driven insights.
-                </p>
-                <div class="d-flex">
-                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <!-- Explore Links -->
+                <div>
+                    <h5 class="text-slate-900 font-bold text-sm uppercase tracking-wider mb-4">Explore</h5>
+                    <ul class="space-y-2">
+                        <li><a href="<?php echo base_url(); ?>" class="text-slate-500 hover:text-primary-600 text-sm transition-colors">Home</a></li>
+                        <li><a href="<?php echo base_url('student/quizzes.php'); ?>" class="text-slate-500 hover:text-primary-600 text-sm transition-colors">Quizzes</a></li>
+                        <li><a href="<?php echo base_url('about.php'); ?>" class="text-slate-500 hover:text-primary-600 text-sm transition-colors">About Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support Links -->
+                <div>
+                    <h5 class="text-slate-900 font-bold text-sm uppercase tracking-wider mb-4">Support</h5>
+                    <ul class="space-y-2">
+                        <li><a href="<?php echo base_url('faq.php'); ?>" class="text-slate-500 hover:text-primary-600 text-sm transition-colors">Help Center</a></li>
+                        <li><a href="<?php echo base_url('contact.php'); ?>" class="text-slate-500 hover:text-primary-600 text-sm transition-colors">Contact Us</a></li>
+                        <li><a href="<?php echo base_url('privacy.php'); ?>" class="text-slate-500 hover:text-primary-600 text-sm transition-colors">Privacy Policy</a></li>
+                        <li><a href="<?php echo base_url('terms.php'); ?>" class="text-slate-500 hover:text-primary-600 text-sm transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h5 class="text-slate-900 font-bold text-sm uppercase tracking-wider mb-4">Stay Updated</h5>
+                    <p class="text-slate-500 text-xs mb-3">Subscribe to our newsletter for new quizzes and learning tips.</p>
+                    <form action="#" class="mb-3">
+                        <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200">
+                            <input type="email" class="flex-grow px-3 py-2 text-sm bg-white focus:outline-none text-slate-800" placeholder="Your email address">
+                            <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 transition-colors" type="button"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </form>
+                    <p class="text-slate-400 text-xs flex items-center">
+                        <i class="fas fa-lock mr-1.5"></i> Secure subscription
+                    </p>
                 </div>
             </div>
 
-            <!-- Explore Links -->
-            <div class="col-lg-2 col-md-6">
-                <h5 class="footer-heading">Explore</h5>
-                <ul class="list-unstyled">
-                    <li><a href="<?php echo base_url(); ?>" class="footer-link">Home</a></li>
-                    <li><a href="<?php echo base_url('student/quizzes.php'); ?>" class="footer-link">Quizzes</a></li>
-                    <li><a href="<?php echo base_url('about.php'); ?>" class="footer-link">About Us</a></li>
-                </ul>
-            </div>
+            <hr class="my-8 border-slate-200">
 
-            <!-- Support Links -->
-            <div class="col-lg-2 col-md-6">
-                <h5 class="footer-heading">Support</h5>
-                <ul class="list-unstyled">
-                    <li><a href="<?php echo base_url('faq.php'); ?>" class="footer-link">Help Center</a></li>
-                    <li><a href="<?php echo base_url('contact.php'); ?>" class="footer-link">Contact Us</a></li>
-                    <li><a href="<?php echo base_url('privacy.php'); ?>" class="footer-link">Privacy Policy</a></li>
-                    <li><a href="<?php echo base_url('terms.php'); ?>" class="footer-link">Terms of Service</a></li>
-                </ul>
-            </div>
-
-            <!-- Newsletter -->
-            <div class="col-lg-4 col-md-6">
-                <h5 class="footer-heading">Stay Updated</h5>
-                <p class="small text-muted mb-3">Subscribe to our newsletter for new quizzes and learning tips.</p>
-                <form action="#" class="mb-3">
-                    <div class="input-group">
-                        <input type="email" class="form-control newsletter-input" placeholder="Your email address">
-                        <button class="btn btn-primary" type="button"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                </form>
-                <p class="small text-muted">
-                    <i class="fas fa-lock me-1"></i> Secure subscription
-                </p>
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
+                <p class="text-slate-400 text-xs">&copy; <?php echo date('Y'); ?> Quizara. All rights reserved.</p>
+                <p class="text-slate-400 text-xs hidden md:block">Built with <i class="fas fa-lightbulb text-warning mx-1"></i> for learning and growth</p>
             </div>
         </div>
-
-        <hr class="mt-5 mb-4 border-secondary opacity-25">
-
-        <div class="row align-items-center">
-            <div class="col-md-6 text-center text-md-start">
-                <p class="mb-0 small text-muted">&copy; <?php echo date('Y'); ?> Quizara. All rights reserved.</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end d-none d-md-block">
-                <p class="mb-0 small text-muted">Built with <i class="fas fa-lightbulb text-warning mx-1"></i> for learning and growth</p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </footer>
+<?php endif; ?>
 
 <!-- Custom JS -->
 <script src="<?php echo base_url('assets/js/validation.js'); ?>"></script>

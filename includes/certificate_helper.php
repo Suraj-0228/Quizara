@@ -79,164 +79,183 @@ function generateCertificatePDF($attempt, $percentage, $outputMode = 'S', $outpu
     $pdf->AddPage();
     $pdf->SetAutoPageBreak(false);
 
-    // Colors
-    $navy = [14, 30, 59];
-    $gold = [206, 156, 58];
-    $grayText = [136, 136, 136];
+    // Premium Color Palette
+    $primaryViolet = [46, 16, 101];  // Deep violet
+    $accentGold = [197, 160, 89];    // Metallic bronze gold
+    $slateDark = [30, 41, 59];       // Dark slate
+    $creamBg = [253, 252, 248];      // Soft ivory background
 
     // Background Fill
-    $pdf->SetFillColor(255, 255, 255);
+    $pdf->SetFillColor($creamBg[0], $creamBg[1], $creamBg[2]);
     $pdf->Rect(0, 0, 297, 210, 'F');
 
-    // Gray Sweeps
-    $pdf->SetFillColor(244, 245, 247);
-    $pdf->DrawShapeScaled([
-        ['M', 0, 0],
-        ['L', 350, 0],
-        ['C', 200, 300, 150, 550, 0, 780],
-        ['L', 0, 0]
-    ]);
-    $pdf->DrawShapeScaled([
-        ['M', 1100, 0],
-        ['L', 850, 0],
-        ['C', 1000, 300, 1050, 550, 1100, 780],
-        ['L', 1100, 0]
-    ]);
+    // Draw Asymmetric Corner Triangles (Violet & Gold)
+    // Top-Left Corner
+    $pdf->SetFillColor($primaryViolet[0], $primaryViolet[1], $primaryViolet[2]);
+    $pdf->Polygon([0, 0, 65, 0, 0, 65], 'F');
+    $pdf->SetDrawColor($accentGold[0], $accentGold[1], $accentGold[2]);
+    $pdf->SetLineWidth(1.5);
+    $pdf->Line(0, 72, 72, 0);
+    $pdf->SetLineWidth(0.5);
+    $pdf->Line(0, 77, 77, 0);
 
-    // Bottom Gold and Navy Sweeps
-    $pdf->SetFillColor($gold[0], $gold[1], $gold[2]);
-    $pdf->DrawShapeScaled([
-        ['M', 0, 540],
-        ['C', 400, 760, 800, 820, 1100, 560],
-        ['L', 1100, 800],
-        ['L', 0, 800],
-        ['L', 0, 540]
-    ]);
+    // Bottom-Right Corner
+    $pdf->SetFillColor($primaryViolet[0], $primaryViolet[1], $primaryViolet[2]);
+    $pdf->Polygon([297, 210, 232, 210, 297, 145], 'F');
+    $pdf->SetLineWidth(1.5);
+    $pdf->Line(297, 138, 225, 210);
+    $pdf->SetLineWidth(0.5);
+    $pdf->Line(297, 133, 220, 210);
 
-    $pdf->SetFillColor($navy[0], $navy[1], $navy[2]);
-    $pdf->DrawShapeScaled([
-        ['M', 0, 560],
-        ['C', 400, 780, 800, 840, 1100, 580],
-        ['L', 1100, 800],
-        ['L', 0, 800],
-        ['L', 0, 560]
-    ]);
+    // Elegant Outer Double Border Frame (Gold)
+    $pdf->SetDrawColor($accentGold[0], $accentGold[1], $accentGold[2]);
+    $pdf->SetLineWidth(1.0);
+    $pdf->Rect(8, 8, 281, 194);
+    $pdf->SetLineWidth(0.3);
+    $pdf->Rect(10.5, 10.5, 276, 189);
 
-    // Gold Border
-    $pdf->SetDrawColor($gold[0], $gold[1], $gold[2]);
-    $pdf->SetLineWidth(1);
-    $pdf->Rect(7, 7, 283, 196);
+    // Draw corner bracket embellishments
+    $pdf->SetLineWidth(0.8);
+    // Top-Left Bracket
+    $pdf->Line(13, 22, 22, 22);
+    $pdf->Line(22, 13, 22, 22);
+    // Top-Right Bracket
+    $pdf->Line(284, 22, 275, 22);
+    $pdf->Line(275, 13, 275, 22);
+    // Bottom-Left Bracket
+    $pdf->Line(13, 188, 22, 188);
+    $pdf->Line(22, 197, 22, 188);
+    // Bottom-Right Bracket
+    $pdf->Line(284, 188, 275, 188);
+    $pdf->Line(275, 197, 275, 188);
 
-    // Right Navy Ribbon & Seal
+    // Right Royal Violet Ribbon & Seal
     $ribbonX = 250;
     $ribbonW = 24;
-    $ribbonH = 108;
-    $pdf->SetFillColor($navy[0], $navy[1], $navy[2]);
+    $ribbonH = 118;
+    $pdf->SetFillColor($primaryViolet[0], $primaryViolet[1], $primaryViolet[2]);
     $pdf->Polygon([
-        $ribbonX,
-        0,
-        $ribbonX + $ribbonW,
-        0,
-        $ribbonX + $ribbonW,
-        $ribbonH,
-        $ribbonX + ($ribbonW / 2),
-        $ribbonH - 13,
-        $ribbonX,
-        $ribbonH
+        $ribbonX, 0,
+        $ribbonX + $ribbonW, 0,
+        $ribbonX + $ribbonW, $ribbonH,
+        $ribbonX + ($ribbonW / 2), $ribbonH - 12,
+        $ribbonX, $ribbonH
     ], 'F');
 
-    $sealSize = 90;
+    // Ribbon gold side borders
+    $pdf->SetDrawColor($accentGold[0], $accentGold[1], $accentGold[2]);
+    $pdf->SetLineWidth(0.6);
+    $pdf->Line($ribbonX + 2, 0, $ribbonX + 2, $ribbonH - 11);
+    $pdf->Line($ribbonX + $ribbonW - 2, 0, $ribbonX + $ribbonW - 2, $ribbonH - 11);
+
+    // Badge Image Seal
+    $sealSize = 66;
     $sealX = $ribbonX + ($ribbonW / 2) - ($sealSize / 2);
-    $sealY = $ribbonH - 18 - ($sealSize / 2);
+    $sealY = $ribbonH - 42;
     $imagePath = __DIR__ . '/../assets/images/Achievement Badge.png';
     if (file_exists($imagePath)) {
         $pdf->Image($imagePath, $sealX, $sealY, $sealSize, $sealSize, 'PNG');
     }
 
-    // Typography
+    // Typography Setup
     $centerX = 148.5;
-
-    // Fallbacks for sanitization if function not available
     $username = htmlspecialchars_decode($attempt['username'] ?? '');
     $quiz_title = htmlspecialchars_decode($attempt['quiz_title'] ?? '');
     $completedDate = isset($attempt['completed_at']) ? date('M d, Y', strtotime($attempt['completed_at'])) : date('M d, Y');
 
-    $pdf->SetFont('Times', 'B', 46);
-    $pdf->SetTextColor($navy[0], $navy[1], $navy[2]);
-    $pdf->SetY(43);
+    // "CERTIFICATE" Title
+    $pdf->SetFont('Times', 'B', 44);
+    $pdf->SetTextColor($primaryViolet[0], $primaryViolet[1], $primaryViolet[2]);
+    $pdf->SetY(38);
     $pdf->SetX($centerX - 100);
-    $pdf->Cell(200, 20, 'CERTIFICATE', 0, 1, 'C');
+    // Add letter spacing manually
+    $titleString = "C E R T I F I C A T E";
+    $pdf->Cell(200, 15, $titleString, 0, 1, 'C');
 
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->SetTextColor($gold[0], $gold[1], $gold[2]);
-    $pdf->SetY(65);
+    // "OF EXCELLENCE" Subtitle
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->SetTextColor($accentGold[0], $accentGold[1], $accentGold[2]);
+    $pdf->SetY(53);
     $pdf->SetX($centerX - 100);
-    $pdf->Cell(200, 10, 'OF EXCELLENCE', 0, 1, 'C');
+    $pdf->Cell(200, 8, 'OF EXCELLENCE', 0, 1, 'C');
 
-    $pdf->SetDrawColor($gold[0], $gold[1], $gold[2]);
-    $pdf->SetLineWidth(0.3);
-    $pdf->Line($centerX - 60, 70, $centerX - 25, 70);
-    $pdf->Line($centerX + 25, 70, $centerX + 60, 70);
-
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->SetTextColor($navy[0], $navy[1], $navy[2]);
-    $pdf->SetY(85);
-    $pdf->SetX($centerX - 100);
-    $pdf->Cell(200, 10, 'THIS CERTIFICATE IS PROUDLY PRESENTED TO', 0, 1, 'C');
-
-    $pdf->SetFont('Times', 'I', 42);
-    $pdf->SetTextColor($navy[0], $navy[1], $navy[2]);
-    $pdf->SetY(100);
-    $pdf->SetX($centerX - 100);
-    $pdf->Cell(200, 15, $username, 0, 1, 'C');
-
-    $pdf->SetDrawColor(136, 136, 136);
+    // Accent lines below subtitle
+    $pdf->SetDrawColor($accentGold[0], $accentGold[1], $accentGold[2]);
     $pdf->SetLineWidth(0.4);
-    $pdf->Line($centerX - 65, 118, $centerX + 65, 118);
+    $pdf->Line($centerX - 48, 62, $centerX - 18, 62);
+    $pdf->Line($centerX + 18, 62, $centerX + 48, 62);
 
-    $pdf->SetFont('Arial', 'B', 10);
-    $pdf->SetTextColor($gold[0], $gold[1], $gold[2]);
-    $pdf->SetY(125);
+    // Presented statement
+    $pdf->SetFont('Arial', 'B', 9);
+    $pdf->SetTextColor($slateDark[0], $slateDark[1], $slateDark[2]);
+    $pdf->SetY(76);
+    $pdf->SetX($centerX - 100);
+    $pdf->Cell(200, 8, 'THIS CERTIFICATE IS PROUDLY PRESENTED TO', 0, 1, 'C');
+
+    // Recipient Name
+    $pdf->SetFont('Times', 'BI', 36);
+    $pdf->SetTextColor($primaryViolet[0], $primaryViolet[1], $primaryViolet[2]);
+    $pdf->SetY(88);
+    $pdf->SetX($centerX - 100);
+    $pdf->Cell(200, 16, $username, 0, 1, 'C');
+
+    // Divider line below name
+    $pdf->SetDrawColor($accentGold[0], $accentGold[1], $accentGold[2]);
+    $pdf->SetLineWidth(0.4);
+    $pdf->Line($centerX - 60, 108, $centerX + 60, 108);
+
+    // Quiz Course Title Subheader
+    $pdf->SetFont('Arial', 'I', 10);
+    $pdf->SetTextColor($slateDark[0], $slateDark[1], $slateDark[2]);
+    $pdf->SetY(116);
+    $pdf->SetX($centerX - 100);
+    $pdf->Cell(200, 6, 'for successfully completing the assessment in', 0, 1, 'C');
+
+    $pdf->SetFont('Arial', 'B', 13);
+    $pdf->SetTextColor($accentGold[0], $accentGold[1], $accentGold[2]);
+    $pdf->SetY(123);
     $pdf->SetX($centerX - 100);
     $pdf->Cell(200, 8, strtoupper($quiz_title), 0, 1, 'C');
 
-    $pdf->SetFont('Arial', '', 11);
-    $pdf->SetTextColor($navy[0], $navy[1], $navy[2]);
+    // Description text
+    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetTextColor($slateDark[0], $slateDark[1], $slateDark[2]);
     $pdf->SetY(135);
     $pdf->SetX($centerX - 80);
-    $desc = "For successfully completing the assessment and demonstrating outstanding\nknowledge, skill, and expertise in the subject with a passing score of " . round($percentage) . "%.";
-    $pdf->MultiCell(160, 6, $desc, 0, 'C');
+    $desc = "Demonstrating outstanding knowledge, skill, and proficiency in the subject matter\nwith a passing grade score of " . round($percentage) . "%.";
+    $pdf->MultiCell(160, 5.5, $desc, 0, 'C');
 
+    // Date Column
     $pdf->SetFont('Arial', '', 11);
-    $pdf->SetTextColor($navy[0], $navy[1], $navy[2]);
-
-    $pdf->SetY(165);
+    $pdf->SetTextColor($slateDark[0], $slateDark[1], $slateDark[2]);
+    $pdf->SetY(162);
     $pdf->SetX($centerX - 80);
     $pdf->Cell(45, 5, $completedDate, 0, 0, 'C');
-    $pdf->SetDrawColor(136, 136, 136);
-    $pdf->Line($centerX - 80, 172, $centerX - 35, 172);
-    $pdf->SetFont('Arial', 'B', 9);
-    $pdf->SetY(174);
+    $pdf->SetDrawColor(180, 180, 180);
+    $pdf->SetLineWidth(0.3);
+    $pdf->Line($centerX - 80, 169, $centerX - 35, 169);
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->SetY(171);
     $pdf->SetX($centerX - 80);
     $pdf->Cell(45, 5, 'Date', 0, 0, 'C');
 
-    // Check if GreatVibes font exists before adding
+    // Signature Column
     $fontPath = __DIR__ . '/fpdf/font/GreatVibes-Regular.php';
     if (file_exists($fontPath)) {
         $pdf->AddFont('GreatVibes', '', 'GreatVibes-Regular.php');
-        $pdf->SetFont('GreatVibes', '', 36);
+        $pdf->SetFont('GreatVibes', '', 32);
     } else {
-        $pdf->SetFont('Times', 'I', 24);
+        $pdf->SetFont('Times', 'I', 22);
     }
-
-    $pdf->SetTextColor($navy[0], $navy[1], $navy[2]);
-    $pdf->SetY(162);
+    $pdf->SetTextColor($primaryViolet[0], $primaryViolet[1], $primaryViolet[2]);
+    $pdf->SetY(158);
     $pdf->SetX($centerX + 35);
     $pdf->Cell(45, 10, 'Suraj Manani', 0, 0, 'C');
-    $pdf->SetDrawColor(136, 136, 136);
-    $pdf->Line($centerX + 35, 172, $centerX + 80, 172);
-    $pdf->SetFont('Arial', 'B', 9);
-    $pdf->SetY(174);
+    $pdf->SetDrawColor(180, 180, 180);
+    $pdf->SetLineWidth(0.3);
+    $pdf->Line($centerX + 35, 169, $centerX + 80, 169);
+    $pdf->SetFont('Arial', 'B', 8);
+    $pdf->SetY(171);
     $pdf->SetX($centerX + 35);
     $pdf->Cell(45, 5, 'Signature', 0, 0, 'C');
 

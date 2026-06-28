@@ -1,205 +1,131 @@
 <?php include_once 'controllers/contact-process.php'; ?>
 
-<div class="row align-items-center py-5">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 py-12 items-center">
     <!-- Contact Info Column -->
-    <div class="col-lg-5 mb-5 mb-lg-0">
-        <h1 class="display-4 fw-bold mb-3">Let's <span class="text-gradient">Connect</span></h1>
-        <p class="text-muted lead mb-5">
+    <div>
+        <h1 class="text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-4">Let's <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-800">Connect</span></h1>
+        <p class="text-slate-500 text-base leading-relaxed mb-8">
             We're here to help and answer any question you might have. We look forward to hearing from you.
         </p>
 
-        <div class="d-flex align-items-center mb-4">
-            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3 flex-shrink-0">
-                <i class="fas fa-envelope fa-2x text-primary"></i>
+        <!-- Email card -->
+        <div class="flex items-center mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-primary-50 text-primary-600 flex items-center justify-center mr-4 flex-shrink-0 border border-primary-100">
+                <i class="fas fa-envelope"></i>
             </div>
             <div>
-                <h5 class="text-dark mb-1">Email Us</h5>
-                <p class="text-muted mb-0">quizmastera524@gmail.com</p>
+                <h5 class="text-sm font-bold text-slate-800 mb-0.5">Email Us</h5>
+                <p class="text-slate-500 text-xs font-semibold">quizmastera524@gmail.com</p>
             </div>
         </div>
 
-        <div class="d-flex align-items-center mb-4">
-            <div class="bg-success bg-opacity-10 p-3 rounded-circle me-3 flex-shrink-0">
-                <i class="fas fa-phone fa-2x text-success"></i>
+        <!-- Phone card -->
+        <div class="flex items-center mb-6">
+            <div class="w-12 h-12 rounded-2xl bg-accent-50 text-accent-600 flex items-center justify-center mr-4 flex-shrink-0 border border-accent-100">
+                <i class="fas fa-phone"></i>
             </div>
             <div>
-                <h5 class="text-dark mb-1">Call Us</h5>
-                <p class="text-muted mb-0">+1 (555) 123-4567</p>
+                <h5 class="text-sm font-bold text-slate-800 mb-0.5">Call Us</h5>
+                <p class="text-slate-500 text-xs font-semibold">+1 (555) 123-4567</p>
             </div>
         </div>
 
-        <div class="d-flex align-items-center mb-5">
-            <div class="bg-info bg-opacity-10 p-3 rounded-circle me-3 flex-shrink-0">
-                <i class="fas fa-map-marker-alt fa-2x text-info"></i>
+        <!-- Address card -->
+        <div class="flex items-center mb-8">
+            <div class="w-12 h-12 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mr-4 flex-shrink-0 border border-sky-100">
+                <i class="fas fa-map-marker-alt"></i>
             </div>
             <div>
-                <h5 class="text-dark mb-1">Visit Us</h5>
-                <p class="text-muted mb-0">123 Education Lane, Tech City</p>
+                <h5 class="text-sm font-bold text-slate-800 mb-0.5">Visit Us</h5>
+                <p class="text-slate-500 text-xs font-semibold">123 Education Lane, Tech City</p>
             </div>
         </div>
 
-        <div class="d-flex gap-3">
-            <a href="#" class="btn btn-outline-primary rounded-circle" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="btn btn-outline-primary rounded-circle" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="btn btn-outline-primary rounded-circle" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="btn btn-outline-primary rounded-circle" style="width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;"><i class="fab fa-linkedin-in"></i></a>
+        <!-- Social links -->
+        <div class="flex gap-3">
+            <a href="#" class="w-9 h-9 border border-slate-200 text-slate-400 hover:border-transparent hover:bg-primary-600 hover:text-white rounded-full flex items-center justify-center transition-all text-xs"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="w-9 h-9 border border-slate-200 text-slate-400 hover:border-transparent hover:bg-primary-600 hover:text-white rounded-full flex items-center justify-center transition-all text-xs"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="w-9 h-9 border border-slate-200 text-slate-400 hover:border-transparent hover:bg-primary-600 hover:text-white rounded-full flex items-center justify-center transition-all text-xs"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="w-9 h-9 border border-slate-200 text-slate-400 hover:border-transparent hover:bg-primary-600 hover:text-white rounded-full flex items-center justify-center transition-all text-xs"><i class="fab fa-linkedin-in"></i></a>
         </div>
     </div>
 
     <!-- Contact Form Column -->
-    <div class="col-lg-6 offset-lg-1">
+    <div>
         <?php if ($message): ?>
-            <div class="alert alert-<?php echo $messageType; ?> alert-dismissible fade show mb-4 glass-alert" role="alert">
-                <i class="fas <?php echo ($messageType == 'success') ? 'fa-check-circle' : 'fa-exclamation-circle'; ?> me-2"></i>
-                <?php echo $message; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert-dismissible p-4 mb-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-between <?php echo ($messageType == 'success') ? 'border-l-4 border-l-accent-500 text-accent-600' : 'border-l-4 border-l-red-500 text-red-655'; ?>" role="alert">
+                <div class="flex items-center">
+                    <i class="fas <?php echo ($messageType == 'success') ? 'fa-check-circle' : 'fa-exclamation-circle'; ?> mr-2.5"></i>
+                    <span class="text-xs font-bold"><?php echo $message; ?></span>
+                </div>
+                <button type="button" class="text-slate-400 hover:text-slate-600 text-sm focus:outline-none" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         <?php endif; ?>
 
-        <div class="card glass-card border-0 shadow-lg position-relative overflow-hidden">
+        <div class="bg-white rounded-[32px] border border-slate-200 p-8 md:p-10 shadow-premium relative overflow-hidden">
             <!-- Decorative Elements -->
-            <div class="position-absolute top-0 end-0 p-4 opacity-10">
-                <i class="fas fa-paper-plane fa-6x text-indigo-600 transform-rotate-45"></i>
+            <div class="absolute top-0 right-0 p-6 opacity-[0.03] -z-10">
+                <i class="fas fa-paper-plane text-8xl text-primary-600 rotate-[-20deg]"></i>
             </div>
 
-            <div class="card-body p-4 p-md-5 position-relative z-1">
-                <h3 class="fw-bold mb-2">Send a Message</h3>
-                <p class="text-muted mb-5 small">We usually respond within 24 hours.</p>
+            <h3 class="font-extrabold text-slate-900 text-xl mb-1">Send a Message</h3>
+            <p class="text-slate-400 text-xs mb-8">We usually respond within 24 hours.</p>
 
-                <form action="" method="POST">
-                    <div class="row g-4">
-                        <div class="col-md-6">
-                            <div class="premium-input-group">
-                                <i class="fas fa-user input-icon"></i>
-                                <input type="text" class="premium-control" id="name" name="name" placeholder=" ">
-                                <label for="name">Your Name</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="premium-input-group">
-                                <i class="fas fa-envelope input-icon"></i>
-                                <input type="email" class="premium-control" id="email" name="email" placeholder=" ">
-                                <label for="email">Email Address</label>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="premium-input-group">
-                                <i class="fas fa-tag input-icon"></i>
-                                <select class="premium-control" id="subject" name="subject">
-                                    <option value="General Inquiry">General Inquiry</option>
-                                    <option value="Support">Technical Support</option>
-                                    <option value="Feedback">Feedback</option>
-                                    <option value="Partnership">Partnership</option>
-                                </select>
-                                <label for="subject">Subject</label>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="premium-input-group">
-                                <i class="fas fa-comment-alt input-icon mt-2"></i>
-                                <textarea class="premium-control" id="message" name="message" style="height: 120px" placeholder=" "></textarea>
-                                <label for="message">Your Message</label>
-                            </div>
-                        </div>
-
-                        <div class="col-12 mt-4">
-                            <button type="submit" class="btn btn-gradient-primary w-100 py-3 rounded-pill fw-bold shadow-lg hover-scale">
-                                Send Message <i class="fas fa-arrow-right ms-2"></i>
-                            </button>
+            <form action="" method="POST" class="space-y-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Name input -->
+                    <div>
+                        <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Your Name</label>
+                        <div class="relative">
+                            <input type="text" name="name" id="name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 pl-10 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-600 transition-all" placeholder="John Doe" />
+                            <i class="fas fa-user absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
                         </div>
                     </div>
-                </form>
-            </div>
+
+                    <!-- Email input -->
+                    <div>
+                        <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Email Address</label>
+                        <div class="relative">
+                            <input type="email" name="email" id="email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 pl-10 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-600 transition-all" placeholder="john@example.com" />
+                            <i class="fas fa-envelope absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subject input -->
+                <div>
+                    <label for="subject" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Subject</label>
+                    <div class="relative">
+                        <select name="subject" id="subject" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 pl-10 pr-10 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-600 transition-all appearance-none cursor-pointer">
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Support">Technical Support</option>
+                            <option value="Feedback">Feedback</option>
+                            <option value="Partnership">Partnership</option>
+                        </select>
+                        <i class="fas fa-tag absolute left-3.5 top-3.5 text-slate-400 text-sm pointer-events-none"></i>
+                        <i class="fas fa-chevron-down absolute right-4 top-3.5 text-slate-400 text-xs pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <!-- Message input -->
+                <div>
+                    <label for="message" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Your Message</label>
+                    <div class="relative">
+                        <textarea name="message" id="message" rows="4" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 pl-10 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-600 transition-all resize-none" placeholder="Type your message here..."></textarea>
+                        <i class="fas fa-comment-alt absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs flex items-center justify-center focus:outline-none">
+                        Send Message <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-
-<style>
-    /* Premium Form Styles */
-    .premium-input-group {
-        position: relative;
-        margin-bottom: 1rem;
-    }
-
-    .input-icon {
-        position: absolute;
-        left: 0;
-        top: 15px;
-        color: var(--secondary);
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-        z-index: 2;
-    }
-
-    .premium-control {
-        width: 100%;
-        background: transparent;
-        border: none;
-        border-bottom: 2px solid var(--slate-200);
-        border-radius: 0;
-        padding: 10px 10px 10px 35px;
-        /* Space for icon */
-        color: var(--slate-800);
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        outline: none;
-    }
-
-    .premium-control:focus {
-        border-bottom-color: var(--primary);
-        background: linear-gradient(to bottom, transparent 95%, var(--indigo-50) 100%);
-    }
-
-    .premium-control:focus+label,
-    .premium-control:not(:placeholder-shown)+label {
-        top: -20px;
-        left: 0;
-        font-size: 0.85rem;
-        color: var(--primary);
-    }
-
-    .premium-input-group label {
-        position: absolute;
-        left: 35px;
-        top: 10px;
-        color: var(--slate-500);
-        font-size: 1rem;
-        pointer-events: none;
-        transition: all 0.3s ease;
-    }
-
-    /* Specific fix for select which handles placeholder differently */
-    select.premium-control {
-        padding-left: 30px;
-        cursor: pointer;
-    }
-
-    select.premium-control option {
-        background-color: #ffffff;
-        color: var(--slate-800);
-    }
-
-    .premium-control:focus~.input-icon {
-        color: var(--primary);
-    }
-
-    /* Button & Card tweaks */
-    .transform-rotate-45 {
-        transform: rotate(-20deg);
-        opacity: 0.1;
-    }
-
-    .hover-scale:hover {
-        transform: scale(1.02);
-    }
-
-    .btn-gradient-primary {
-        background: linear-gradient(135deg, var(--primary) 0%, #4facfe 100%);
-        border: none;
-        color: white;
-    }
-</style>
 
 <?php include_once 'includes/footer.php'; ?>

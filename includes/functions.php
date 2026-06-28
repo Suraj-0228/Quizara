@@ -91,9 +91,40 @@ function flash($name = '', $message = '', $class = 'success')
             $_SESSION[$name . '_class'] = $class;
         } elseif (empty($message) && !empty($_SESSION[$name])) {
             $class = !empty($_SESSION[$name . '_class']) ? $_SESSION[$name . '_class'] : 'success';
-            echo '<div class="alert alert-' . $class . ' alert-dismissible fade show" role="alert">' . $_SESSION[$name] . '
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            
+            // Map status classes to premium Tailwind styles
+            $bgColor = 'bg-primary-50';
+            $textColor = 'text-primary-800';
+            $borderColor = 'border-primary-100/30';
+            $icon = '<i class="fas fa-info-circle mr-2.5 text-primary-500"></i>';
+
+            if ($class === 'success') {
+                $bgColor = 'bg-emerald-50';
+                $textColor = 'text-emerald-800';
+                $borderColor = 'border-emerald-100/40';
+                $icon = '<i class="fas fa-check-circle mr-2.5 text-emerald-500"></i>';
+            } elseif ($class === 'danger' || $class === 'error') {
+                $bgColor = 'bg-rose-50';
+                $textColor = 'text-rose-800';
+                $borderColor = 'border-rose-100/40';
+                $icon = '<i class="fas fa-exclamation-circle mr-2.5 text-rose-500"></i>';
+            } elseif ($class === 'warning') {
+                $bgColor = 'bg-amber-50';
+                $textColor = 'text-amber-800';
+                $borderColor = 'border-amber-100/40';
+                $icon = '<i class="fas fa-exclamation-triangle mr-2.5 text-amber-500"></i>';
+            }
+
+            echo '<div class="alert-dismissible p-4 mb-6 rounded-2xl border flex items-center justify-between ' . $bgColor . ' ' . $textColor . ' ' . $borderColor . '" role="alert">
+                    <div class="flex items-center text-xs font-bold">
+                        ' . $icon . '
+                        <span>' . $_SESSION[$name] . '</span>
+                    </div>
+                    <button type="button" class="text-slate-400 hover:text-slate-655 focus:outline-none flex items-center justify-center p-1" onclick="this.parentElement.remove()" aria-label="Close">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
                   </div>';
+            
             unset($_SESSION[$name]);
             unset($_SESSION[$name . '_class']);
         }

@@ -1,97 +1,94 @@
 <?php include_once 'controllers/reports-process.php'; ?>
 
-<div class="container py-4">
-    <!-- Hero Header -->
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <div>
-            <h1 class="display-5 fw-bold mb-2">Result Reports</h1>
-            <p class="text-muted lead mb-0">Analytics and performance overview.</p>
-        </div>
-        <button onclick="window.print()" class="btn btn-outline-primary d-print-none rounded-pill px-4">
-            <i class="fas fa-print me-2"></i>Print Report
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+    <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">Result Reports</h1>
+        <p class="text-slate-505 text-sm mb-0">Analytics and performance overview.</p>
+    </div>
+    <div class="flex-shrink-0 print:hidden">
+        <button onclick="window.print()" class="border border-primary-200 text-primary-600 hover:bg-primary-50 font-bold px-5 py-2.5 rounded-full shadow-sm text-xs transition-all flex items-center focus:outline-none">
+            <i class="fas fa-print mr-2 text-[10px]"></i>Print Report
         </button>
     </div>
+</div>
 
-    <!-- Stats Dashboard -->
-    <div class="row g-4 mb-5 d-print-none">
-        <div class="col-md-4">
-            <div class="glass-card border-0 shadow-sm p-4 text-center h-100">
-                <div class="text-muted text-uppercase small mb-2">Total Attempts</div>
-                <div class="display-4 fw-bold mb-0"><?php echo $total_attempts; ?></div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="glass-card border-0 shadow-sm p-4 text-center h-100">
-                <div class="text-muted text-uppercase small mb-2">Average Score</div>
-                <div class="display-4 fw-bold text-info mb-0"><?php echo $avg_score; ?>%</div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="glass-card border-0 shadow-sm p-4 text-center h-100">
-                <div class="text-muted text-uppercase small mb-2">Pass Rate</div>
-                <div class="display-4 fw-bold text-success mb-0"><?php echo $pass_rate; ?>%</div>
-            </div>
-        </div>
+<!-- Stats Dashboard -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 print:hidden">
+    <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm text-center">
+        <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-2">Total Attempts</div>
+        <div class="text-4xl font-extrabold text-slate-800"><?php echo $total_attempts; ?></div>
     </div>
+    <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm text-center">
+        <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-2">Average Score</div>
+        <div class="text-4xl font-extrabold text-sky-500"><?php echo $avg_score; ?>%</div>
+    </div>
+    <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm text-center">
+        <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-2">Pass Rate</div>
+        <div class="text-4xl font-extrabold text-emerald-500"><?php echo $pass_rate; ?>%</div>
+    </div>
+</div>
 
-    <!-- Results Table -->
-    <div class="glass-card border-0 shadow-lg position-relative overflow-hidden mb-5">
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0" style="--bs-table-bg: #fff; --bs-table-hover-bg: var(--slate-50); color: var(--slate-800);">
-                    <thead class="bg-slate-50 border-bottom border-slate-200">
-                        <tr>
-                            <th class="ps-4 py-3 text-uppercase text-muted small border-0">Student</th>
-                            <th class="py-3 text-uppercase text-muted small border-0">Quiz Title</th>
-                            <th class="py-3 text-uppercase text-muted small border-0">Score</th>
-                            <th class="py-3 text-uppercase text-muted small border-0 text-center">Status</th>
-                            <th class="py-3 text-uppercase text-muted small border-0 text-end pe-4">Date</th>
+<!-- Results Table -->
+<div class="bg-white border border-slate-200 rounded-3xl shadow-premium overflow-hidden mb-8">
+    <div class="overflow-x-auto w-full">
+        <table class="w-full text-left text-sm text-slate-600 border-collapse">
+            <thead class="bg-slate-50 border-b border-slate-100">
+                <tr>
+                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Student</th>
+                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Quiz Title</th>
+                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Score</th>
+                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Status</th>
+                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-right">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (count($attempts) > 0): ?>
+                    <?php foreach ($attempts as $attempt): ?>
+                        <?php
+                        $q_total = $attempt['total_questions'];
+                        $percentage = $q_total > 0 ? ($attempt['score'] / $q_total) * 100 : 0;
+                        $is_passed = $percentage >= 50;
+                        ?>
+                        <tr class="border-b border-slate-100 last:border-0 hover:bg-slate-50/30 transition-colors">
+                            <td class="px-6 py-4 font-bold text-slate-800">
+                                <?php echo sanitize($attempt['username']); ?>
+                            </td>
+                            <td class="px-6 py-4 text-slate-550 font-semibold">
+                                <?php echo sanitize($attempt['quiz_title']); ?>
+                            </td>
+                            <td class="px-6 py-4 text-slate-800">
+                                <span class="font-extrabold"><?php echo $attempt['score']; ?>/<?php echo $q_total; ?></span>
+                                <small class="text-slate-400 text-xs ml-1">(<?php echo round($percentage); ?>%)</small>
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <?php if ($is_passed): ?>
+                                    <span class="bg-emerald-50 text-emerald-600 border border-emerald-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">
+                                        Passed
+                                    </span>
+                                <?php else: ?>
+                                    <span class="bg-rose-50 text-rose-600 border border-rose-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">
+                                        Failed
+                                    </span>
+                                <?php endif; ?>
+                            </td>
+                            <td class="px-6 py-4 text-right text-slate-400 text-xs font-semibold">
+                                <?php echo date('M d, Y H:i', strtotime($attempt['completed_at'])); ?>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody class="border-top-0">
-                        <?php if (count($attempts) > 0): ?>
-                            <?php foreach ($attempts as $attempt): ?>
-                                <?php
-                                $q_total = $attempt['total_questions'];
-                                $percentage = $q_total > 0 ? ($attempt['score'] / $q_total) * 100 : 0;
-                                $status = $percentage >= 50 ? 'Passed' : 'Failed';
-                                $status_class = $status === 'Passed' ? 'success' : 'danger';
-                                $bg_class = $status === 'Passed' ? 'bg-success' : 'bg-danger';
-                                ?>
-                                <tr class="border-bottom border-slate-100 transition-all">
-                                    <td class="ps-4 py-3 fw-bold">
-                                        <?php echo sanitize($attempt['username']); ?>
-                                    </td>
-                                    <td class="py-3 text-muted">
-                                        <?php echo sanitize($attempt['quiz_title']); ?>
-                                    </td>
-                                    <td class="py-3">
-                                        <span class="fw-bold"><?php echo $attempt['score']; ?>/<?php echo $q_total; ?></span>
-                                        <small class="text-muted ms-1">(<?php echo round($percentage); ?>%)</small>
-                                    </td>
-                                    <td class="py-3 text-center">
-                                        <span class="badge <?php echo $bg_class; ?> bg-opacity-10 text-<?php echo $status_class; ?> border border-<?php echo $status_class; ?> border-opacity-25 rounded-pill px-3">
-                                            <?php echo $status; ?>
-                                        </span>
-                                    </td>
-                                    <td class="text-end pe-4 py-3 text-muted small">
-                                        <?php echo date('M d, Y H:i', strtotime($attempt['completed_at'])); ?>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="5" class="text-center py-5">
-                                    <div class="text-muted opacity-50 mb-3"><i class="fas fa-chart-bar fa-3x"></i></div>
-                                    <h5 class="fw-bold">No results found</h5>
-                                    <p class="text-muted small">Students haven't completed any quizzes yet.</p>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5" class="text-center py-12">
+                            <div class="mb-4">
+                                <i class="fas fa-chart-bar text-slate-300 text-5xl"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-800 text-base mb-1">No results found</h5>
+                            <p class="text-slate-400 text-xs">Students haven't completed any quizzes yet.</p>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </div>
 

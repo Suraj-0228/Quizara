@@ -1,19 +1,19 @@
 <?php include_once 'controllers/forgot-password-process.php'; ?>
 
-<section class="container position-relative z-1">
-    <div class="auth-card-premium mx-auto">
-        <div class="auth-header text-center">
-            <div class="auth-brand-icon">
-                <i class="fas fa-key text-danger"></i>
+<section class="max-w-md mx-auto py-12 px-4">
+    <div class="bg-white rounded-3xl border border-slate-200 p-8 shadow-premium relative overflow-hidden">
+        <div class="text-center mb-8">
+            <div class="w-16 h-16 rounded-2xl bg-red-50 text-red-655 text-red-600 flex items-center justify-center text-2xl mx-auto mb-4">
+                <i class="fas fa-key"></i>
             </div>
-            <h2 class="fw-black text-danger mb-2">Forgot Password</h2>
-            <p class="text-slate-500 small fw-medium">Recover your account access</p>
-            <p class="text-primary x-small mt-2">Enter your email and we'll send a reset link.</p>
+            <h2 class="text-2xl font-black text-red-655 text-red-600 mb-1">Forgot Password</h2>
+            <p class="text-slate-400 text-xs font-semibold">Recover your account access</p>
+            <p class="text-primary-600 text-[11px] font-bold mt-2 leading-relaxed max-w-xs mx-auto">Enter your email and we'll send a reset link.</p>
         </div>
 
         <?php if (!empty($errors)): ?>
-            <div class="alert alert-danger glass-alert mb-4 border-0 border-start border-danger border-4 shadow-sm">
-                <ul class="mb-0 ps-3 small fw-bold">
+            <div class="p-4 mb-6 rounded-2xl bg-red-50 border border-red-200 text-red-655 text-red-600 text-xs font-medium">
+                <ul class="list-disc pl-4 space-y-1">
                     <?php foreach ($errors as $error): ?>
                         <li><?php echo $error; ?></li>
                     <?php endforeach; ?>
@@ -22,39 +22,27 @@
         <?php endif; ?>
 
         <form action="" method="POST" id="forgotPasswordForm" class="needs-validation" novalidate>
-            <div class="premium-input-group mb-5">
-                <i class="fas fa-envelope input-icon"></i>
-                <input type="email" class="premium-control" id="email" name="email" placeholder=" " required>
-                <label for="email">Email address</label>
-                <div class="invalid-feedback ps-2 mt-4 text-start">Please enter your registered email.</div>
+            <!-- Email Input -->
+            <div class="relative z-0 w-full mb-8 group border-b-2 border-slate-200 focus-within:border-primary-600 transition-colors">
+                <input type="email" class="block py-2.5 px-0 pl-8 w-full text-sm text-slate-800 bg-transparent border-0 appearance-none focus:outline-none focus:ring-0 peer" id="email" name="email" placeholder=" ">
+                <label for="email" class="peer-focus:font-medium absolute text-sm text-slate-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-primary-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:left-8 peer-focus:scale-75 peer-focus:-translate-y-6">Email Address</label>
+                <i class="fas fa-envelope absolute left-0 top-3 text-slate-400 peer-focus:text-primary-600 text-sm transition-colors"></i>
             </div>
 
-            <div class="d-grid mb-4">
-                <button type="submit" class="btn btn-outline-indigo rounded-pill shadow-premium hover-scale py-3 fw-black">
-                    Send Recovery Link <i class="fas fa-paper-plane ms-2"></i>
+            <div class="mb-6">
+                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs flex items-center justify-center focus:outline-none">
+                    Send Recovery Link <i class="fas fa-paper-plane ml-2 text-[10px]"></i>
                 </button>
             </div>
 
-            <div class="auth-footer text-center mt-0">
-                <p class="mb-0 text-slate-500 small">
-                    Remembered it? <a href="login.php" class="text-indigo-600 fw-bold text-decoration-none ms-1">Return to Login</a>
+            <div class="text-center">
+                <p class="text-slate-505 text-xs">
+                    Remembered it? <a href="login.php" class="text-primary-600 font-bold ml-1">Return to Login</a>
                 </p>
             </div>
         </form>
     </div>
 </section>
-
-<style>
-    .btn-outline-indigo {
-        border: 1px solid var(--indigo-500);
-        color: var(--indigo-500);
-    }
-
-    .btn-outline-indigo:hover {
-        background-color: var(--indigo-500);
-        color: #fff;
-    }
-</style>
 
 <script>
     // Validation Script

@@ -1,139 +1,98 @@
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="<?php echo base_url(); ?>">
-            <i class="fas fa-graduation-cap me-2"></i>Quizara
+<nav class="fixed top-4 left-0 w-full z-50 px-4 print:hidden">
+    <div class="max-w-6xl mx-auto bg-white/80 border border-slate-200/85 backdrop-blur-md rounded-full shadow-premium px-6 py-3 flex justify-between items-center">
+        <!-- Brand -->
+        <a class="flex items-center text-primary-600 hover:text-primary-700 transition-colors font-extrabold text-lg tracking-wider" href="<?php echo base_url(); ?>">
+            <i class="fas fa-graduation-cap mr-2"></i>Quizara
         </a>
 
-        <!-- Mobile User Menu -->
-        <?php if (isLoggedIn()): ?>
-            <div class="dropdown d-lg-none ms-auto me-3">
-                <a class="dropdown-toggle d-flex align-items-center text-decoration-none" href="#" id="mobileUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; font-weight: bold; font-size: 0.9rem; border: 2px solid #fff; box-shadow: var(--shadow-sm);">
-                        <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?>
-                    </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end shadow-premium border-0 py-2 animated fadeIn" aria-labelledby="mobileUserDropdown" style="border-radius: 15px; margin-top: 10px;">
-                    <li class="px-3 py-2 border-bottom border-slate-100 mb-2">
-                        <div class="small text-muted fw-bold text-uppercase" style="font-size: 0.65rem; letter-spacing: 0.5px;">Logged in as</div>
-                        <div class="fw-bold text-slate-900 fs-5"><?php echo sanitize($_SESSION['username']); ?></div>
-                    </li>
-                    <?php if (!isAdmin()): ?>
-                        <li><a class="dropdown-item py-2 fw-semibold" href="<?php echo base_url('student/profile.php'); ?>"><i class="fas fa-user-cog me-2 text-primary"></i>Profile Settings</a></li>
-                        <li><a class="dropdown-item py-2 fw-semibold" href="<?php echo base_url('student/reports.php'); ?>"><i class="fas fa-chart-line me-2 text-success"></i>Performance Reports</a></li>
-                        <li><a class="dropdown-item py-2 fw-semibold" href="<?php echo base_url('student/quizzes.php'); ?>"><i class="fas fa-list-check me-2 text-warning"></i>Available Quizzes</a></li>
-                        <li><a class="dropdown-item py-2 fw-semibold" href="<?php echo base_url('student/history.php'); ?>"><i class="fas fa-history me-2 text-info"></i>Learning History</a></li>
-                        <li>
-                            <hr class="dropdown-divider border-slate-100">
-                        </li>
-                    <?php else: ?>
-                        <li><a class="dropdown-item py-2 fw-semibold" href="<?php echo base_url('admin/settings.php'); ?>"><i class="fas fa-cog me-2 text-primary"></i>System Settings</a></li>
-                        <li>
-                            <hr class="dropdown-divider border-slate-100">
-                        </li>
-                    <?php endif; ?>
-                    <li><a class="dropdown-item py-2 text-danger fw-bold" href="<?php echo base_url('logout.php'); ?>"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a></li>
-                </ul>
-            </div>
-        <?php endif; ?>
+        <!-- Navigation Links (Desktop) -->
+        <div class="hidden md:flex items-center space-x-2">
+            <a class="text-slate-600 hover:text-primary-600 hover:bg-slate-50/50 font-bold text-xs transition-colors px-4 py-2 rounded-full" href="<?php echo base_url(); ?>">Home</a>
+            <a class="text-slate-600 hover:text-primary-600 hover:bg-slate-50/50 font-bold text-xs transition-colors px-4 py-2 rounded-full" href="<?php echo base_url('about.php'); ?>">About</a>
+            <a class="text-slate-600 hover:text-primary-600 hover:bg-slate-50/50 font-bold text-xs transition-colors px-4 py-2 rounded-full" href="<?php echo base_url('faq.php'); ?>">FAQ</a>
+            <a class="text-slate-600 hover:text-primary-600 hover:bg-slate-50/50 font-bold text-xs transition-colors px-4 py-2 rounded-full" href="<?php echo base_url('contact.php'); ?>">Contact</a>
+        </div>
 
-        <!-- Custom Toggler -->
-        <button class="navbar-toggler border-0 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <div class="hamburger-menu <?php echo isLoggedIn() ? 'ms-0' : 'ms-auto'; ?>">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- Left Side -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url(); ?>">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url('about.php'); ?>">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url('faq.php'); ?>">FAQ</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo base_url('contact.php'); ?>">Contact</a>
-                </li>
-            </ul>
-
-            <!-- Desktop User Menu -->
+        <!-- Right Menu (Desktop & Mobile trigger) -->
+        <div class="flex items-center space-x-3">
             <?php if (isLoggedIn()): ?>
-                <ul class="navbar-nav ms-auto align-items-center d-none d-lg-flex">
-                    <li class="nav-item dropdown dropdown-premium">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center px-3 py-2 rounded-pill bg-slate-50 border border-slate-100" href="#" id="desktopUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px; font-weight: bold; font-size: 0.8rem; border: 2px solid #fff; box-shadow: var(--shadow-sm);">
-                                <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?>
-                            </div>
-                            <span class="fw-bold text-slate-800 me-1"><?php echo sanitize($_SESSION['username']); ?></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-premium border-0 py-2 animated fadeIn" aria-labelledby="desktopUserDropdown" style="border-radius: 15px; margin-top: 15px; min-width: 220px;">
-                            <li class="px-3 py-2 border-bottom border-slate-100 mb-2 text-center">
-                                <div class="small text-muted fw-bold text-uppercase mb-1" style="font-size: 0.65rem; letter-spacing: 0.5px;">Account Profile</div>
-                                <div class="fw-bold text-indigo-600"><?php echo sanitize($_SESSION['username']); ?></div>
-                            </li>
-                            <?php if (!isAdmin()): ?>
-                                <li><a class="dropdown-item py-2 fw-semibold" href="<?php echo base_url('student/profile.php'); ?>"><i class="fas fa-user-cog me-2 text-primary"></i>Profile Settings</a></li>
-                                <li><a class="dropdown-item py-2 fw-semibold" href="<?php echo base_url('student/reports.php'); ?>"><i class="fas fa-chart-line me-2 text-success"></i>Performance Reports</a></li>
-                                <li><a class="dropdown-item py-2 fw-semibold" href="<?php echo base_url('student/quizzes.php'); ?>"><i class="fas fa-list-check me-2 text-warning"></i>Available Quizzes</a></li>
-                                <li><a class="dropdown-item py-2 fw-semibold" href="<?php echo base_url('student/history.php'); ?>"><i class="fas fa-history me-2 text-info"></i>Learning History</a></li>
-                                <li>
-                                    <hr class="dropdown-divider border-slate-100">
-                                </li>
-                            <?php else: ?>
-                                <li><a class="dropdown-item py-2 fw-semibold" href="<?php echo base_url('admin/dashboard.php'); ?>"><i class="fas fa-desktop me-2 text-primary"></i>Admin Control</a></li>
-                                <li>
-                                    <hr class="dropdown-divider border-slate-100">
-                                </li>
-                            <?php endif; ?>
-                            <li><a class="dropdown-item py-2 text-danger fw-bold" href="<?php echo base_url('logout.php'); ?>"><i class="fas fa-power-off me-2"></i>Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <!-- Desktop Logged In Action Links -->
+                <div class="relative hidden md:block">
+                    <button class="flex items-center space-x-2 bg-slate-50 border border-slate-200 hover:bg-slate-100 px-3.5 py-1.5 rounded-full transition-all focus:outline-none" id="desktopUserDropdown" data-bs-toggle="dropdown">
+                        <div class="w-7 h-7 rounded-full bg-primary-600 text-white flex items-center justify-content-center text-xs font-bold border-2 border-white shadow-sm">
+                            <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?>
+                        </div>
+                        <span class="text-slate-800 text-xs font-bold"><?php echo sanitize($_SESSION['username']); ?></span>
+                        <i class="fas fa-chevron-down text-slate-400 text-[10px]"></i>
+                    </button>
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown-menu absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-premium py-2 hidden z-50">
+                        <div class="px-4 py-2 border-b border-slate-100 mb-1 text-center">
+                            <div class="text-[0.65rem] text-slate-400 uppercase font-bold tracking-wider mb-0.5">Account Profile</div>
+                            <div class="text-primary-600 font-bold text-sm"><?php echo sanitize($_SESSION['username']); ?></div>
+                        </div>
+                        <?php if (!isAdmin()): ?>
+                            <a class="flex items-center px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 font-semibold" href="<?php echo base_url('student/dashboard.php'); ?>"><i class="fas fa-desktop w-5 text-primary-600 mr-2"></i>Student Portal</a>
+                            <a class="flex items-center px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 font-semibold" href="<?php echo base_url('student/profile.php'); ?>"><i class="fas fa-user-cog w-5 text-primary-600 mr-2"></i>Profile Settings</a>
+                            <div class="border-t border-slate-100 my-1"></div>
+                        <?php else: ?>
+                            <a class="flex items-center px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 font-semibold" href="<?php echo base_url('admin/dashboard.php'); ?>"><i class="fas fa-desktop w-5 text-primary-600 mr-2"></i>Admin Control</a>
+                            <div class="border-t border-slate-100 my-1"></div>
+                        <?php endif; ?>
+                        <a class="flex items-center px-4 py-2 text-xs text-red-655 text-red-600 hover:bg-red-50 font-bold" href="<?php echo base_url('logout.php'); ?>"><i class="fas fa-power-off w-5 mr-2"></i>Logout</a>
+                    </div>
+                </div>
+
+                <!-- Mobile User Menu icon -->
+                <div class="relative md:hidden">
+                    <button class="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-content-center text-xs font-bold border-2 border-white shadow-sm focus:outline-none" id="mobileUserDropdown" data-bs-toggle="dropdown">
+                        <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?>
+                    </button>
+                    <div class="dropdown-menu absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-premium py-2 hidden z-50">
+                        <div class="px-4 py-2 border-b border-slate-100 mb-1">
+                            <div class="text-[0.65rem] text-slate-400 uppercase font-bold tracking-wider mb-0.5">Logged in as</div>
+                            <div class="text-slate-800 font-bold text-xs truncate"><?php echo sanitize($_SESSION['username']); ?></div>
+                        </div>
+                        <?php if (!isAdmin()): ?>
+                            <a class="flex items-center px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 font-semibold" href="<?php echo base_url('student/dashboard.php'); ?>"><i class="fas fa-desktop w-5 text-primary-600 mr-2"></i>Student Portal</a>
+                            <a class="flex items-center px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 font-semibold" href="<?php echo base_url('student/profile.php'); ?>"><i class="fas fa-user-cog w-5 text-primary-600 mr-2"></i>Profile Settings</a>
+                            <div class="border-t border-slate-100 my-1"></div>
+                        <?php else: ?>
+                            <a class="flex items-center px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 font-semibold" href="<?php echo base_url('admin/settings.php'); ?>"><i class="fas fa-cog w-5 text-primary-600 mr-2"></i>System Settings</a>
+                            <div class="border-t border-slate-100 my-1"></div>
+                        <?php endif; ?>
+                        <a class="flex items-center px-4 py-2 text-xs text-red-600 hover:bg-red-50 font-bold" href="<?php echo base_url('logout.php'); ?>"><i class="fas fa-sign-out-alt w-5 mr-2"></i>Sign Out</a>
+                    </div>
+                </div>
             <?php else: ?>
-                <div class="d-flex gap-2">
-                    <a href="<?php echo base_url('login.php'); ?>" class="btn btn-outline-indigo rounded-pill px-4 fw-bold">Login</a>
-                    <a href="<?php echo base_url('register.php'); ?>" class="btn btn-outline-indigo rounded-pill px-4 fw-bold shadow-premium">Join Now</a>
+                <div class="hidden md:flex space-x-2">
+                    <a href="<?php echo base_url('login.php'); ?>" class="text-primary-600 hover:bg-primary-50 border border-primary-200 font-bold text-xs px-5 py-2 rounded-full transition-all">Login</a>
+                    <a href="<?php echo base_url('register.php'); ?>" class="bg-primary-600 hover:bg-primary-700 text-white font-bold text-xs px-5 py-2 rounded-full shadow-md hover:scale-105 transition-all">Join Now</a>
+                </div>
+            <?php endif; ?>
+
+            <!-- Hamburger Mobile Menu Toggle -->
+            <button class="md:hidden flex flex-col justify-center items-center w-6 h-6 space-y-1.5 focus:outline-none p-0 border-0 bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="block w-6 h-0.5 bg-slate-700"></span>
+                <span class="block w-6 h-0.5 bg-slate-700"></span>
+                <span class="block w-6 h-0.5 bg-slate-700"></span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Mobile Links (Collapsible) -->
+    <div class="collapse hidden md:hidden bg-white/95 border border-slate-200/80 rounded-2xl shadow-premium px-6 py-4 mt-2 max-w-6xl mx-auto" id="navbarNav">
+        <div class="flex flex-col space-y-3">
+            <a class="text-slate-655 text-slate-600 hover:text-primary-600 font-bold text-xs transition-colors" href="<?php echo base_url(); ?>">Home</a>
+            <a class="text-slate-655 text-slate-600 hover:text-primary-600 font-bold text-xs transition-colors" href="<?php echo base_url('about.php'); ?>">About</a>
+            <a class="text-slate-655 text-slate-600 hover:text-primary-600 font-bold text-xs transition-colors" href="<?php echo base_url('faq.php'); ?>">FAQ</a>
+            <a class="text-slate-655 text-slate-600 hover:text-primary-600 font-bold text-xs transition-colors" href="<?php echo base_url('contact.php'); ?>">Contact</a>
+            <?php if (!isLoggedIn()): ?>
+                <div class="border-t border-slate-100 my-2 pt-3 flex space-x-2">
+                    <a href="<?php echo base_url('login.php'); ?>" class="text-primary-600 hover:bg-primary-50 border border-primary-200 text-center font-bold text-xs px-4 py-2.5 rounded-full flex-1 transition-all">Login</a>
+                    <a href="<?php echo base_url('register.php'); ?>" class="bg-primary-600 hover:bg-primary-700 text-white text-center font-bold text-xs px-4 py-2.5 rounded-full shadow-md flex-1 transition-all">Join Now</a>
                 </div>
             <?php endif; ?>
         </div>
     </div>
 </nav>
-
-<style>
-    .btn-outline-indigo {
-        border: 1px solid var(--indigo-500);
-        color: var(--indigo-500);
-    }
-
-    .btn-outline-indigo:hover {
-        background-color: var(--indigo-500);
-        color: #fff;
-    }
-
-    /* Tiny animation for dropdown */
-    .animated {
-        animation-duration: 0.3s;
-        animation-fill-mode: both;
-    }
-
-    .fadeIn {
-        animation-name: fadeIn;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-</style>

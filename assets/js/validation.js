@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     toggleButtons.forEach(button => {
         button.addEventListener('click', function () {
-            const input = this.previousElementSibling;
+            const input = this.closest('.relative').querySelector('input');
 
             if (input.type === 'password') {
                 input.type = 'text';
@@ -55,8 +55,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Remove error as user types
                 if (this.classList.contains('is-invalid')) {
                     this.classList.remove('is-invalid');
-                    const errorTag = this.parentElement.querySelector('.error-text');
-                    if (errorTag) errorTag.innerText = '';
+                    const parent = this.closest('.premium-input-group') || this.parentElement;
+                    
+                    // Restore parent borders
+                    parent.classList.add('border-slate-200', 'focus-within:border-primary-600');
+                    parent.classList.remove('border-red-500', 'focus-within:border-red-500');
+                    
+                    // Restore icon
+                    const icon = parent.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('text-slate-400', 'peer-focus:text-primary-600');
+                        icon.classList.remove('text-red-500');
+                    }
+                    
+                    const errorTag = parent.nextElementSibling;
+                    if (errorTag && errorTag.classList.contains('error-text')) {
+                        errorTag.innerText = '';
+                    }
                 }
             });
         });
@@ -112,22 +127,47 @@ function validateInput(input) {
 
     // UI Updates
     const parent = input.closest('.premium-input-group') || input.parentElement;
-    let errorTag = parent.querySelector('.error-text');
+    let errorTag = parent.nextElementSibling;
+    if (errorTag && !errorTag.classList.contains('error-text')) {
+        errorTag = null;
+    }
 
     // Create error tag if not exists
     if (!errorTag) {
         errorTag = document.createElement('p');
-        errorTag.className = 'error-text text-danger small mt-1 mb-0 ms-2';
-        parent.appendChild(errorTag);
+        errorTag.className = 'error-text text-red-600 text-sm mb-4 block font-semibold';
+        parent.after(errorTag);
     }
 
     if (!isValid) {
         input.classList.add('is-invalid');
         errorTag.innerText = errorMessage;
+        
+        // Highlight parent container
+        parent.classList.remove('border-slate-200', 'focus-within:border-primary-600');
+        parent.classList.add('border-red-500', 'focus-within:border-red-500');
+        
+        // Highlight icon
+        const icon = parent.querySelector('i');
+        if (icon) {
+            icon.classList.remove('text-slate-400', 'peer-focus:text-primary-600');
+            icon.classList.add('text-red-500');
+        }
         return false;
     } else {
         input.classList.remove('is-invalid');
         errorTag.innerText = '';
+        
+        // Restore parent container
+        parent.classList.add('border-slate-200', 'focus-within:border-primary-600');
+        parent.classList.remove('border-red-500', 'focus-within:border-red-500');
+        
+        // Restore icon
+        const icon = parent.querySelector('i');
+        if (icon) {
+            icon.classList.add('text-slate-400', 'peer-focus:text-primary-600');
+            icon.classList.remove('text-red-500');
+        }
         return true;
     }
 }
