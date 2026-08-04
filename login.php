@@ -7,11 +7,11 @@
                 <i class="fas fa-lock-open"></i>
             </div>
             <h2 class="text-2xl font-black text-slate-900 mb-1">Welcome Back</h2>
-            <p class="text-slate-400 text-xs font-semibold">Continue your learning journey</p>
+            <p class="text-slate-400 text-sm font-semibold">Continue your learning journey</p>
         </div>
 
         <?php if ($error): ?>
-            <div class="p-4 mb-6 rounded-2xl bg-red-50 border border-red-200 text-red-655 text-red-600 text-sm font-medium flex items-center">
+            <div class="p-4 mb-6 rounded-2xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium flex items-center">
                 <i class="fas fa-exclamation-circle mr-2.5"></i> <?php echo $error; ?>
             </div>
         <?php endif; ?>
@@ -33,28 +33,28 @@
             </div>
 
             <div class="flex justify-between items-center mt-5 mb-6">
-                <label class="flex items-center text-slate-500 text-xs font-semibold cursor-pointer">
+                <label class="flex items-center text-slate-500 text-sm font-semibold cursor-pointer">
                     <input type="checkbox" id="remember" class="w-4 h-4 text-primary-600 border-slate-300 rounded focus:ring-primary-500 mr-2">
                     Remember Me
                 </label>
-                <a href="forgot-password.php" class="text-red-550 hover:text-red-655 text-red-600 hover:text-red-700 font-bold text-xs">Recovery Password?</a>
+                <a href="forgot-password.php" class="text-red-600 hover:text-red-700 font-bold text-sm">Recovery Password?</a>
             </div>
 
             <div class="mb-6">
-                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs flex items-center justify-center focus:outline-none">
-                    Sign In Now <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
+                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-sm flex items-center justify-center focus:outline-none">
+                    Sign In Now <i class="fas fa-arrow-right ml-2 text-xs"></i>
                 </button>
             </div>
 
             <div class="text-center">
-                <p class="text-slate-400 text-xs mb-4">Or continue with</p>
+                <p class="text-slate-400 text-sm mb-4">Or continue with</p>
 
                 <div class="flex justify-center space-x-3 mb-6">
                     <a href="#" class="w-10 h-10 border border-slate-200 text-slate-400 hover:border-transparent hover:bg-primary-600 hover:text-white rounded-full flex items-center justify-center transition-all"><i class="fab fa-google text-sm"></i></a>
                     <a href="#" class="w-10 h-10 border border-slate-200 text-slate-400 hover:border-transparent hover:bg-primary-600 hover:text-white rounded-full flex items-center justify-center transition-all"><i class="fab fa-github text-sm"></i></a>
                 </div>
 
-                <p class="text-slate-500 text-xs">
+                <p class="text-slate-500 text-sm">
                     New to Quizara? <a href="register.php" class="text-primary-600 font-bold ml-1">Create an Account</a>
                 </p>
             </div>

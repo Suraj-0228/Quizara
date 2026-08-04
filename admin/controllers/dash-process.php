@@ -9,6 +9,8 @@ $stats['students'] = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'stude
 $stats['quizzes'] = $pdo->query("SELECT COUNT(*) FROM quizzes")->fetchColumn();
 $stats['questions'] = $pdo->query("SELECT COUNT(*) FROM questions")->fetchColumn();
 $stats['attempts'] = $pdo->query("SELECT COUNT(*) FROM quiz_attempts")->fetchColumn();
+$stats['purchases'] = $pdo->query("SELECT COUNT(*) FROM user_quiz_purchases")->fetchColumn();
+$stats['revenue'] = (float)$pdo->query("SELECT COALESCE(SUM(amount), 0) FROM user_quiz_purchases")->fetchColumn();
 
 // Recent Activity (Last 5 quiz attempts)
 $stmt = $pdo->query("

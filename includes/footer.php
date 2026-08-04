@@ -47,14 +47,14 @@
                 <!-- Newsletter -->
                 <div>
                     <h5 class="text-slate-900 font-bold text-sm uppercase tracking-wider mb-4">Stay Updated</h5>
-                    <p class="text-slate-500 text-xs mb-3">Subscribe to our newsletter for new quizzes and learning tips.</p>
+                    <p class="text-slate-500 text-sm mb-3">Subscribe to our newsletter for new quizzes and learning tips.</p>
                     <form action="#" class="mb-3">
                         <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200">
                             <input type="email" class="flex-grow px-3 py-2 text-sm bg-white focus:outline-none text-slate-800" placeholder="Your email address">
                             <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 transition-colors" type="button"><i class="fas fa-paper-plane"></i></button>
                         </div>
                     </form>
-                    <p class="text-slate-400 text-xs flex items-center">
+                    <p class="text-slate-400 text-sm flex items-center">
                         <i class="fas fa-lock mr-1.5"></i> Secure subscription
                     </p>
                 </div>
@@ -63,8 +63,8 @@
             <hr class="my-8 border-slate-200">
 
             <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4">
-                <p class="text-slate-400 text-xs">&copy; <?php echo date('Y'); ?> Quizara. All rights reserved.</p>
-                <p class="text-slate-400 text-xs hidden md:block">Built with <i class="fas fa-lightbulb text-warning mx-1"></i> for learning and growth</p>
+                <p class="text-slate-400 text-sm">&copy; <?php echo date('Y'); ?> Quizara. All rights reserved.</p>
+                <p class="text-slate-400 text-sm hidden md:block">Built with <i class="fas fa-lightbulb text-warning mx-1"></i> for learning and growth</p>
             </div>
         </div>
     </footer>

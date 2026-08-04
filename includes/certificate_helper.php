@@ -79,11 +79,11 @@ function generateCertificatePDF($attempt, $percentage, $outputMode = 'S', $outpu
     $pdf->AddPage();
     $pdf->SetAutoPageBreak(false);
 
-    // Premium Color Palette
-    $primaryViolet = [46, 16, 101];  // Deep violet
-    $accentGold = [197, 160, 89];    // Metallic bronze gold
-    $slateDark = [30, 41, 59];       // Dark slate
-    $creamBg = [253, 252, 248];      // Soft ivory background
+    // Premium Color Palette 2 (Midnight Charcoal & Sunset Orange)
+    $primaryViolet = [37, 52, 63];     // Midnight Charcoal (#25343F)
+    $accentGold = [255, 155, 81];      // Sunset Orange (#FF9B51)
+    $slateDark = [30, 41, 59];         // Dark slate
+    $creamBg = [250, 252, 252];        // Ice Gray background
 
     // Background Fill
     $pdf->SetFillColor($creamBg[0], $creamBg[1], $creamBg[2]);

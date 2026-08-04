@@ -3,7 +3,7 @@
 <!-- Header & Nav -->
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
     <div>
-        <span class="bg-primary-50 text-primary-600 text-[10px] font-bold px-3.5 py-1.5 rounded-full mb-3 inline-block uppercase tracking-wider">Review Mode</span>
+        <span class="bg-primary-50 text-primary-600 text-xs font-bold px-3.5 py-1.5 rounded-full mb-3 inline-block uppercase tracking-wider">Review Mode</span>
         <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-0"><?php echo sanitize($attempt['title']); ?></h1>
     </div>
     <div class="flex gap-2 w-full md:w-auto justify-end flex-shrink-0">
@@ -32,7 +32,7 @@ $passed = $percentage >= $attempt['passing_score'];
     <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm relative overflow-hidden group">
         <i class="fas fa-star text-primary-500 mb-2 block"></i>
         <div class="text-2xl font-extrabold text-slate-800 mb-0.5"><?php echo $attempt['score']; ?></div>
-        <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Points Earned</div>
+        <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Points Earned</div>
         <div class="w-full bg-slate-100 h-1 rounded-full mt-3 overflow-hidden">
             <div class="bg-primary-600 h-full rounded-full" style="width: 100%"></div>
         </div>
@@ -42,7 +42,7 @@ $passed = $percentage >= $attempt['passing_score'];
     <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm relative overflow-hidden group">
         <i class="fas fa-percentage <?php echo $passed ? 'text-emerald-500' : 'text-rose-500'; ?> mb-2 block"></i>
         <div class="text-2xl font-extrabold <?php echo $passed ? 'text-emerald-600' : 'text-rose-600'; ?> mb-0.5"><?php echo round($percentage); ?>%</div>
-        <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Total Accuracy</div>
+        <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Total Accuracy</div>
         <div class="w-full bg-slate-100 h-1 rounded-full mt-3 overflow-hidden">
             <div class="h-full rounded-full <?php echo $passed ? 'bg-emerald-500' : 'bg-rose-500'; ?>" style="width: <?php echo $percentage; ?>%"></div>
         </div>
@@ -52,7 +52,7 @@ $passed = $percentage >= $attempt['passing_score'];
     <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm relative overflow-hidden group">
         <i class="fas fa-check-circle text-emerald-500 mb-2 block"></i>
         <div class="text-2xl font-extrabold text-emerald-600 mb-0.5"><?php echo $attempt['correct_answers']; ?></div>
-        <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Correct Solving</div>
+        <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Correct Solving</div>
         <div class="w-full bg-slate-100 h-1 rounded-full mt-3 overflow-hidden">
             <div class="bg-emerald-500 h-full rounded-full" style="width: 70%"></div>
         </div>
@@ -62,7 +62,7 @@ $passed = $percentage >= $attempt['passing_score'];
     <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-sm relative overflow-hidden group">
         <i class="fas fa-history text-rose-500 mb-2 block"></i>
         <div class="text-2xl font-extrabold text-rose-600 mb-0.5"><?php echo $attempt['total_questions'] - $attempt['correct_answers']; ?></div>
-        <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Incorrect Ones</div>
+        <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Incorrect Ones</div>
         <div class="w-full bg-slate-100 h-1 rounded-full mt-3 overflow-hidden">
             <div class="bg-rose-500 h-full rounded-full" style="width: 30%"></div>
         </div>
@@ -81,15 +81,15 @@ $passed = $percentage >= $attempt['passing_score'];
                 <div class="p-6 md:p-8 pl-8 md:pl-10">
                     <div class="flex flex-col md:flex-row justify-between items-start gap-4 mb-6">
                         <h5 class="font-extrabold text-slate-900 text-base md:text-lg flex items-start leading-normal">
-                            <span class="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-lg mr-3 select-none flex-shrink-0 font-sans">Q<?php echo $index + 1; ?>.</span>
+                            <span class="bg-slate-100 text-slate-600 text-sm font-bold px-2.5 py-1 rounded-lg mr-3 select-none flex-shrink-0 font-sans">Q<?php echo $index + 1; ?>.</span>
                             <?php echo sanitize($q['question_text']); ?>
                         </h5>
                         <?php if ($q['user_is_correct']): ?>
-                            <span class="bg-emerald-50 text-emerald-600 border border-emerald-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center flex-shrink-0">
+                            <span class="bg-emerald-50 text-emerald-600 border border-emerald-100 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center flex-shrink-0">
                                 <i class="fas fa-check-circle mr-1"></i> Correct
                             </span>
                         <?php else: ?>
-                            <span class="bg-rose-50 text-rose-600 border border-rose-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center flex-shrink-0">
+                            <span class="bg-rose-50 text-rose-600 border border-rose-100 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center flex-shrink-0">
                                 <i class="fas fa-times-circle mr-1"></i> Incorrect
                             </span>
                         <?php endif; ?>
@@ -98,8 +98,8 @@ $passed = $percentage >= $attempt['passing_score'];
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 md:pl-10">
                         <!-- User Answer block -->
                         <div class="<?php echo $q['user_is_correct'] ? 'bg-emerald-50/30 border border-emerald-100/50 text-emerald-800' : 'bg-rose-50/30 border border-rose-100/50 text-rose-800'; ?> p-4 rounded-2xl">
-                            <p class="text-[10px] font-bold uppercase tracking-wider mb-1.5 opacity-80">Your Answer</p>
-                            <div class="font-bold text-slate-800 text-xs font-sans">
+                            <p class="text-xs font-bold uppercase tracking-wider mb-1.5 opacity-80">Your Answer</p>
+                            <div class="font-bold text-slate-800 text-sm font-sans">
                                 <?php if ($q['selected_option_id']): ?>
                                     <?php echo sanitize($q['user_answer_text']); ?>
                                 <?php else: ?>
@@ -111,13 +111,13 @@ $passed = $percentage >= $attempt['passing_score'];
                         <!-- Correct Answer block (only shown if wrong) -->
                         <?php if (!$q['user_is_correct']): ?>
                             <div class="bg-primary-50/30 border border-primary-100/50 p-4 rounded-2xl">
-                                <p class="text-primary-600 text-[10px] font-bold uppercase tracking-wider mb-1.5 opacity-85">Correct Answer</p>
+                                <p class="text-primary-600 text-xs font-bold uppercase tracking-wider mb-1.5 opacity-85">Correct Answer</p>
                                 <?php
                                 $stmt_c = $pdo->prepare("SELECT option_text FROM options WHERE question_id = ? AND is_correct = 1");
                                 $stmt_c->execute([$q['id']]);
                                 $correct_opt = $stmt_c->fetch();
                                 ?>
-                                <div class="font-bold text-slate-800 text-xs flex items-center font-sans">
+                                <div class="font-bold text-slate-800 text-sm flex items-center font-sans">
                                     <i class="fas fa-check-circle mr-1.5 text-emerald-500"></i>
                                     <?php echo $correct_opt ? sanitize($correct_opt['option_text']) : 'N/A'; ?>
                                 </div>

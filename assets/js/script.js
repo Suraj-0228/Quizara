@@ -25,14 +25,27 @@ window.bootstrap = {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Auto-hide alerts after 5 seconds
-    const alerts = document.querySelectorAll('.alert-dismissible');
-    alerts.forEach(alert => {
-        setTimeout(() => {
-            const bsAlert = new bootstrap.Alert(alert);
-            bsAlert.close();
-        }, 5000);
-    });
+    // Auto-hide all alert messages system-wide after 2 seconds (2000ms)
+    function autoDismissAlerts() {
+        const alerts = document.querySelectorAll('.alert-dismissible, .flash-alert-msg, [role="alert"]');
+        alerts.forEach(alert => {
+            if (alert.dataset.autodismissed) return;
+            alert.dataset.autodismissed = "true";
+
+            setTimeout(() => {
+                alert.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out, margin 0.5s ease-out';
+                alert.style.opacity = '0';
+                alert.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    if (alert && alert.parentNode) {
+                        alert.remove();
+                    }
+                }, 500);
+            }, 2000);
+        });
+    }
+
+    autoDismissAlerts();
 
     // Sidebar Toggle (Admin & Student)
     const sidebarToggle = document.getElementById('sidebarToggle');

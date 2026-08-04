@@ -33,21 +33,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // 1. Change Password
     if (isset($_POST['update_password'])) {
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
+        $current_password = $_POST['current_password'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $confirm_password = $_POST['confirm_password'] ?? '';
+
+        if (empty($current_password)) {
+            $errors['current_password'] = 'Current Password is required.';
+        } else {
+            // Verify current password against DB
+            $stmt_check = $pdo->prepare("SELECT password FROM users WHERE id = ?");
+            $stmt_check->execute([$user_id]);
+            $db_password = $stmt_check->fetchColumn();
+
+            if ($db_password !== $current_password) {
+                $errors['current_password'] = 'Current password is incorrect.';
+            }
+        }
         
         if (empty($password)) {
-            $errors['password'] = 'Password is required.';
+            $errors['password'] = 'New Password is required.';
+        } elseif (strlen($password) < 6) {
+            $errors['password'] = 'Password must be at least 6 characters.';
         }
+
         if (empty($confirm_password)) {
             $errors['confirm_password'] = 'Confirm Password is required.';
+        } elseif ($password !== $confirm_password) {
+            $errors['confirm_password'] = 'Passwords do not match.';
         }
         
         if (empty($errors)) {
             $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
             if ($stmt->execute([$password, $user_id])) {
+                $redirect = isset($_POST['redirect_to']) ? $_POST['redirect_to'] : 'settings.php';
                 flash('message', 'Password Updated Successfully.', 'success');
-                redirect('profile.php');
+                redirect($redirect);
                 exit;
             } else {
                 flash('message', 'Error Updating Password.', 'danger');
@@ -195,6 +215,21 @@ $stats_count = $quizzes_taken->fetchColumn();
 $avg_score_stmt = $pdo->prepare("SELECT AVG((score/total_questions)*100) FROM quiz_attempts WHERE user_id = ? AND total_questions > 0");
 $avg_score_stmt->execute([$user_id]);
 $avg_score = round((float)$avg_score_stmt->fetchColumn(), 1);
+
+// Certificates Count (Passed attempts)
+$certs_stmt = $pdo->prepare("
+    SELECT COUNT(*) 
+    FROM quiz_attempts qa 
+    JOIN quizzes q ON qa.quiz_id = q.id 
+    WHERE qa.user_id = ? AND qa.total_questions > 0 AND (qa.score / qa.total_questions * 100) >= q.passing_score
+");
+$certs_stmt->execute([$user_id]);
+$certs_count = $certs_stmt->fetchColumn();
+
+// Premium High Mode Purchases Count
+$prem_stmt = $pdo->prepare("SELECT COUNT(*) FROM user_quiz_purchases WHERE user_id = ?");
+$prem_stmt->execute([$user_id]);
+$premium_count = $prem_stmt->fetchColumn();
 
 $pageTitle = 'My Profile';
 include_once '../includes/header.php';

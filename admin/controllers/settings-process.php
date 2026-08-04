@@ -37,12 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $pdo->commit();
-        $message = 'Settings updated successfully.';
-        $messageType = 'success';
+        flash('message', 'Settings updated successfully.', 'edit');
     } catch (Exception $e) {
         $pdo->rollBack();
-        $message = 'Error updating settings: ' . $e->getMessage();
-        $messageType = 'danger';
+        flash('message', 'Error updating settings: ' . $e->getMessage(), 'danger');
     }
 }
 

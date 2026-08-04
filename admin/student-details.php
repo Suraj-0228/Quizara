@@ -2,7 +2,7 @@
 
 <!-- Back Navigation -->
 <div class="mb-6">
-    <a href="students.php" class="inline-flex items-center border border-primary-200 text-primary-600 hover:bg-primary-50 font-bold px-5 py-2 rounded-full transition-all text-xs focus:outline-none shadow-sm">
+    <a href="students.php" class="inline-flex items-center border border-primary-200 text-primary-600 hover:bg-primary-50 font-bold px-5 py-2 rounded-full transition-all text-sm focus:outline-none shadow-sm">
         <i class="fas fa-arrow-left mr-2"></i>Back to Students
     </a>
 </div>
@@ -19,18 +19,18 @@
                 </div>
 
                 <h3 class="font-extrabold text-slate-900 text-xl mb-1"><?php echo sanitize($student['username']); ?></h3>
-                <p class="text-slate-400 text-xs font-semibold mb-6 flex items-center justify-center">
+                <p class="text-slate-400 text-sm font-semibold mb-6 flex items-center justify-center">
                     <i class="fas fa-envelope mr-2 text-primary-400"></i><?php echo sanitize($student['email']); ?>
                 </p>
 
                 <div class="grid grid-cols-2 gap-4 mt-6 border-t border-slate-100 pt-6 text-left">
                     <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl">
-                        <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">Quizzes</div>
+                        <div class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">Quizzes</div>
                         <div class="text-2xl mb-0 font-extrabold text-slate-800"><?php echo count($attempts); ?></div>
                     </div>
                     <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl">
-                        <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider mb-1">Joined</div>
-                        <div class="text-sm mb-0 font-extrabold text-slate-850 pt-1.5"><?php echo date('M Y', strtotime($student['created_at'])); ?></div>
+                        <div class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">Joined</div>
+                        <div class="text-sm mb-0 font-extrabold text-slate-800 pt-1.5"><?php echo date('M Y', strtotime($student['created_at'])); ?></div>
                     </div>
                 </div>
             </div>
@@ -49,11 +49,11 @@
                 <table class="w-full text-left text-sm text-slate-600 border-collapse">
                     <thead class="bg-slate-50 border-b border-slate-100">
                         <tr>
-                            <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Quiz Title</th>
-                            <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Date Taken</th>
-                            <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Score</th>
-                            <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Result</th>
-                            <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-right">Actions</th>
+                            <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider">Quiz Title</th>
+                            <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider">Date Taken</th>
+                            <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider">Score</th>
+                            <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider text-center">Result</th>
+                            <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,22 +68,22 @@
                                     <td class="px-6 py-4 font-bold text-slate-800">
                                         <?php echo sanitize($attempt['title']); ?>
                                     </td>
-                                    <td class="px-6 py-4 text-slate-400 text-xs font-semibold">
+                                    <td class="px-6 py-4 text-slate-400 text-sm font-semibold">
                                         <?php echo date('M d, Y H:i', strtotime($attempt['started_at'])); ?>
                                     </td>
                                     <td class="px-6 py-4">
                                         <span class="font-extrabold text-slate-800"><?php echo $attempt['score']; ?>/<?php echo $total_questions; ?></span>
-                                        <small class="text-slate-400 text-xs ml-1">(<?php echo round($percentage); ?>%)</small>
+                                        <small class="text-slate-400 text-sm ml-1">(<?php echo round($percentage); ?>%)</small>
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <?php if ($passed): ?>
-                                            <span class="bg-emerald-50 text-emerald-600 border border-emerald-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">Passed</span>
+                                            <span class="bg-emerald-50 text-emerald-600 border border-emerald-100 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">Passed</span>
                                         <?php else: ?>
-                                            <span class="bg-rose-50 text-rose-600 border border-rose-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">Failed</span>
+                                            <span class="bg-rose-50 text-rose-600 border border-rose-100 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">Failed</span>
                                         <?php endif; ?>
                                     </td>
                                     <td class="px-6 py-4 text-right">
-                                        <a href="../student/review.php?attempt_id=<?php echo $attempt['id']; ?>" class="w-8 h-8 rounded-full flex items-center justify-center text-primary-550 hover:bg-primary-50 transition-all" title="Review Attempt">
+                                        <a href="../student/review.php?attempt_id=<?php echo $attempt['id']; ?>" class="w-8 h-8 rounded-full flex items-center justify-center text-primary-600 hover:bg-primary-50 transition-all" title="Review Attempt">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>
@@ -96,7 +96,7 @@
                                         <i class="fas fa-clipboard-list text-slate-300 text-5xl"></i>
                                     </div>
                                     <h5 class="font-bold text-slate-800 text-base mb-1">No quiz attempts yet</h5>
-                                    <p class="text-slate-400 text-xs">This student hasn't taken any quizzes.</p>
+                                    <p class="text-slate-400 text-sm">This student hasn't taken any quizzes.</p>
                                 </td>
                             </tr>
                         <?php endif; ?>

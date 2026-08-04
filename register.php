@@ -7,11 +7,11 @@
                 <i class="fas fa-user-plus"></i>
             </div>
             <h2 class="text-2xl font-black text-slate-900 mb-1">Create Account</h2>
-            <p class="text-slate-400 text-xs font-semibold">Start your learning journey today</p>
+            <p class="text-slate-400 text-sm font-semibold">Start your learning journey today</p>
         </div>
 
         <?php if (!empty($errors)): ?>
-            <div class="p-4 mb-2 rounded-2xl bg-red-50 border border-red-200 text-red-655 text-red-600 text-xs font-medium">
+            <div class="p-4 mb-2 rounded-2xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium">
                 <ul class="list-disc pl-4 space-y-1">
                     <?php foreach ($errors as $error): ?>
                         <li><?php echo $error; ?></li>
@@ -52,22 +52,22 @@
             </div>
 
             <div>
-                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs flex items-center justify-center focus:outline-none">
-                    Create Account <i class="fas fa-rocket ml-2 text-[10px]"></i>
+                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-sm flex items-center justify-center focus:outline-none">
+                    Create Account <i class="fas fa-rocket ml-2 text-xs"></i>
                 </button>
             </div>
 
             <div class="text-center pt-2">
-                <p class="text-slate-505 text-xs">
+                <p class="text-slate-500 text-sm">
                     Already have an account? <a href="login.php" class="text-primary-600 font-bold ml-1">Sign In instead</a>
                 </p>
 
                 <div class="mt-6 pt-6 border-t border-slate-100 flex justify-center space-x-6">
-                    <div class="flex items-center text-slate-400 text-xs font-semibold">
+                    <div class="flex items-center text-slate-400 text-sm font-semibold">
                         <i class="fas fa-check-circle text-emerald-500 mr-1.5"></i>
                         <span>Free Access</span>
                     </div>
-                    <div class="flex items-center text-slate-400 text-xs font-semibold">
+                    <div class="flex items-center text-slate-400 text-sm font-semibold">
                         <i class="fas fa-check-circle text-emerald-500 mr-1.5"></i>
                         <span>Analytics</span>
                     </div>

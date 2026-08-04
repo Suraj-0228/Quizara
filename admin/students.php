@@ -3,11 +3,11 @@
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
     <div>
         <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">Registered Students</h1>
-        <p class="text-slate-505 text-sm mb-0">Monitor student progress and activity.</p>
+        <p class="text-slate-500 text-sm mb-0">Monitor student progress and activity.</p>
     </div>
     <div class="flex-shrink-0">
-        <div class="bg-primary-50 text-primary-600 border border-primary-100/30 text-xs font-bold px-4 py-2.5 rounded-full flex items-center shadow-sm">
-            <i class="fas fa-users mr-2 text-[10px]"></i>
+        <div class="bg-primary-50 text-primary-600 border border-primary-100/30 text-sm font-bold px-4 py-2.5 rounded-full flex items-center shadow-sm">
+            <i class="fas fa-users mr-2 text-xs"></i>
             <span><?php echo count($students); ?></span>&nbsp;<span class="text-primary-400 font-medium">Total Students</span>
         </div>
     </div>
@@ -19,11 +19,11 @@
         <table class="w-full text-left text-sm text-slate-600 border-collapse">
             <thead class="bg-slate-50 border-b border-slate-100">
                 <tr>
-                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Student</th>
-                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Email</th>
-                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Joined</th>
-                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Quizzes Taken</th>
-                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-right">Actions</th>
+                    <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider">Student</th>
+                    <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider">Email</th>
+                    <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider">Joined</th>
+                    <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider text-center">Quizzes Taken</th>
+                    <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider text-right">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,27 +32,27 @@
                         <tr class="border-b border-slate-100 last:border-0 hover:bg-slate-50/30 transition-colors">
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
-                                    <div class="w-9 h-9 bg-primary-50 border border-slate-100 flex items-center justify-center font-bold text-primary-600 mr-3 text-[10px] select-none flex-shrink-0 rounded-full">
+                                    <div class="w-9 h-9 bg-primary-50 border border-slate-100 flex items-center justify-center font-bold text-primary-600 mr-3 text-xs select-none flex-shrink-0 rounded-full">
                                         <?php echo strtoupper(substr($student['username'], 0, 1)); ?>
                                     </div>
                                     <div>
                                         <div class="font-bold text-slate-800"><?php echo sanitize($student['username']); ?></div>
-                                        <div class="text-slate-400 text-[10px] font-bold">ID: #<?php echo $student['id']; ?></div>
+                                        <div class="text-slate-400 text-xs font-bold">ID: #<?php echo $student['id']; ?></div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 text-slate-505 font-semibold"><?php echo sanitize($student['email']); ?></td>
-                            <td class="px-6 py-4 text-slate-400 text-xs font-semibold">
+                            <td class="px-6 py-4 text-slate-500 font-semibold"><?php echo sanitize($student['email']); ?></td>
+                            <td class="px-6 py-4 text-slate-400 text-sm font-semibold">
                                 <i class="far fa-calendar-alt mr-1.5 opacity-60"></i>
                                 <?php echo date('M d, Y', strtotime($student['created_at'])); ?>
                             </td>
                             <td class="px-6 py-4 text-center">
                                 <?php if ($student['quizzes_taken'] > 0): ?>
-                                    <span class="bg-emerald-50 text-emerald-600 border border-emerald-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">
+                                    <span class="bg-emerald-50 text-emerald-600 border border-emerald-100 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">
                                         <?php echo $student['quizzes_taken']; ?> Quizzes
                                     </span>
                                 <?php else: ?>
-                                    <span class="bg-amber-50 text-amber-600 border border-amber-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">
+                                    <span class="bg-amber-50 text-amber-600 border border-amber-100 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">
                                         Inactive
                                     </span>
                                 <?php endif; ?>
@@ -92,7 +92,7 @@
                                 <i class="fas fa-users-slash text-slate-350 text-5xl"></i>
                             </div>
                             <h5 class="font-bold text-slate-800 text-base mb-1">No students found</h5>
-                            <p class="text-slate-400 text-xs">Share your quiz link to get students started.</p>
+                            <p class="text-slate-400 text-sm">Share your quiz link to get students started.</p>
                         </td>
                     </tr>
                 <?php endif; ?>

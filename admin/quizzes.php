@@ -6,8 +6,8 @@
         <p class="text-slate-500 text-sm md:text-base mb-0">Create, edit, and organize your quizzes.</p>
     </div>
     <div class="flex-shrink-0">
-        <a href="add-quiz.php" class="bg-primary-600 hover:bg-primary-700 text-white font-bold px-6 py-3 rounded-full shadow-md text-xs transition-all focus:outline-none hover:scale-105 flex items-center">
-            <i class="fas fa-plus mr-2 text-[10px]"></i>Add Quiz
+        <a href="add-quiz.php" class="bg-primary-600 hover:bg-primary-700 text-white font-bold px-6 py-3 rounded-full shadow-md text-sm transition-all focus:outline-none hover:scale-105 flex items-center">
+            <i class="fas fa-plus mr-2 text-xs"></i>Add Quiz
         </a>
     </div>
 </div>
@@ -18,11 +18,11 @@
         <table class="w-full text-left text-sm text-slate-600 border-collapse">
             <thead class="bg-slate-50 border-b border-slate-100">
                 <tr>
-                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Title</th>
-                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Category</th>
-                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider">Time</th>
-                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Questions</th>
-                    <th class="px-6 py-3.5 text-xs font-bold text-slate-400 uppercase tracking-wider text-right">Actions</th>
+                    <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider">Title</th>
+                    <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider">Category</th>
+                    <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider">Time</th>
+                    <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider text-center">Questions</th>
+                    <th class="px-6 py-3.5 text-sm font-bold text-slate-400 uppercase tracking-wider text-right">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,24 +36,24 @@
                                     </div>
                                     <div class="min-w-0">
                                         <div class="font-bold text-slate-850 truncate max-w-[200px] md:max-w-xs"><?php echo sanitize($quiz['title']); ?></div>
-                                        <div class="text-slate-400 text-xs mt-0.5 line-clamp-1 max-w-[200px] md:max-w-xs"><?php echo sanitize($quiz['description']); ?></div>
+                                        <div class="text-slate-400 text-sm mt-0.5 line-clamp-1 max-w-[200px] md:max-w-xs"><?php echo sanitize($quiz['description']); ?></div>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4">
-                                <span class="bg-sky-50 text-sky-600 border border-sky-100 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">
+                                <span class="bg-sky-50 text-sky-600 border border-sky-100 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wider inline-flex items-center">
                                     <?php echo sanitize($quiz['category_name']); ?>
                                 </span>
                             </td>
                             <td class="px-6 py-4">
                                 <?php if ($quiz['time_limit'] > 0): ?>
-                                    <span class="text-amber-500 font-semibold text-xs flex items-center"><i class="fas fa-clock mr-1.5 text-[10px]"></i> <?php echo $quiz['time_limit']; ?>m</span>
+                                    <span class="text-amber-500 font-semibold text-sm flex items-center"><i class="fas fa-clock mr-1.5 text-xs"></i> <?php echo $quiz['time_limit']; ?>m</span>
                                 <?php else: ?>
-                                    <span class="text-emerald-500 font-semibold text-xs flex items-center"><i class="fas fa-infinity mr-1.5 text-[10px]"></i> No Limit</span>
+                                    <span class="text-emerald-500 font-semibold text-sm flex items-center"><i class="fas fa-infinity mr-1.5 text-xs"></i> No Limit</span>
                                 <?php endif; ?>
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <span class="bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-full">
+                                <span class="bg-slate-100 text-slate-600 text-sm font-bold px-2.5 py-1 rounded-full">
                                     <?php echo $quiz['question_count']; ?>
                                 </span>
                             </td>
@@ -82,7 +82,7 @@
                                 <i class="fas fa-box-open text-slate-350 text-5xl"></i>
                             </div>
                             <h5 class="font-bold text-slate-800 text-base mb-1">No quizzes found</h5>
-                            <p class="text-slate-400 text-xs">Get started by creating your first quiz.</p>
+                            <p class="text-slate-400 text-sm">Get started by creating your first quiz.</p>
                         </td>
                     </tr>
                 <?php endif; ?>

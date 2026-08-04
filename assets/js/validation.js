@@ -79,6 +79,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function validateInput(input) {
+    // Skip hidden or disabled inputs (e.g. inactive payment tab fields)
+    if (input.disabled || input.type === 'hidden' || input.closest('.hidden')) {
+        return true;
+    }
+
     const value = input.value.trim();
     const name = input.name;
     let errorMessage = '';
@@ -87,9 +92,10 @@ function validateInput(input) {
     // Skip if not required and empty (unless specific logic)
     // We treat standard fields as implicitly required per user request
     const implicitlyRequired = [
-        'username', 'email', 'password', 'confirm_password', 'name',
+        'username', 'email', 'password', 'confirm_password', 'current_password', 'name',
         'message', 'subject', 'new_password', 'confirm_delete',
-        'title', 'question_text', 'site_name', 'category_id'
+        'title', 'question_text', 'site_name', 'category_id',
+        'card_name', 'card_number', 'card_expiry', 'card_cvv', 'gpay_vpa'
     ];
 
     if (!implicitlyRequired.includes(name) && !input.hasAttribute('required') && value === '') return true;
@@ -111,16 +117,67 @@ function validateInput(input) {
     }
     // Password Length (Registration/Change)
     else if ((name === 'password' || name === 'new_password') && value.length < 6) {
-        if (input.form.querySelector('input[name="confirm_password"]')) { // Only check length on register/change, not login
+        if (input.form && input.form.querySelector('input[name="confirm_password"]')) { // Only check length on register/change, not login
             errorMessage = 'Password must be at least 6 characters.';
             isValid = false;
         }
     }
     // Confirm Password
     else if (name === 'confirm_password') {
-        const passwordInput = input.form.querySelector('input[name="password"]') || input.form.querySelector('input[name="new_password"]');
+        const passwordInput = input.form ? (input.form.querySelector('input[name="password"]') || input.form.querySelector('input[name="new_password"]')) : null;
         if (passwordInput && value !== passwordInput.value) {
             errorMessage = 'Passwords do not match.';
+            isValid = false;
+        }
+    }
+    // Cardholder Name Validation
+    else if (name === 'card_name') {
+        const nameRegex = /^[a-zA-Z\s]{3,50}$/;
+        if (!nameRegex.test(value)) {
+            errorMessage = 'Cardholder name must contain at least 3 letters.';
+            isValid = false;
+        }
+    }
+    // Card Number Validation
+    else if (name === 'card_number') {
+        const cleanNum = value.replace(/\s+/g, '');
+        if (!/^\d{15,16}$/.test(cleanNum)) {
+            errorMessage = 'Please enter a valid 16-digit card number.';
+            isValid = false;
+        }
+    }
+    // Card Expiry Validation (MM/YY)
+    else if (name === 'card_expiry') {
+        const expiryRegex = /^(0[1-9]|1[0-2])\/(\d{2})$/;
+        if (!expiryRegex.test(value)) {
+            errorMessage = 'Expiry date must be in MM/YY format.';
+            isValid = false;
+        } else {
+            const parts = value.split('/');
+            const expMonth = parseInt(parts[0], 10);
+            const expYear = parseInt('20' + parts[1], 10);
+            const now = new Date();
+            const curMonth = now.getMonth() + 1;
+            const curYear = now.getFullYear();
+
+            if (expYear < curYear || (expYear === curYear && expMonth < curMonth)) {
+                errorMessage = 'Card has expired.';
+                isValid = false;
+            }
+        }
+    }
+    // Card CVV Validation
+    else if (name === 'card_cvv') {
+        if (!/^\d{3,4}$/.test(value)) {
+            errorMessage = 'CVV must be 3 or 4 digits.';
+            isValid = false;
+        }
+    }
+    // GPay VPA / Phone Number Validation
+    else if (name === 'gpay_vpa') {
+        const vpaRegex = /^([a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}|[6-9]\d{9})$/;
+        if (!vpaRegex.test(value)) {
+            errorMessage = 'Enter a valid GPay UPI ID (e.g. user@okaxis) or 10-digit number.';
             isValid = false;
         }
     }

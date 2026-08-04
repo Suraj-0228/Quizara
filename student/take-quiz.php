@@ -64,15 +64,15 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4 mt-8">
-                        <button type="button" onclick="cancelQuiz()" class="w-full sm:flex-1 border border-red-200 hover:border-red-300 text-red-655 text-red-600 hover:bg-red-50 font-bold py-3.5 rounded-full text-xs transition-all focus:outline-none text-center">
+                        <button type="button" onclick="cancelQuiz()" class="w-full sm:flex-1 border border-red-200 hover:border-red-300 text-red-600 hover:bg-red-50 font-bold py-3.5 rounded-full text-sm transition-all focus:outline-none text-center">
                             Cancel Quiz <i class="fas fa-times ml-2"></i>
                         </button>
                         <?php if ($index == $total_questions - 1): ?>
-                            <button type="button" class="w-full sm:flex-1 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md text-xs transition-all focus:outline-none text-center next-btn uppercase tracking-wider">
+                            <button type="button" class="w-full sm:flex-1 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md text-sm transition-all focus:outline-none text-center next-btn uppercase tracking-wider">
                                 Submit Quiz <i class="fas fa-paper-plane ml-2"></i>
                             </button>
                         <?php else: ?>
-                            <button type="button" class="w-full sm:flex-1 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md text-xs transition-all focus:outline-none text-center next-btn uppercase tracking-wider">
+                            <button type="button" class="w-full sm:flex-1 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md text-sm transition-all focus:outline-none text-center next-btn uppercase tracking-wider">
                                 Next Question <i class="fas fa-arrow-right ml-2"></i>
                             </button>
                         <?php endif; ?>
@@ -102,7 +102,7 @@
             <button type="button" class="block w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 rounded-full shadow-md transition-all focus:outline-none" onclick="confirmCancelQuiz()">
                 Cancel Quiz
             </button>
-            <button type="button" class="w-full text-slate-400 hover:text-slate-600 text-xs font-bold py-2 focus:outline-none" data-bs-dismiss="modal">
+            <button type="button" class="w-full text-slate-400 hover:text-slate-600 text-sm font-bold py-2 focus:outline-none" data-bs-dismiss="modal">
                 Resume
             </button>
         </div>
@@ -166,7 +166,7 @@
                 let errorTxt = currentCard.querySelector('.error-text');
                 if (!errorTxt) {
                     errorTxt = document.createElement('p');
-                    errorTxt.className = 'error-text text-red-500 mt-4 mb-0 text-center font-bold text-xs';
+                    errorTxt.className = 'error-text text-red-500 mt-4 mb-0 text-center font-bold text-sm';
                     errorTxt.innerHTML = '<i class="fas fa-exclamation-circle mr-1.5"></i> Please, Select an Answer Before Proceeding!!';
                     currentCard.querySelector('.p-6, .p-10').appendChild(errorTxt);
 

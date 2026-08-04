@@ -91,39 +91,76 @@ function flash($name = '', $message = '', $class = 'success')
             $_SESSION[$name . '_class'] = $class;
         } elseif (empty($message) && !empty($_SESSION[$name])) {
             $class = !empty($_SESSION[$name . '_class']) ? $_SESSION[$name . '_class'] : 'success';
+            $msgText = $_SESSION[$name];
+            $msgLower = strtolower(strip_tags($msgText));
             
-            // Map status classes to premium Tailwind styles
-            $bgColor = 'bg-primary-50';
-            $textColor = 'text-primary-800';
-            $borderColor = 'border-primary-100/30';
-            $icon = '<i class="fas fa-info-circle mr-2.5 text-primary-500"></i>';
-
-            if ($class === 'success') {
-                $bgColor = 'bg-emerald-50';
-                $textColor = 'text-emerald-800';
-                $borderColor = 'border-emerald-100/40';
-                $icon = '<i class="fas fa-check-circle mr-2.5 text-emerald-500"></i>';
-            } elseif ($class === 'danger' || $class === 'error') {
-                $bgColor = 'bg-rose-50';
-                $textColor = 'text-rose-800';
-                $borderColor = 'border-rose-100/40';
-                $icon = '<i class="fas fa-exclamation-circle mr-2.5 text-rose-500"></i>';
-            } elseif ($class === 'warning') {
-                $bgColor = 'bg-amber-50';
-                $textColor = 'text-amber-800';
-                $borderColor = 'border-amber-100/40';
-                $icon = '<i class="fas fa-exclamation-triangle mr-2.5 text-amber-500"></i>';
+            // Action Type Detection (Add = Green, Edit = Blue, Delete = Red, Warning = Amber)
+            $type = 'info';
+            
+            if ($class === 'danger' || $class === 'error' || $class === 'delete' || stristr($msgLower, 'delete') || stristr($msgLower, 'remove') || stristr($msgLower, 'revoke') || stristr($msgLower, 'fail') || stristr($msgLower, 'invalid') || stristr($msgLower, 'error')) {
+                $type = 'delete';
+            } elseif ($class === 'edit' || $class === 'info' || stristr($msgLower, 'update') || stristr($msgLower, 'edit') || stristr($msgLower, 'change') || stristr($msgLower, 'save') || stristr($msgLower, 'setting')) {
+                $type = 'edit';
+            } elseif ($class === 'success' || $class === 'add' || stristr($msgLower, 'add') || stristr($msgLower, 'create') || stristr($msgLower, 'grant') || stristr($msgLower, 'success')) {
+                $type = 'add';
+            } elseif ($class === 'warning' || stristr($msgLower, 'warn')) {
+                $type = 'warning';
             }
 
-            echo '<div class="alert-dismissible p-4 mb-6 rounded-2xl border flex items-center justify-between ' . $bgColor . ' ' . $textColor . ' ' . $borderColor . '" role="alert">
-                    <div class="flex items-center text-xs font-bold">
+            // Apply Action Color Schemes
+            if ($type === 'add') {
+                // GREEN: Add / Create / Success
+                $bgColor = 'bg-emerald-50';
+                $textColor = 'text-emerald-600';
+                $borderColor = 'border-emerald-200';
+                $icon = '<i class="fas fa-check-circle mr-3 text-emerald-500 text-lg flex-shrink-0"></i>';
+            } elseif ($type === 'edit') {
+                // BLUE: Edit / Update / Settings
+                $bgColor = 'bg-sky-50';
+                $textColor = 'text-sky-600';
+                $borderColor = 'border-sky-200';
+                $icon = '<i class="fas fa-info-circle mr-3 text-sky-500 text-lg flex-shrink-0"></i>';
+            } elseif ($type === 'delete') {
+                // RED: Delete / Remove / Danger / Error
+                $bgColor = 'bg-red-50';
+                $textColor = 'text-red-500';
+                $borderColor = 'border-red-200';
+                $icon = '<i class="fas fa-trash-alt mr-3 text-red-500 text-lg flex-shrink-0"></i>';
+            } else {
+                // AMBER: Warning
+                $bgColor = 'bg-amber-50';
+                $textColor = 'text-amber-900';
+                $borderColor = 'border-amber-200';
+                $icon = '<i class="fas fa-exclamation-triangle mr-3 text-amber-500 text-lg flex-shrink-0"></i>';
+            }
+
+            $alertId = 'flash_' . uniqid();
+
+            echo '<div id="' . $alertId . '" class="flash-alert-msg p-4 mb-6 rounded-2xl border shadow-sm flex items-center justify-between transition-all duration-500 transform translate-y-0 opacity-100 ' . $bgColor . ' ' . $textColor . ' ' . $borderColor . '" role="alert">
+                    <div class="flex items-center text-sm font-extrabold">
                         ' . $icon . '
-                        <span>' . $_SESSION[$name] . '</span>
+                        <span>' . $msgText . '</span>
                     </div>
-                    <button type="button" class="text-slate-400 hover:text-slate-655 focus:outline-none flex items-center justify-center p-1" onclick="this.parentElement.remove()" aria-label="Close">
-                        <i class="fas fa-times text-xs"></i>
+                    <button type="button" class="ml-4 text-slate-400 hover:text-slate-700 focus:outline-none flex items-center justify-center p-1 transition-colors" onclick="closeFlashAlert(\'' . $alertId . '\')" aria-label="Close">
+                        <i class="fas fa-times text-sm"></i>
                     </button>
-                  </div>';
+                  </div>
+                  <script>
+                  if (typeof closeFlashAlert !== "function") {
+                      window.closeFlashAlert = function(id) {
+                          const el = document.getElementById(id);
+                          if (el) {
+                              el.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out, margin 0.5s ease-out";
+                              el.style.opacity = "0";
+                              el.style.transform = "translateY(-10px)";
+                              setTimeout(function() { if (el && el.parentNode) el.remove(); }, 500);
+                          }
+                      };
+                  }
+                  setTimeout(function() {
+                      closeFlashAlert("' . $alertId . '");
+                  }, 2000);
+                  </script>';
             
             unset($_SESSION[$name]);
             unset($_SESSION[$name . '_class']);

@@ -23,8 +23,8 @@
 
 .option-input:checked + .option-label {
     background: var(--indigo-50);
-    border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(124, 58, 237, 0.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(255, 155, 81, 0.2);
 }
 
 .check-circle {

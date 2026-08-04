@@ -22,7 +22,7 @@
 
     <div class="bg-white border border-slate-200 rounded-[32px] shadow-premium p-8 md:p-12 text-center relative overflow-hidden">
         <div class="pb-6 border-b border-slate-100 mb-8">
-            <span class="bg-primary-50 text-primary-600 text-xs font-bold px-3.5 py-1.5 rounded-full mb-3 inline-block uppercase tracking-wider">Quiz Results</span>
+            <span class="bg-primary-50 text-primary-600 text-sm font-bold px-3.5 py-1.5 rounded-full mb-3 inline-block uppercase tracking-wider">Quiz Results</span>
             <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-0"><?php echo sanitize($attempt['title']); ?></h2>
         </div>
 
@@ -42,7 +42,7 @@
             </svg>
             <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
                 <div class="text-4xl md:text-5xl font-black text-slate-900 leading-none mb-1"><?php echo round($percentage); ?>%</div>
-                <div class="text-[10px] font-bold uppercase tracking-wider <?php echo $passed ? 'text-emerald-500' : 'text-rose-500'; ?>">
+                <div class="text-xs font-bold uppercase tracking-wider <?php echo $passed ? 'text-emerald-500' : 'text-rose-500'; ?>">
                     <?php echo $passed ? 'PASSED' : 'FAILED'; ?>
                 </div>
             </div>
@@ -51,10 +51,10 @@
         <div class="mb-8">
             <?php if ($passed): ?>
                 <h2 class="text-xl font-bold text-slate-900 mb-3">Excellent Job!</h2>
-                <p class="text-slate-500 text-xs md:text-sm leading-relaxed max-w-md mx-auto">You've mastered this topic with flying colors. Your performance shows a strong understanding of the material.</p>
+                <p class="text-slate-500 text-sm leading-relaxed max-w-md mx-auto">You've mastered this topic with flying colors. Your performance shows a strong understanding of the material.</p>
             <?php else: ?>
                 <h2 class="text-xl font-bold text-slate-900 mb-3">Don't Give Up!</h2>
-                <p class="text-slate-500 text-xs md:text-sm leading-relaxed max-w-md mx-auto">Progress is a journey, not a destination. Review your answers and sharpen your knowledge for the next round!</p>
+                <p class="text-slate-500 text-sm leading-relaxed max-w-md mx-auto">Progress is a journey, not a destination. Review your answers and sharpen your knowledge for the next round!</p>
             <?php endif; ?>
         </div>
 
@@ -65,7 +65,7 @@
                     <i class="fas fa-bullseye"></i>
                 </div>
                 <h3 class="text-slate-800 mb-0.5 font-extrabold text-base"><?php echo $attempt['score']; ?>/<?php echo $attempt['total_questions']; ?></h3>
-                <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Score</div>
+                <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Score</div>
             </div>
             <!-- Correct box -->
             <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl text-center">
@@ -73,7 +73,7 @@
                     <i class="fas fa-check"></i>
                 </div>
                 <h3 class="text-slate-800 mb-0.5 font-extrabold text-base"><?php echo $attempt['correct_answers']; ?></h3>
-                <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Correct</div>
+                <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Correct</div>
             </div>
             <!-- Wrong box -->
             <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl text-center">
@@ -81,21 +81,21 @@
                     <i class="fas fa-times"></i>
                 </div>
                 <h3 class="text-slate-800 mb-0.5 font-extrabold text-base"><?php echo $attempt['total_questions'] - $attempt['correct_answers']; ?></h3>
-                <div class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Wrong</div>
+                <div class="text-slate-400 text-xs font-bold uppercase tracking-wider">Wrong</div>
             </div>
         </div>
 
         <div class="space-y-4">
-            <a href="review.php?attempt_id=<?php echo $attempt_id; ?>" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs flex items-center justify-center focus:outline-none">
-                <span>Explore Answer Review</span> <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
+            <a href="review.php?attempt_id=<?php echo $attempt_id; ?>" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-sm flex items-center justify-center focus:outline-none">
+                <span>Explore Answer Review</span> <i class="fas fa-arrow-right ml-2 text-xs"></i>
             </a>
 
             <div class="grid grid-cols-2 gap-4">
-                <a href="quizzes.php" class="border border-slate-200 text-slate-500 hover:bg-primary-50 hover:border-primary-500 hover:text-primary-600 font-bold py-2.5 rounded-full text-xs transition-all text-center focus:outline-none">
-                    <i class="fas fa-redo mr-2 text-[9px]"></i>New Challenge
+                <a href="quizzes.php" class="border border-slate-200 text-slate-500 hover:bg-primary-50 hover:border-primary-500 hover:text-primary-600 font-bold py-2.5 rounded-full text-sm transition-all text-center focus:outline-none">
+                    <i class="fas fa-redo mr-2 text-xs"></i>New Challenge
                 </a>
-                <a href="dashboard.php" class="border border-slate-200 text-slate-500 hover:bg-primary-50 hover:border-primary-500 hover:text-primary-600 font-bold py-2.5 rounded-full text-xs transition-all text-center focus:outline-none">
-                    <i class="fas fa-home mr-2 text-[9px]"></i>Dashboard
+                <a href="dashboard.php" class="border border-slate-200 text-slate-500 hover:bg-primary-50 hover:border-primary-500 hover:text-primary-600 font-bold py-2.5 rounded-full text-sm transition-all text-center focus:outline-none">
+                    <i class="fas fa-home mr-2 text-xs"></i>Dashboard
                 </a>
             </div>
         </div>

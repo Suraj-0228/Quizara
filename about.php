@@ -10,7 +10,7 @@ include_once 'includes/header.php';
     
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
-            <div class="inline-flex items-center bg-primary-50 border border-primary-100 text-primary-600 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider mb-6">
+            <div class="inline-flex items-center bg-primary-50 border border-primary-100 text-primary-600 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider mb-6">
                 <i class="fas fa-sparkles mr-2"></i> Shaping the Future of Education
             </div>
             <h1 class="text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-6">
@@ -21,8 +21,8 @@ include_once 'includes/header.php';
                 Quizara is a modern assessment platform dedicated to transforming how knowledge is shared and validated. We believe learning should be an adventure, not a chore.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 items-center">
-                <a href="register.php" class="w-full sm:w-auto text-center bg-primary-600 hover:bg-primary-700 text-white font-bold px-8 py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs">Join Us Now</a>
-                <a href="#mission" class="text-primary-600 hover:text-primary-700 font-bold text-xs inline-flex items-center">
+                <a href="register.php" class="w-full sm:w-auto text-center bg-primary-600 hover:bg-primary-700 text-white font-bold px-8 py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-sm">Join Us Now</a>
+                <a href="#mission" class="text-primary-600 hover:text-primary-700 font-bold text-sm inline-flex items-center">
                     Our Core Story <i class="fas fa-arrow-down ml-2"></i>
                 </a>
             </div>
@@ -40,7 +40,7 @@ include_once 'includes/header.php';
                     <i class="fas fa-chart-line text-accent-500 text-xl mr-3"></i>
                     <div>
                         <div class="font-bold text-slate-800 text-sm">Progress Tracking</div>
-                        <div class="text-slate-400 text-xs">Real-time data</div>
+                        <div class="text-slate-400 text-sm">Real-time data</div>
                     </div>
                 </div>
                 <!-- Sub Card 2 -->
@@ -48,7 +48,7 @@ include_once 'includes/header.php';
                     <i class="fas fa-users text-sky-500 text-xl mr-3"></i>
                     <div>
                         <div class="font-bold text-slate-800 text-sm">Global Learner Base</div>
-                        <div class="text-slate-400 text-xs">5k+ Joined</div>
+                        <div class="text-slate-400 text-sm">5k+ Joined</div>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@ include_once 'includes/header.php';
 <!-- Modern Values Grid -->
 <section class="py-16">
     <div class="max-w-2xl mx-auto text-center mb-12">
-        <h6 class="text-primary-600 text-xs uppercase font-extrabold tracking-widest mb-2">Driven by excellence</h6>
+        <h6 class="text-primary-600 text-sm uppercase font-extrabold tracking-widest mb-2">Driven by excellence</h6>
         <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-3">The Quizara <span class="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-800">Core Values</span></h2>
         <p class="text-slate-500 text-sm md:text-base leading-relaxed">These pillars define every line of code we write and every quiz we host.</p>
     </div>
@@ -86,7 +86,7 @@ include_once 'includes/header.php';
                 <i class="fas fa-bolt text-xl"></i>
             </div>
             <h4 class="font-bold text-slate-900 text-base mb-3">Innovation First</h4>
-            <p class="text-slate-400 text-xs leading-relaxed">We are constantly redefining the limits of online testing, using data to make assessments smarter and more engaging every day.</p>
+            <p class="text-slate-400 text-sm leading-relaxed">We are constantly redefining the limits of online testing, using data to make assessments smarter and more engaging every day.</p>
         </div>
 
         <!-- Student Obsessed -->
@@ -95,7 +95,7 @@ include_once 'includes/header.php';
                 <i class="fas fa-fingerprint text-xl"></i>
             </div>
             <h4 class="font-bold text-slate-900 text-base mb-3">Student Obsessed</h4>
-            <p class="text-slate-400 text-xs leading-relaxed">Your growth is our North Star. Everything in Quizara is built with the student experience as the top priority.</p>
+            <p class="text-slate-400 text-sm leading-relaxed">Your growth is our North Star. Everything in Quizara is built with the student experience as the top priority.</p>
         </div>
 
         <!-- Radical Transparency -->
@@ -104,7 +104,7 @@ include_once 'includes/header.php';
                 <i class="fas fa-hand-holding-heart text-xl"></i>
             </div>
             <h4 class="font-bold text-slate-900 text-base mb-3">Radical Transparency</h4>
-            <p class="text-slate-400 text-xs leading-relaxed">We believe in data that speaks for itself. Clear metrics, honest feedback, and open communication with our community.</p>
+            <p class="text-slate-400 text-sm leading-relaxed">We believe in data that speaks for itself. Clear metrics, honest feedback, and open communication with our community.</p>
         </div>
     </div>
 </section>
@@ -121,8 +121,8 @@ include_once 'includes/header.php';
                 Join our global community of thousands and start your journey toward mastery today. It only takes 30 seconds to sign up.
             </p>
             <div class="flex flex-wrap justify-center lg:justify-start gap-4">
-                <a href="register.php" class="bg-primary-600 hover:bg-primary-700 text-white font-bold px-8 py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs">Start Learning Free</a>
-                <a href="contact.php" class="border border-primary-200 text-primary-600 hover:bg-primary-50 font-bold px-8 py-3.5 rounded-full transition-all text-xs">Get In Touch</a>
+                <a href="register.php" class="bg-primary-600 hover:bg-primary-700 text-white font-bold px-8 py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-sm">Start Learning Free</a>
+                <a href="contact.php" class="border border-primary-200 text-primary-600 hover:bg-primary-50 font-bold px-8 py-3.5 rounded-full transition-all text-sm">Get In Touch</a>
             </div>
         </div>
         
@@ -130,19 +130,19 @@ include_once 'includes/header.php';
             <div class="grid grid-cols-2 gap-4">
                 <div class="p-6 rounded-2xl bg-white border border-primary-100 text-center shadow-sm hover:shadow-md transition-shadow">
                     <h3 class="text-3xl font-extrabold text-slate-800 mb-1">5k+</h3>
-                    <div class="text-primary-600 text-[10px] font-bold uppercase tracking-wider">Learners</div>
+                    <div class="text-primary-600 text-xs font-bold uppercase tracking-wider">Learners</div>
                 </div>
                 <div class="p-6 rounded-2xl bg-white border border-primary-100 text-center shadow-sm hover:shadow-md transition-shadow">
                     <h3 class="text-3xl font-extrabold text-slate-800 mb-1">200+</h3>
-                    <div class="text-primary-600 text-[10px] font-bold uppercase tracking-wider">Quizzes</div>
+                    <div class="text-primary-600 text-xs font-bold uppercase tracking-wider">Quizzes</div>
                 </div>
                 <div class="p-6 rounded-2xl bg-white border border-primary-100 text-center shadow-sm hover:shadow-md transition-shadow">
                     <h3 class="text-3xl font-extrabold text-slate-800 mb-1">98%</h3>
-                    <div class="text-primary-600 text-[10px] font-bold uppercase tracking-wider">Success</div>
+                    <div class="text-primary-600 text-xs font-bold uppercase tracking-wider">Success</div>
                 </div>
                 <div class="p-6 rounded-2xl bg-white border border-primary-100 text-center shadow-sm hover:shadow-md transition-shadow">
                     <h3 class="text-3xl font-extrabold text-slate-800 mb-1">24/7</h3>
-                    <div class="text-primary-600 text-[10px] font-bold uppercase tracking-wider">Support</div>
+                    <div class="text-primary-600 text-xs font-bold uppercase tracking-wider">Support</div>
                 </div>
             </div>
         </div>

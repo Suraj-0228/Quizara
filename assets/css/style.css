@@ -1,25 +1,26 @@
 :root {
-    /* Primary Colors - Slate & Violet Palette */
-    --slate-50: #F8FAFC;
-    --slate-100: #F1F5F9;
-    --slate-200: #E2E8F0;
-    --slate-300: #CBD5E1;
-    --slate-400: #94A3B8;
-    --slate-500: #64748B;
-    --slate-600: #475569;
-    --slate-700: #334155;
-    --slate-800: #1E293B;
-    --slate-900: #0F172A;
+    /* Primary Colors - Midnight Charcoal & Sunset Orange Palette */
+    --slate-50: #EAEFEF;
+    --slate-100: #E2E8EC;
+    --slate-200: #BFC9D1;
+    --slate-300: #9DAEC0;
+    --slate-400: #7B90A3;
+    --slate-500: #5A7286;
+    --slate-600: #3F5466;
+    --slate-700: #2E3E4D;
+    --slate-800: #25343F;
+    --slate-900: #172129;
 
-    --indigo-50: #F5F3FF;
-    --indigo-100: #EDE9FE;
-    --indigo-505: #A78BFA;
-    --indigo-500: #8B5CF6;
-    --indigo-600: #7C3AED;
-    --indigo-700: #6D28D9;
+    --indigo-50: #FFF7ED;
+    --indigo-100: #FFEDD5;
+    --indigo-505: #FFB375;
+    --indigo-500: #FF9B51;
+    --indigo-600: #25343F;
+    --indigo-700: #172129;
 
-    /* Theme Semantic Colors (Premium Light Theme) */
-    --primary: var(--indigo-600);
+    /* Theme Semantic Colors */
+    --primary: #25343F;
+    --accent: #FF9B51;
     --secondary: var(--slate-500);
     --dark-bg: var(--slate-50);
     --card-bg: #FFFFFF;
@@ -30,19 +31,19 @@
 
     /* Status Colors */
     --success: #10B981;
-    --warning: #F59E0B;
+    --warning: #FF9B51;
     --danger: #EF4444;
     --info: #3B82F6;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, var(--indigo-600) 0%, var(--indigo-500) 100%);
-    --gradient-accent: linear-gradient(135deg, var(--indigo-600) 0%, var(--indigo-700) 100%);
+    --gradient-primary: linear-gradient(135deg, #25343F 0%, #172129 100%);
+    --gradient-accent: linear-gradient(135deg, #FF9B51 0%, #F97316 100%);
 
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-premium: 0 20px 25px -5px rgba(37, 52, 63, 0.1), 0 10px 10px -5px rgba(37, 52, 63, 0.04);
 }
 
 /* Global Font Settings */

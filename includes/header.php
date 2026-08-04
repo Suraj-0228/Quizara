@@ -23,40 +23,40 @@ checkMaintenanceMode();
                 extend: {
                     colors: {
                         primary: {
-                            50: '#f5f3ff',
-                            100: '#ede9fe',
-                            200: '#ddd6fe',
-                            300: '#c4b5fd',
-                            400: '#a78bfa',
-                            500: '#8b5cf6',
-                            600: '#7c3aed', // Brand primary violet-600
-                            700: '#6d28d9',
-                            800: '#5b21b6',
-                            900: '#4c1d95',
+                            50: '#f2f5f8',
+                            100: '#e1e7ec',
+                            200: '#bfc9d1',
+                            300: '#96a7b5',
+                            400: '#677f93',
+                            500: '#415769',
+                            600: '#25343f', // Midnight Charcoal Primary
+                            700: '#1d2a34',
+                            800: '#172129',
+                            900: '#10171e',
                         },
                         accent: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            200: '#a7f3d0',
-                            300: '#6ee7b7',
-                            400: '#34d399',
-                            500: '#10b981', // Brand accent emerald-500
-                            600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
-                            900: '#064e3b',
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#ffb375',
+                            500: '#ff9b51', // Vibrant Sunset Orange Accent
+                            600: '#f97316',
+                            700: '#ea580c',
+                            800: '#c2410c',
+                            900: '#9a3412',
                         },
                         slate: {
-                            50: '#F8FAFC',
-                            100: '#F1F5F9',
-                            200: '#E2E8F0',
-                            300: '#CBD5E1',
-                            400: '#94A3B8',
-                            500: '#64748B',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1E293B',
-                            900: '#0F172A',
+                            50: '#EAEFEF', // Ice Gray Background
+                            100: '#E2E8EC',
+                            200: '#BFC9D1', // Slate Silver Borders
+                            300: '#9DAEC0',
+                            400: '#7B90A3',
+                            500: '#5A7286',
+                            600: '#3F5466',
+                            700: '#2E3E4D',
+                            800: '#25343F', // Midnight Charcoal
+                            900: '#172129',
                         }
                     },
                     fontFamily: {

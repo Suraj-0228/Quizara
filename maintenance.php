@@ -12,17 +12,18 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#7c3aed',
+                        primary: '#25343f',
+                        accent: '#ff9b51',
                         slate: {
-                            50: '#F8FAFC',
+                            50: '#EAEFEF',
                             100: '#F1F5F9',
-                            200: '#E2E8F0',
+                            200: '#BFC9D1',
                             300: '#CBD5E1',
                             400: '#94A3B8',
                             500: '#64748B',
                             600: '#475569',
                             700: '#334155',
-                            800: '#1E293B',
+                            800: '#25343F',
                             900: '#0F172A',
                         }
                     },
@@ -45,33 +46,33 @@
         <!-- Accent top border gradient -->
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-primary-600"></div>
 
-        <div class="inline-flex items-center bg-slate-100/50 border border-slate-200/80 text-slate-700 px-4.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider mb-10 mx-auto">
+        <div class="inline-flex items-center bg-slate-100/50 border border-slate-200/80 text-slate-700 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider mb-10 mx-auto">
             <i class="fas fa-circle text-[8px] text-emerald-500 mr-2 animate-pulse"></i> System Status: Maintenance
         </div>
 
         <div class="mb-10 relative inline-block">
             <i class="fas fa-cog text-6xl text-amber-500 gear-icon"></i>
             <div class="absolute -bottom-2 -right-2 bg-primary-600 text-white w-10 h-10 rounded-xl flex items-center justify-center text-sm shadow-md border border-white/10 tool-icon">
-                <i class="fas fa-wrench text-xs"></i>
+                <i class="fas fa-wrench text-sm"></i>
             </div>
         </div>
 
         <h1 class="text-3xl font-black text-slate-900 mb-3">System Maintenance</h1>
-        <p class="text-slate-500 text-xs md:text-sm font-medium px-4 mb-10 leading-relaxed">
+        <p class="text-slate-500 text-sm font-medium px-4 mb-10 leading-relaxed">
             We are currently optimizing our quiz engine and refreshing core modules to serve you better. We'll be back online briefly.
         </p>
 
         <div class="flex flex-col sm:flex-row justify-center gap-4 w-full">
-            <a href="/Quizara/logout.php" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 rounded-full shadow-md text-xs flex items-center justify-center transition-all">
-                <i class="fas fa-sign-out-alt mr-2 text-[10px]"></i>Exit Portal
+            <a href="/Quizara/logout.php" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3.5 rounded-full shadow-md text-sm flex items-center justify-center transition-all">
+                <i class="fas fa-sign-out-alt mr-2 text-xs"></i>Exit Portal
             </a>
-            <a href="#" onclick="window.location.reload()" class="w-full sm:w-auto bg-primary-600 hover:bg-primary-700 text-violet-600 font-bold px-8 py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs flex items-center justify-center btn-glow">
-                Re-verify Status <i class="fas fa-sync-alt ml-2 text-[10px]"></i>
+            <a href="#" onclick="window.location.reload()" class="w-full sm:w-auto bg-primary-600 hover:bg-primary-700 text-slat-900 font-bold px-8 py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-sm flex items-center justify-center btn-glow">
+                Re-verify Status <i class="fas fa-sync-alt ml-2 text-xs"></i>
             </a>
         </div>
 
         <div class="mt-10 pt-6 border-t border-slate-100">
-            <div class="flex items-center justify-center text-slate-400 text-xs font-bold">
+            <div class="flex items-center justify-center text-slate-400 text-sm font-bold">
                 <i class="fas fa-hourglass-half mr-2 text-primary-500"></i> Estimated Recovery: 60 Minutes
             </div>
         </div>

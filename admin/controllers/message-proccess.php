@@ -13,15 +13,12 @@ if (isset($_POST['delete_message'])) {
         try {
             $stmt = $pdo->prepare("DELETE FROM contact_messages WHERE id = ?");
             if ($stmt->execute([$msg_id])) {
-                $message = "Message deleted successfully.";
-                $messageType = "success";
+                flash('message', 'Message deleted successfully.', 'success');
             } else {
-                $message = "Failed to delete message.";
-                $messageType = "danger";
+                flash('message', 'Failed to delete message.', 'danger');
             }
-        } catch (PDOException $e) {
-            $message = "Error: " . $e->getMessage();
-            $messageType = "danger";
+        } catch (Exception $e) {
+            flash('message', 'Error: ' . $e->getMessage(), 'danger');
         }
     }
 }

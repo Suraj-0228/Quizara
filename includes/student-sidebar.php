@@ -7,13 +7,27 @@
     
     <ul class="flex flex-col space-y-1 mb-auto">
         <?php
+        global $pdo;
+        $sidebar_user = null;
+        if (isset($_SESSION['user_id']) && isset($pdo)) {
+            $s_stmt = $pdo->prepare("SELECT username, email, role, profile_pic FROM users WHERE id = ?");
+            $s_stmt->execute([$_SESSION['user_id']]);
+            $sidebar_user = $s_stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        $sidebar_username = $sidebar_user['username'] ?? $_SESSION['username'] ?? 'User';
+        $sidebar_email = $sidebar_user['email'] ?? $_SESSION['email'] ?? '';
+        $sidebar_pic = $sidebar_user['profile_pic'] ?? null;
+        $sidebar_role = $sidebar_user['role'] ?? $_SESSION['role'] ?? 'Student';
+
         $current_page = basename($_SERVER['PHP_SELF']);
         $menu_items = [
             ['dashboard.php', 'Dashboard', 'fas fa-tachometer-alt', ['dashboard.php']],
-            ['quizzes.php', 'Quizzes', 'fas fa-list-check', ['quizzes.php', 'take-quiz.php', 'results.php', 'review.php', 'upgrade-premium.php', 'checkout.php']],
+            ['quizzes.php', 'Quizzes', 'fas fa-list-check', ['quizzes.php', 'take-quiz.php', 'results.php', 'review.php', 'upgrade-premium.php', 'checkout.php', 'receipt.php']],
             ['history.php', 'History', 'fas fa-history', ['history.php']],
             ['reports.php', 'Reports', 'fas fa-chart-line', ['reports.php']],
-            ['profile.php', 'Profile', 'fas fa-user-cog', ['profile.php']]
+            ['profile.php', 'Profile', 'fas fa-id-card', ['profile.php']],
+            ['settings.php', 'Settings', 'fas fa-cog', ['settings.php']]
         ];
 
         foreach ($menu_items as $item):
@@ -40,12 +54,16 @@
         <hr class="border-slate-200 my-3">
 
         <div class="flex items-center px-2 py-2 bg-slate-50 rounded-xl border border-slate-200">
-            <div class="rounded-full bg-primary-600 text-white flex items-center justify-content-center w-9 h-9 font-bold mr-3 pl-3.5 shadow-sm flex-shrink-0">
-                <?php echo strtoupper(substr($_SESSION['username'], 0, 1)); ?>
+            <div class="w-9 h-9 rounded-full bg-primary-600 border border-slate-200 flex items-center justify-center text-white font-bold text-sm mr-3 flex-shrink-0 shadow-sm overflow-hidden">
+                <?php if (!empty($sidebar_pic) && file_exists(__DIR__ . '/../assets/images/profiles/' . $sidebar_pic)): ?>
+                    <img src="<?php echo base_url('assets/images/profiles/' . sanitize($sidebar_pic)); ?>" alt="Profile" class="w-full h-full object-cover">
+                <?php else: ?>
+                    <span><?php echo strtoupper(substr($sidebar_username, 0, 1)); ?></span>
+                <?php endif; ?>
             </div>
             <div class="min-w-0">
-                <div class="font-bold text-slate-800 text-xs truncate max-w-[120px]"><?php echo sanitize($_SESSION['username']); ?></div>
-                <div class="text-slate-400 text-[0.65rem] font-medium uppercase tracking-wider">Student</div>
+                <div class="font-bold text-slate-800 text-sm truncate max-w-[130px]" title="<?php echo sanitize($sidebar_username); ?>"><?php echo sanitize($sidebar_username); ?></div>
+                <div class="text-slate-400 text-xs font-semibold truncate max-w-[130px]" title="<?php echo sanitize($sidebar_email); ?>"><?php echo sanitize($sidebar_email); ?></div>
             </div>
         </div>
     </div>

@@ -6,21 +6,14 @@
         <p class="text-slate-500 text-sm md:text-base mb-0">Manage global application settings and platform preferences.</p>
     </div>
     <div class="flex-shrink-0">
-        <div class="bg-primary-50 text-primary-600 border border-primary-100/30 text-xs font-bold px-4 py-2.5 rounded-full flex items-center shadow-sm">
-            <i class="fas fa-server mr-2 text-primary-500 text-[10px]"></i>
+        <div class="bg-primary-50 text-primary-600 border border-primary-100/30 text-sm font-bold px-4 py-2.5 rounded-full flex items-center shadow-sm">
+            <i class="fas fa-server mr-2 text-primary-500 text-xs"></i>
             <span>System Engine Online</span>
         </div>
     </div>
 </div>
 
-<?php if ($message): ?>
-    <div class="p-4 mb-6 rounded-2xl bg-primary-50 border border-primary-200 text-primary-700 text-sm font-medium flex items-center justify-between">
-        <div class="flex items-center">
-            <i class="fas fa-info-circle mr-2.5"></i> <?php echo $message; ?>
-        </div>
-        <button type="button" onclick="this.parentElement.remove()" class="text-primary-500 hover:text-primary-700"><i class="fas fa-times"></i></button>
-    </div>
-<?php endif; ?>
+<?php flash('message'); ?>
 
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
     <!-- Sidebar Navigation -->
@@ -28,21 +21,21 @@
         <div class="bg-white border border-slate-200 rounded-3xl p-4 shadow-sm sticky top-[100px] z-10 space-y-2" id="v-pills-tab">
             <button type="button" class="tab-btn w-full flex items-center p-3 rounded-2xl text-left text-sm font-bold transition-all focus:outline-none bg-primary-600 text-white shadow-sm" data-bs-target="#v-pills-general">
                 <div class="w-8 h-8 rounded-xl bg-white/15 flex items-center justify-center mr-3 text-sm flex-shrink-0">
-                    <i class="fas fa-sliders-h text-[11px]"></i>
+                    <i class="fas fa-sliders-h text-xs"></i>
                 </div>
-                <span class="uppercase tracking-wider text-[11px]">General</span>
+                <span class="uppercase tracking-wider text-xs">General</span>
             </button>
-            <button type="button" class="tab-btn w-full flex items-center p-3 rounded-2xl text-left text-sm font-bold transition-all focus:outline-none text-slate-550 hover:text-primary-600" data-bs-target="#v-pills-system">
+            <button type="button" class="tab-btn w-full flex items-center p-3 rounded-2xl text-left text-sm font-bold transition-all focus:outline-none text-slate-500 hover:text-primary-600" data-bs-target="#v-pills-system">
                 <div class="w-8 h-8 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center mr-3 text-sm flex-shrink-0">
-                    <i class="fas fa-shield-alt text-[11px]"></i>
+                    <i class="fas fa-shield-alt text-xs"></i>
                 </div>
-                <span class="uppercase tracking-wider text-[11px]">Security</span>
+                <span class="uppercase tracking-wider text-xs">Security</span>
             </button>
-            <button type="button" class="tab-btn w-full flex items-center p-3 rounded-2xl text-left text-sm font-bold transition-all focus:outline-none text-slate-555 hover:text-primary-600" data-bs-target="#v-pills-email">
+            <button type="button" class="tab-btn w-full flex items-center p-3 rounded-2xl text-left text-sm font-bold transition-all focus:outline-none text-slate-500 hover:text-primary-600" data-bs-target="#v-pills-email">
                 <div class="w-8 h-8 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center mr-3 text-sm flex-shrink-0">
-                    <i class="fas fa-envelope-open-text text-[11px]"></i>
+                    <i class="fas fa-envelope-open-text text-xs"></i>
                 </div>
-                <span class="uppercase tracking-wider text-[11px]">Messaging</span>
+                <span class="uppercase tracking-wider text-xs">Messaging</span>
             </button>
         </div>
     </div>
@@ -61,22 +54,22 @@
                         <div class="p-6 md:p-8 space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Platform Name</label>
+                                    <label class="block text-sm font-bold text-slate-700 uppercase tracking-wider mb-2">Platform Name</label>
                                     <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-600 transition-all">
-                                        <span class="px-3 bg-slate-50 border-r border-slate-200 flex items-center text-slate-400 text-xs"><i class="fas fa-globe"></i></span>
+                                        <span class="px-3 bg-slate-50 border-r border-slate-200 flex items-center text-slate-400 text-sm"><i class="fas fa-globe"></i></span>
                                         <input type="text" class="flex-grow px-4 py-2.5 text-sm bg-white focus:outline-none text-slate-800" name="site_name" value="<?php echo isset($settings['site_name']) ? sanitize($settings['site_name']) : 'Quizara'; ?>" placeholder="Site name...">
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Contact Email</label>
+                                    <label class="block text-sm font-bold text-slate-700 uppercase tracking-wider mb-2">Contact Email</label>
                                     <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-600 transition-all">
-                                        <span class="px-3 bg-slate-50 border-r border-slate-200 flex items-center text-slate-400 text-xs"><i class="fas fa-envelope"></i></span>
+                                        <span class="px-3 bg-slate-50 border-r border-slate-200 flex items-center text-slate-400 text-sm"><i class="fas fa-envelope"></i></span>
                                         <input type="email" class="flex-grow px-4 py-2.5 text-sm bg-white focus:outline-none text-slate-800" name="contact_email" value="<?php echo isset($settings['contact_email']) ? sanitize($settings['contact_email']) : ''; ?>" placeholder="support@domain.com">
                                     </div>
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Site Description</label>
+                                <label class="block text-sm font-bold text-slate-700 uppercase tracking-wider mb-2">Site Description</label>
                                 <textarea class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-800 font-medium focus:outline-none focus:ring-2 focus:ring-primary-500/20 focus:border-primary-600 transition-all resize-none" name="site_description" rows="3" placeholder="Brief description of your platform..."><?php echo isset($settings['site_description']) ? sanitize($settings['site_description']) : ''; ?></textarea>
                             </div>
                         </div>
@@ -88,8 +81,8 @@
                         </div>
                         <div class="p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                             <div>
-                                <h6 class="font-extrabold text-slate-850 text-sm mb-1">Pagination Limit</h6>
-                                <p class="text-slate-400 text-xs">How many items should we show per page in administrative tables?</p>
+                                <h6 class="font-extrabold text-slate-800 text-sm mb-1">Pagination Limit</h6>
+                                <p class="text-slate-400 text-sm">How many items should we show per page in administrative tables?</p>
                             </div>
                             <div class="w-full md:w-auto">
                                 <div class="flex shadow-sm rounded-lg overflow-hidden border border-slate-200 bg-white focus-within:ring-2 focus-within:ring-primary-500/20 focus-within:border-primary-600 transition-all relative min-w-[200px]">
@@ -98,7 +91,7 @@
                                         <option value="20" <?php echo (isset($settings['items_per_page']) && $settings['items_per_page'] == '20') ? 'selected' : ''; ?>>20 Rows Per Page</option>
                                         <option value="50" <?php echo (isset($settings['items_per_page']) && $settings['items_per_page'] == '50') ? 'selected' : ''; ?>>50 Rows Per Page</option>
                                     </select>
-                                    <i class="fas fa-chevron-down absolute right-4 top-3.5 text-slate-400 pointer-events-none text-xs"></i>
+                                    <i class="fas fa-chevron-down absolute right-4 top-3.5 text-slate-400 pointer-events-none text-sm"></i>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +113,7 @@
                                     </div>
                                     <div class="min-w-0">
                                         <h6 class="font-extrabold text-slate-800 text-sm truncate mb-0.5">Maintenance Mode</h6>
-                                        <p class="text-slate-400 text-xs truncate">Put the site into read-only mode for maintenance.</p>
+                                        <p class="text-slate-400 text-sm truncate">Put the site into read-only mode for maintenance.</p>
                                     </div>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer select-none">
@@ -137,7 +130,7 @@
                                     </div>
                                     <div class="min-w-0">
                                         <h6 class="font-extrabold text-slate-800 text-sm truncate mb-0.5">Open Registration</h6>
-                                        <p class="text-slate-400 text-xs truncate">Allow new students to create accounts on the platform.</p>
+                                        <p class="text-slate-400 text-sm truncate">Allow new students to create accounts on the platform.</p>
                                     </div>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer select-none">
@@ -160,8 +153,8 @@
                                 <i class="fas fa-envelope-open-text"></i>
                             </div>
                             <h4 class="font-extrabold text-slate-800 text-base mb-1">Email Configuration</h4>
-                            <p class="text-slate-400 text-xs leading-relaxed">Messaging services are currently handled by the core system relay. SMTP configuration will be available in future updates.</p>
-                            <button type="button" class="border border-slate-200 text-slate-455 font-bold px-6 py-2 rounded-full text-xs cursor-not-allowed mt-4 focus:outline-none" disabled>Coming Soon</button>
+                            <p class="text-slate-400 text-sm leading-relaxed">Messaging services are currently handled by the core system relay. SMTP configuration will be available in future updates.</p>
+                            <button type="button" class="border border-slate-200 text-slate-400 font-bold px-6 py-2 rounded-full text-sm cursor-not-allowed mt-4 focus:outline-none" disabled>Coming Soon</button>
                         </div>
                     </div>
                 </div>
@@ -170,9 +163,9 @@
 
             <!-- Footer Actions -->
             <div class="flex justify-end space-x-3 pt-6 border-t border-slate-100 mt-6">
-                <button type="button" class="border border-slate-200 text-slate-505 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-full text-xs transition-all focus:outline-none" onclick="window.history.back()">Discard Changes</button>
-                <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white font-bold px-6 py-2.5 rounded-full shadow-md text-xs transition-all focus:outline-none hover:scale-105">
-                    Save Configuration <i class="fas fa-check-circle ml-1.5 text-[10px]"></i>
+                <button type="button" class="border border-slate-200 text-slate-500 hover:bg-slate-50 font-bold px-5 py-2.5 rounded-full text-sm transition-all focus:outline-none" onclick="window.history.back()">Discard Changes</button>
+                <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white font-bold px-6 py-2.5 rounded-full shadow-md text-sm transition-all focus:outline-none hover:scale-105">
+                    Save Configuration <i class="fas fa-check-circle ml-1.5 text-xs"></i>
                 </button>
             </div>
         </form>

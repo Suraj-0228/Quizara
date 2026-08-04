@@ -6,13 +6,13 @@
             <div class="w-16 h-16 rounded-2xl bg-red-50 text-red-655 text-red-600 flex items-center justify-center text-2xl mx-auto mb-4">
                 <i class="fas fa-key"></i>
             </div>
-            <h2 class="text-2xl font-black text-red-655 text-red-600 mb-1">Forgot Password</h2>
-            <p class="text-slate-400 text-xs font-semibold">Recover your account access</p>
-            <p class="text-primary-600 text-[11px] font-bold mt-2 leading-relaxed max-w-xs mx-auto">Enter your email and we'll send a reset link.</p>
+            <h2 class="text-2xl font-black text-red-600 mb-1">Forgot Password</h2>
+            <p class="text-slate-400 text-sm font-semibold">Recover your account access</p>
+            <p class="text-primary-600 text-xs font-bold mt-2 leading-relaxed max-w-xs mx-auto">Enter your email and we'll send a reset link.</p>
         </div>
 
         <?php if (!empty($errors)): ?>
-            <div class="p-4 mb-6 rounded-2xl bg-red-50 border border-red-200 text-red-655 text-red-600 text-xs font-medium">
+            <div class="p-4 mb-6 rounded-2xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium">
                 <ul class="list-disc pl-4 space-y-1">
                     <?php foreach ($errors as $error): ?>
                         <li><?php echo $error; ?></li>
@@ -30,13 +30,13 @@
             </div>
 
             <div class="mb-6">
-                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-xs flex items-center justify-center focus:outline-none">
-                    Send Recovery Link <i class="fas fa-paper-plane ml-2 text-[10px]"></i>
+                <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3.5 rounded-full shadow-md hover:scale-105 transition-all text-sm flex items-center justify-center focus:outline-none">
+                    Send Recovery Link <i class="fas fa-paper-plane ml-2 text-xs"></i>
                 </button>
             </div>
 
             <div class="text-center">
-                <p class="text-slate-505 text-xs">
+                <p class="text-slate-500 text-sm">
                     Remembered it? <a href="login.php" class="text-primary-600 font-bold ml-1">Return to Login</a>
                 </p>
             </div>
