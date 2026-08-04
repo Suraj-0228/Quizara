@@ -8,13 +8,29 @@ ini_set('session.cookie_lifetime', $session_lifetime);
 if (session_status() === PHP_SESSION_NONE) {
     session_set_cookie_params([
         'lifetime' => $session_lifetime,
-        'path' => '/Quizara/',
+        'path' => '/',
         'domain' => '',
-        'secure' => isset($_SERVER['HTTPS']),
+        'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
         'httponly' => true,
         'samesite' => 'Lax'
     ]);
     session_start();
+}
+
+/**
+ * Base URL helper (Auto-detects root vs subfolder)
+ */
+function base_url($path = '')
+{
+    $scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+    
+    if (strpos($scriptName, '/Quizara/') !== false) {
+        $base = '/Quizara/';
+    } else {
+        $base = '/';
+    }
+    
+    return rtrim($base, '/') . '/' . ltrim($path, '/');
 }
 
 /**
@@ -47,7 +63,7 @@ function isAdmin()
 function requireLogin()
 {
     if (!isLoggedIn()) {
-        redirect('/Quizara/login.php');
+        redirect(base_url('login.php'));
     }
 
     // Verify user still exists in DB (prevents errors if DB was reset)
@@ -56,7 +72,7 @@ function requireLogin()
     $stmt->execute([$_SESSION['user_id']]);
     if (!$stmt->fetch()) {
         session_destroy();
-        redirect('/Quizara/login.php?error=session_expired');
+        redirect(base_url('login.php?error=session_expired'));
     }
 }
 
@@ -67,7 +83,7 @@ function requireAdmin()
 {
     requireLogin();
     if (!isAdmin()) {
-        redirect('/Quizara/student/dashboard.php'); // Redirect non-admins to student dashboard
+        redirect(base_url('student/dashboard.php')); // Redirect non-admins to student dashboard
     }
 }
 
@@ -169,13 +185,6 @@ function flash($name = '', $message = '', $class = 'success')
 }
 
 /**
- * Base URL helper
- */
-function base_url($path = '')
-{
-    return '/Quizara/' . ltrim($path, '/');
-}
-/**
  * Check Maintenance Mode
  */
 function checkMaintenanceMode()
@@ -200,7 +209,7 @@ function checkMaintenanceMode()
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($result && $result['setting_value'] === '1') {
-                redirect('/Quizara/maintenance.php');
+                redirect(base_url('maintenance.php'));
             }
         }
     } catch (PDOException $e) {

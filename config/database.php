@@ -2,18 +2,29 @@
 /* Set timezone to local time (IST) */
 date_default_timezone_set("Asia/Kolkata");
 
-/* Database details */
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'quizara_db');
+// Auto-detect environment (Local XAMPP vs Production Live Host)
+$isLocal = in_array($_SERVER['HTTP_HOST'] ?? '', ['localhost', '127.0.0.1', '::1']) || strpos($_SERVER['HTTP_HOST'] ?? '', 'localhost:') === 0;
 
-/* Attempt to connect to MySQL database */
+if ($isLocal) {
+    // Local XAMPP Environment
+    $host = 'localhost';
+    $db   = 'quiz_system';
+    $user = 'root';
+    $pass = '';
+} else {
+    // Production Live Environment (InfinityFree)
+    $host = 'sql108.infinityfree.com';
+    $db   = 'if0_42575304_quiz_system';
+    $user = 'if0_42575304';
+    $pass = 'wXuTQPXKJ3';
+}
+
 try {
-    $pdo = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
-    // Set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ]);
 } catch (PDOException $e) {
-    die("ERROR: Could not connect. " . $e->getMessage());
+    die("Database connection failed: " . $e->getMessage());
 }
