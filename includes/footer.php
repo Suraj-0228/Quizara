@@ -71,8 +71,8 @@
 <?php endif; ?>
 
 <!-- Custom JS -->
-<script src="<?php echo base_url('assets/js/validation.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/script.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/validation.js?v=2'); ?>"></script>
+<script src="<?php echo base_url('assets/js/script.js?v=2'); ?>"></script>
 </body>
 
 </html>

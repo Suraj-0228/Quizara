@@ -71,11 +71,53 @@ checkMaintenanceMode();
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/Quizara/assets/css/style.css">
-    <link rel="stylesheet" href="/Quizara/assets/css/quiz.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css?v=2'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/quiz.css?v=2'); ?>">
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Mobile Navigation Toggle Scripts -->
+    <script>
+        function quizaraToggleNavbar(e) {
+            if (e && e.stopPropagation) e.stopPropagation();
+            var nav = document.getElementById('navbarNav');
+            if (!nav) return;
+            var isHidden = nav.classList.contains('hidden') || nav.style.display === 'none' || getComputedStyle(nav).display === 'none';
+            if (isHidden) {
+                nav.classList.remove('hidden');
+                nav.style.display = 'block';
+                nav.style.visibility = 'visible';
+            } else {
+                nav.classList.add('hidden');
+                nav.style.display = 'none';
+            }
+        }
+
+        function quizaraToggleSidebar(e) {
+            if (e && e.stopPropagation) e.stopPropagation();
+            var sidebar = document.querySelector('.admin-sidebar, .student-sidebar');
+            var backdrop = document.querySelector('.sidebar-backdrop');
+            if (!sidebar) return;
+
+            if (!backdrop) {
+                backdrop = document.createElement('div');
+                backdrop.className = 'sidebar-backdrop fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-30 hidden transition-opacity';
+                document.body.appendChild(backdrop);
+                backdrop.addEventListener('click', function () {
+                    sidebar.classList.remove('active-sidebar');
+                    backdrop.classList.add('hidden');
+                });
+            }
+
+            var isActive = sidebar.classList.toggle('active-sidebar');
+            if (isActive) {
+                backdrop.classList.remove('hidden');
+            } else {
+                backdrop.classList.add('hidden');
+            }
+        }
+    </script>
 </head>
 
 <body class="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans">
@@ -94,8 +136,8 @@ checkMaintenanceMode();
                         <i class="fas fa-graduation-cap text-primary-600 text-xl mr-2"></i>
                         <span class="font-extrabold text-lg tracking-wider">Quizara</span>
                     </a>
-                    <button class="border border-slate-200 hover:bg-slate-50 text-slate-700 px-3 py-1.5 rounded-lg transition-all focus:outline-none" type="button" id="sidebarToggle">
-                        <i class="fas fa-bars"></i>
+                    <button class="border border-slate-200 hover:bg-slate-50 text-slate-700 px-3 py-1.5 rounded-lg transition-all focus:outline-none cursor-pointer" type="button" id="sidebarToggle" onclick="quizaraToggleSidebar(event);">
+                        <i class="fas fa-bars pointer-events-none"></i>
                     </button>
                 </div>
             </nav>
@@ -113,8 +155,8 @@ checkMaintenanceMode();
                         <i class="fas fa-graduation-cap text-primary-600 text-xl mr-2"></i>
                         <span class="font-extrabold text-lg tracking-wider">Quizara</span>
                     </a>
-                    <button class="border border-slate-200 hover:bg-slate-50 text-slate-700 px-3 py-1.5 rounded-lg transition-all focus:outline-none" type="button" id="sidebarToggle">
-                        <i class="fas fa-bars"></i>
+                    <button class="border border-slate-200 hover:bg-slate-50 text-slate-700 px-3 py-1.5 rounded-lg transition-all focus:outline-none cursor-pointer" type="button" id="sidebarToggle" onclick="quizaraToggleSidebar(event);">
+                        <i class="fas fa-bars pointer-events-none"></i>
                     </button>
                 </div>
             </nav>

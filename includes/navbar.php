@@ -72,25 +72,32 @@
             <?php endif; ?>
 
             <!-- Hamburger Mobile Menu Toggle -->
-            <button class="md:hidden flex flex-col justify-center items-center w-6 h-6 space-y-1.5 focus:outline-none p-0 border-0 bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="block w-6 h-0.5 bg-slate-700"></span>
-                <span class="block w-6 h-0.5 bg-slate-700"></span>
-                <span class="block w-6 h-0.5 bg-slate-700"></span>
+            <button class="md:hidden w-10 h-10 rounded-full border border-slate-200 bg-slate-50 hover:bg-slate-100 flex items-center justify-center text-slate-700 transition-all focus:outline-none cursor-pointer" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" onclick="quizaraToggleNavbar(event);" aria-label="Toggle navigation">
+                <i class="fas fa-bars text-base pointer-events-none"></i>
             </button>
         </div>
     </div>
     
     <!-- Mobile Links (Collapsible) -->
-    <div class="collapse hidden md:hidden bg-white/95 border border-slate-200/80 rounded-2xl shadow-premium px-6 py-4 mt-2 max-w-6xl mx-auto" id="navbarNav">
+    <div class="hidden md:hidden bg-white/95 backdrop-blur-md border border-slate-200/90 rounded-2xl shadow-premium px-6 py-5 mt-2 max-w-6xl mx-auto z-50 transition-all" id="navbarNav">
         <div class="flex flex-col space-y-3">
-            <a class="text-slate-600 hover:text-primary-600 font-bold text-sm transition-colors" href="<?php echo base_url(); ?>">Home</a>
-            <a class="text-slate-600 hover:text-primary-600 font-bold text-sm transition-colors" href="<?php echo base_url('about.php'); ?>">About</a>
-            <a class="text-slate-600 hover:text-primary-600 font-bold text-sm transition-colors" href="<?php echo base_url('faq.php'); ?>">FAQ</a>
-            <a class="text-slate-600 hover:text-primary-600 font-bold text-sm transition-colors" href="<?php echo base_url('contact.php'); ?>">Contact</a>
+            <a class="flex items-center text-slate-700 hover:text-primary-600 font-bold text-sm transition-colors py-1.5" href="<?php echo base_url(); ?>"><i class="fas fa-home w-6 text-primary-500"></i>Home</a>
+            <a class="flex items-center text-slate-700 hover:text-primary-600 font-bold text-sm transition-colors py-1.5" href="<?php echo base_url('about.php'); ?>"><i class="fas fa-info-circle w-6 text-primary-500"></i>About</a>
+            <a class="flex items-center text-slate-700 hover:text-primary-600 font-bold text-sm transition-colors py-1.5" href="<?php echo base_url('faq.php'); ?>"><i class="fas fa-question-circle w-6 text-primary-500"></i>FAQ</a>
+            <a class="flex items-center text-slate-700 hover:text-primary-600 font-bold text-sm transition-colors py-1.5" href="<?php echo base_url('contact.php'); ?>"><i class="fas fa-envelope w-6 text-primary-500"></i>Contact</a>
             <?php if (!isLoggedIn()): ?>
-                <div class="border-t border-slate-100 my-2 pt-3 flex space-x-2">
-                    <a href="<?php echo base_url('login.php'); ?>" class="text-primary-600 hover:bg-primary-50 border border-primary-200 text-center font-bold text-sm px-4 py-2.5 rounded-full flex-1 transition-all">Login</a>
-                    <a href="<?php echo base_url('register.php'); ?>" class="bg-primary-600 hover:bg-primary-700 text-white text-center font-bold text-sm px-4 py-2.5 rounded-full shadow-md flex-1 transition-all">Join Now</a>
+                <div class="border-t border-slate-100 my-2 pt-4 flex space-x-3">
+                    <a href="<?php echo base_url('login.php'); ?>" class="text-primary-600 hover:bg-primary-50 border border-primary-200 text-center font-bold text-sm px-4 py-2.5 rounded-full flex-1 transition-all">Sign In</a>
+                    <a href="<?php echo base_url('register.php'); ?>" class="bg-primary-600 hover:bg-primary-700 text-white text-center font-bold text-sm px-4 py-2.5 rounded-full shadow-md flex-1 transition-all">Get Started Free</a>
+                </div>
+            <?php else: ?>
+                <div class="border-t border-slate-100 my-2 pt-3 flex flex-col space-y-2">
+                    <?php if (!isAdmin()): ?>
+                        <a href="<?php echo base_url('student/dashboard.php'); ?>" class="bg-primary-600 text-white text-center font-bold text-sm px-4 py-2.5 rounded-full shadow-md transition-all flex items-center justify-center"><i class="fas fa-desktop mr-2"></i>Student Dashboard</a>
+                    <?php else: ?>
+                        <a href="<?php echo base_url('admin/dashboard.php'); ?>" class="bg-primary-600 text-white text-center font-bold text-sm px-4 py-2.5 rounded-full shadow-md transition-all flex items-center justify-center"><i class="fas fa-user-shield mr-2"></i>Admin Dashboard</a>
+                    <?php endif; ?>
+                    <a href="<?php echo base_url('logout.php'); ?>" class="text-red-600 hover:bg-red-50 text-center font-bold text-sm px-4 py-2 rounded-full transition-all flex items-center justify-center"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
                 </div>
             <?php endif; ?>
         </div>

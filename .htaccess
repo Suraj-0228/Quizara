@@ -1,7 +1,9 @@
-# Force HTTPS Redirect for SSL Security
+# Force HTTPS Redirect for SSL Security (Skip on Localhost / 127.0.0.1)
 RewriteEngine On
+RewriteCond %{HTTP_HOST} !^localhost [NC]
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
 RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=302]
 
 # Enterprise Security Headers
 Header set X-Content-Type-Options "nosniff"

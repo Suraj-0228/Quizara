@@ -24,6 +24,48 @@ window.bootstrap = {
     }
 };
 
+// Global Helper Functions for Mobile Navigation
+window.quizaraToggleNavbar = function (e) {
+    if (e && e.stopPropagation) e.stopPropagation();
+    var nav = document.getElementById('navbarNav');
+    if (!nav) return;
+    var isHidden = nav.classList.contains('hidden') || nav.style.display === 'none' || getComputedStyle(nav).display === 'none';
+    if (isHidden) {
+        nav.classList.remove('hidden');
+        nav.style.display = 'block';
+        nav.style.visibility = 'visible';
+    } else {
+        nav.classList.add('hidden');
+        nav.style.display = 'none';
+    }
+};
+
+window.quizaraToggleSidebar = function (e) {
+    if (e) {
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    }
+    var sidebar = document.querySelector('.admin-sidebar, .student-sidebar');
+    var backdrop = document.querySelector('.sidebar-backdrop');
+    if (!sidebar) return;
+
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'sidebar-backdrop fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-30 hidden transition-opacity';
+        document.body.appendChild(backdrop);
+        backdrop.addEventListener('click', function () {
+            sidebar.classList.remove('active-sidebar');
+            backdrop.classList.add('hidden');
+        });
+    }
+
+    var isActive = sidebar.classList.toggle('active-sidebar');
+    if (isActive) {
+        backdrop.classList.remove('hidden');
+    } else {
+        backdrop.classList.add('hidden');
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function () {
     // Auto-hide all alert messages system-wide after 2 seconds (2000ms)
     function autoDismissAlerts() {
@@ -47,25 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     autoDismissAlerts();
 
-    // Sidebar Toggle (Admin & Student)
+    // Event listener for sidebarToggle
     const sidebarToggle = document.getElementById('sidebarToggle');
-    const sidebar = document.querySelector('.admin-sidebar, .student-sidebar');
-
-    if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', function (e) {
-            e.stopPropagation();
-            sidebar.classList.toggle('active-sidebar');
-        });
-
-        // Close sidebar when clicking outside
-        document.addEventListener('click', function (e) {
-            if (sidebar.classList.contains('active-sidebar') &&
-                !sidebar.contains(e.target) &&
-                e.target !== sidebarToggle &&
-                !sidebarToggle.contains(e.target)) {
-                sidebar.classList.remove('active-sidebar');
-            }
-        });
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', window.quizaraToggleSidebar);
     }
 });
 
@@ -101,13 +128,13 @@ document.addEventListener('click', function (e) {
     // 3. Navbar Collapse Toggle (data-bs-toggle="collapse")
     const collapseToggle = e.target.closest('[data-bs-toggle="collapse"]');
     if (collapseToggle) {
-        e.preventDefault();
-        const targetId = collapseToggle.getAttribute('data-bs-target');
-        if (targetId) {
-            const targetEl = document.querySelector(targetId);
-            if (targetEl) {
-                targetEl.classList.toggle('hidden');
-            }
+        window.quizaraToggleNavbar(e);
+    } else {
+        // Clicked outside collapse: auto-close open mobile navbar
+        const nav = document.getElementById('navbarNav');
+        if (nav && !nav.contains(e.target) && !nav.classList.contains('hidden')) {
+            nav.classList.add('hidden');
+            nav.style.display = 'none';
         }
     }
 });
