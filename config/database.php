@@ -8,7 +8,7 @@ $isLocal = in_array($_SERVER['HTTP_HOST'] ?? '', ['localhost', '127.0.0.1', '::1
 if ($isLocal) {
     // Local XAMPP Environment
     $host = 'localhost';
-    $db   = 'quiz_system';
+    $db   = 'quizara_db';
     $user = 'root';
     $pass = '';
 } else {
