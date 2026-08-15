@@ -94,7 +94,7 @@ include_once '../includes/header.php';
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Expiry Date -->
                     <div>
                         <label for="card_expiry" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Expiry Date</label>

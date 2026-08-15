@@ -63,12 +63,12 @@
                     <div class="flex space-x-1.5 bg-slate-50 p-1 rounded-2xl mt-auto">
                         <!-- Low Mode -->
                         <?php if (in_array($quiz['highest_mode_completed'], ['low', 'medium', 'high'])): ?>
-                            <button class="flex-1 text-center py-2 text-sm font-bold bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center space-x-1 border border-primary-200/30" disabled title="Completed">
+                            <button class="flex-1 text-center py-2 text-sm font-bold bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center space-x-1 border border-emerald-200/40" disabled title="Completed">
                                 <i class="fas fa-check-circle text-xs"></i>
                                 <span>Low</span>
                             </button>
                         <?php else: ?>
-                            <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=low" class="flex-1 text-center py-2 text-sm font-bold text-primary-600 hover:bg-primary-100 hover:text-primary-700 rounded-xl flex items-center justify-center space-x-1 transition-all" title="Start Low Mode">
+                            <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=low" class="flex-1 text-center py-2 text-sm font-bold text-primary-600 hover:bg-primary-50 rounded-xl flex items-center justify-center space-x-1 border border-primary-200/20 transition-all animate-pulse" title="Start Low Mode">
                                 <i class="fas fa-play text-xs"></i>
                                 <span>Low</span>
                             </a>
@@ -76,17 +76,17 @@
 
                         <!-- Medium Mode -->
                         <?php if (in_array($quiz['highest_mode_completed'], ['medium', 'high'])): ?>
-                            <button class="flex-1 text-center py-2 text-sm font-bold bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center space-x-1 border border-primary-200/30" disabled title="Completed">
+                            <button class="flex-1 text-center py-2 text-sm font-bold bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center space-x-1 border border-emerald-200/40" disabled title="Completed">
                                 <i class="fas fa-check-circle text-xs"></i>
                                 <span>Med</span>
                             </button>
                         <?php elseif (in_array($quiz['highest_mode_completed'], ['low'])): ?>
-                            <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=medium" class="flex-1 text-center py-2 text-sm font-bold text-primary-600 hover:bg-primary-100 hover:text-primary-700 rounded-xl flex items-center justify-center space-x-1 transition-all" title="Start Medium Mode">
+                            <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=medium" class="flex-1 text-center py-2 text-sm font-bold text-primary-600 hover:bg-primary-50 rounded-xl flex items-center justify-center space-x-1 border border-primary-200/20 transition-all animate-pulse" title="Start Medium Mode">
                                 <i class="fas fa-play text-xs"></i>
                                 <span>Med</span>
                             </a>
                         <?php else: ?>
-                            <button class="flex-1 text-center py-2 text-sm font-bold text-slate-400 bg-slate-100/50 rounded-xl flex items-center justify-center space-x-1 cursor-not-allowed" disabled title="Locked">
+                            <button class="flex-1 text-center py-2 text-sm font-bold text-red-500 bg-red-50 rounded-xl flex items-center justify-center space-x-1 border border-red-200/35 cursor-not-allowed" disabled title="Locked">
                                 <i class="fas fa-lock text-xs"></i>
                                 <span>Med</span>
                             </button>
@@ -94,24 +94,24 @@
 
                         <!-- High/Premium Mode -->
                         <?php if ($quiz['highest_mode_completed'] == 'high'): ?>
-                            <button class="flex-1 text-center py-2 text-sm font-bold bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center space-x-1 border border-primary-200/30" disabled title="Completed">
+                            <button class="flex-1 text-center py-2 text-sm font-bold bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center space-x-1 border border-emerald-200/40" disabled title="Completed">
                                 <i class="fas fa-check-circle text-xs"></i>
                                 <span>High</span>
                             </button>
                         <?php elseif (in_array($quiz['highest_mode_completed'], ['medium'])): ?>
                             <?php if ($quiz['is_purchased']): ?>
-                                <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=high" class="flex-1 text-center py-2 text-sm font-bold text-primary-600 hover:bg-primary-100 hover:text-primary-700 rounded-xl flex items-center justify-center space-x-1 transition-all" title="Start High Mode">
+                                <a href="take-quiz.php?id=<?php echo $quiz['id']; ?>&mode=high" class="flex-1 text-center py-2 text-sm font-bold text-primary-600 hover:bg-primary-50 rounded-xl flex items-center justify-center space-x-1 border border-primary-200/20 transition-all animate-pulse" title="Start High Mode">
                                     <i class="fas fa-play text-xs"></i>
                                     <span>High</span>
                                 </a>
                             <?php else: ?>
-                                <a href="upgrade-premium.php?quiz_id=<?php echo $quiz['id']; ?>" class="flex-1 text-center py-2 text-sm font-bold text-amber-600 bg-amber-50 hover:bg-amber-100 rounded-xl flex items-center justify-center space-x-1 transition-all border border-amber-200/30" title="Upgrade to Premium">
+                                <a href="upgrade-premium.php?quiz_id=<?php echo $quiz['id']; ?>" class="flex-1 text-center py-2 text-sm font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-xl flex items-center justify-center space-x-1 transition-all border border-amber-200" title="Upgrade to Premium">
                                     <i class="fas fa-crown text-xs"></i>
                                     <span>High</span>
                                 </a>
                             <?php endif; ?>
                         <?php else: ?>
-                            <button class="flex-1 text-center py-2 text-sm font-bold text-slate-400 bg-slate-100/50 rounded-xl flex items-center justify-center space-x-1 cursor-not-allowed" disabled title="Locked">
+                            <button class="flex-1 text-center py-2 text-sm font-bold text-red-500 bg-red-50 rounded-xl flex items-center justify-center space-x-1 border border-red-200/35 cursor-not-allowed" disabled title="Locked">
                                 <i class="fas fa-lock text-xs"></i>
                                 <span>High</span>
                             </button>

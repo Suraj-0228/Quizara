@@ -89,11 +89,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     autoDismissAlerts();
 
-    // Event listener for sidebarToggle
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', window.quizaraToggleSidebar);
-    }
 });
 
 // Global click delegation for custom Tailwind dropdowns, collapse menus, and modals
